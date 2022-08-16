@@ -1,0 +1,19 @@
+{
+  "name": "my-launcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "lerna run test",
+    "start": "lerna run start",
+    "postinstall": "lerna bootstrap --hoist"
+  },
+  "author": "",
+  "license": "AGPL-3.0",
+  "devDependencies": {
+    "lerna": "^5.4.2"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

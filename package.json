@@ -25,5 +25,11 @@
   "env": {
     "VITE_DEV_SERVER_HOST": "127.0.0.1",
     "VITE_DEV_SERVER_PORT": 7777
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.0",
+    "@emotion/styled": "^11.10.0",
+    "@mui/material": "^5.10.1",
+    "glasstron": "^0.1.1"
   }
 }

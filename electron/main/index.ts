@@ -1,4 +1,5 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
+import { app, shell, ipcMain } from 'electron'
+import { BrowserWindow } from 'glasstron';
 import { release } from 'os'
 import { join } from 'path'
 
@@ -34,6 +35,9 @@ async function createWindow() {
     title: 'Main window',
     icon: join(ROOT_PATH.public, 'favicon.svg'),
     frame: false,
+    titlebarStyle: 'hiddenInset',
+    blur: true,
+    blurType: 'blurbehind',
     webPreferences: {
       preload,
       nodeIntegration: true,

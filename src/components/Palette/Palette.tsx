@@ -1,15 +1,10 @@
-import { IpcEvent } from "../../../common/ipc";
+import { ArgsContext } from "../../App";
 import styles from "./Palette.module.scss";
 import { MenuItem, TextField } from "@mui/material";
-import { ipcRenderer } from "electron";
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
 
 export const Palette: React.FC = () => {
-  useEffect(() => {
-    ipcRenderer.invoke(IpcEvent.GetPipedArgs).then((args: string[]) => {
-      console.log(args);
-    });
-  }, []);
+  const { stdinArgs } = useContext(ArgsContext);
 
   return (
     <div className={styles.palette}>
@@ -20,11 +15,12 @@ export const Palette: React.FC = () => {
       />
 
       <div className={styles["palette-items"]}>
-        <MenuItem className={styles["palette-item"]}>Test item</MenuItem>
-        <MenuItem className={styles["palette-item"]}>Test item 2</MenuItem>
-        <MenuItem className={styles["palette-item"]}>Test item 3</MenuItem>
-        <MenuItem className={styles["palette-item"]}>Test item 4</MenuItem>
-        <MenuItem className={styles["palette-item"]}>Test item 5</MenuItem>
+        {stdinArgs &&
+          stdinArgs?.map((arg, index) => (
+            <MenuItem key={index} className={styles["palette-item"]}>
+              {arg}
+            </MenuItem>
+          ))}
       </div>
     </div>
   );

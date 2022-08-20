@@ -43,6 +43,8 @@ async function createWindow() {
     )}ms (debug mode)`
   );
 
+  await readPipedArgs();
+
   win = new BrowserWindow({
     title: "My launcher",
     icon: join(ROOT_PATH.public, "favicon.svg"),
@@ -94,7 +96,4 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.handle(IpcEvent.GetPipedArgs, async () => {
-  const pipedArgs = await readPipedArgs();
-  return pipedArgs;
-});
+ipcMain.handle(IpcEvent.GetPipedArgs, async () => readPipedArgs());

@@ -1,11 +1,27 @@
+import { IpcEvent } from "../../../common/ipc";
 import styles from "./Palette.module.scss";
-import { TextField } from "@mui/material";
-import React from "react";
+import { MenuItem, TextField } from "@mui/material";
+import { ipcRenderer } from "electron";
+import React, { useEffect } from "react";
 
 export const Palette: React.FC = () => {
+  useEffect(() => {
+    ipcRenderer.on(IpcEvent.RendererReady, (_event, ...args) => {
+      console.log("[Receive Main-process message]:", ...args);
+    });
+  }, []);
+
   return (
     <div className={styles.palette}>
       <TextField fullWidth inputProps={{ style: { fontSize: "2rem" } }} />
+
+      <div className={styles["palette-items"]}>
+        <MenuItem className={styles["palette-item"]}>Test item</MenuItem>
+        <MenuItem className={styles["palette-item"]}>Test item 2</MenuItem>
+        <MenuItem className={styles["palette-item"]}>Test item 3</MenuItem>
+        <MenuItem className={styles["palette-item"]}>Test item 4</MenuItem>
+        <MenuItem className={styles["palette-item"]}>Test item 5</MenuItem>
+      </div>
     </div>
   );
 };

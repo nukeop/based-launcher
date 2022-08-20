@@ -1,8 +1,12 @@
+import { IpcEvent } from "../../common/ipc";
+import { readPipedArgs } from "./args";
+import Logger from "./logger";
 import { app, shell, ipcMain } from "electron";
 import { BrowserWindow } from "glasstron";
 import { release } from "os";
 import { join } from "path";
 
+const startTime = process.hrtime();
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith("6.1")) app.disableHardwareAcceleration();
 
@@ -31,6 +35,14 @@ const url = process.env.VITE_DEV_SERVER_URL as string;
 const indexHtml = join(ROOT_PATH.dist, "index.html");
 
 async function createWindow() {
+  Logger.info("Starting launcher");
+  const endTime = process.hrtime(startTime);
+  Logger.debug(
+    `Launcher started in ${(endTime[0] * 1000 + endTime[1] / 1000000).toFixed(
+      0
+    )}ms (debug mode)`
+  );
+
   win = new BrowserWindow({
     title: "My launcher",
     icon: join(ROOT_PATH.public, "favicon.svg"),
@@ -82,18 +94,7 @@ app.on("activate", () => {
   }
 });
 
-// new window example arg: new windows url
-ipcMain.handle("open-win", (event, arg) => {
-  const childWindow = new BrowserWindow({
-    webPreferences: {
-      preload,
-    },
-  });
-
-  if (app.isPackaged) {
-    childWindow.loadFile(indexHtml, { hash: arg });
-  } else {
-    childWindow.loadURL(`${url}/#${arg}`);
-    // childWindow.webContents.openDevTools({ mode: "undocked", activate: true })
-  }
+ipcMain.handle(IpcEvent.RendererReady, async () => {
+  const pipedArgs = await readPipedArgs();
+  return pipedArgs;
 });

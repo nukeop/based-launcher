@@ -4,3 +4,14 @@
 
     padding: 16px;
 }
+
+.palette-items {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.palette-item {
+    flex: 1 1 50%;
+}

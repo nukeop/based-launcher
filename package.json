@@ -8,7 +8,7 @@
     "lint": "eslint \"src/**/*.{ts,tsx}\" \"electron/**/*.ts\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" \"electron/**/*.ts\" --fix"
   },
-  "author": "",
+  "author": "nukeop <12746779+nukeop@users.noreply.github.com>",
   "license": "AGPL-3.0",
   "main": "dist/electron/main/index.js",
   "devDependencies": {
@@ -39,6 +39,7 @@
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/material": "^5.10.1",
-    "glasstron": "^0.1.1"
+    "glasstron": "^0.1.1",
+    "winston": "^3.8.1"
   }
 }

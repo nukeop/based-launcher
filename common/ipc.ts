@@ -1,3 +1,3 @@
 export enum IpcEvent {
-  RendererReady = "RendererReady",
+  GetPipedArgs = "get-piped-args",
 }

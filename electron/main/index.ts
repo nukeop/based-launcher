@@ -94,7 +94,7 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.handle(IpcEvent.RendererReady, async () => {
+ipcMain.handle(IpcEvent.GetPipedArgs, async () => {
   const pipedArgs = await readPipedArgs();
   return pipedArgs;
 });

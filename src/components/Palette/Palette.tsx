@@ -6,14 +6,18 @@ import React, { useEffect } from "react";
 
 export const Palette: React.FC = () => {
   useEffect(() => {
-    ipcRenderer.on(IpcEvent.RendererReady, (_event, ...args) => {
-      console.log("[Receive Main-process message]:", ...args);
+    ipcRenderer.invoke(IpcEvent.GetPipedArgs).then((args: string[]) => {
+      console.log(args);
     });
   }, []);
 
   return (
     <div className={styles.palette}>
-      <TextField fullWidth inputProps={{ style: { fontSize: "2rem" } }} />
+      <TextField
+        fullWidth
+        placeholder="Search..."
+        inputProps={{ className: styles.search }}
+      />
 
       <div className={styles["palette-items"]}>
         <MenuItem className={styles["palette-item"]}>Test item</MenuItem>

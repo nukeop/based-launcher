@@ -3,7 +3,12 @@
     flex-flow: column;
 
     padding: 16px;
+
+    .search {
+        font-size: 2rem;
+    }
 }
+
 
 .palette-items {
     display: flex;
@@ -13,5 +18,5 @@
 }
 
 .palette-item {
-    flex: 1 1 50%;
+    flex: 0 1 50%;
 }

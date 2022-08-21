@@ -1,26 +1,34 @@
-import { ArgsContext } from "../../App";
 import styles from "./Palette.module.scss";
 import { MenuItem, TextField } from "@mui/material";
-import React, { useContext } from "react";
+import React from "react";
 
-export const Palette: React.FC = () => {
-  const { stdinArgs } = useContext(ArgsContext);
+type PaletteOption = {
+  id: string;
+  name: string;
+  description?: string;
+  icon?: React.ReactNode;
+};
 
+type PaletteProps = {
+  options: PaletteOption[];
+};
+
+export const Palette: React.FC<PaletteProps> = ({ options }) => {
   return (
     <div className={styles.palette}>
       <TextField
+        autoFocus
         fullWidth
         placeholder="Search..."
         inputProps={{ className: styles.search }}
       />
 
       <div className={styles["palette-items"]}>
-        {stdinArgs &&
-          stdinArgs?.map((arg, index) => (
-            <MenuItem key={index} className={styles["palette-item"]}>
-              {arg}
-            </MenuItem>
-          ))}
+        {options?.map((option, index) => (
+          <MenuItem key={option.id} className={styles["palette-item"]}>
+            {option.name}
+          </MenuItem>
+        ))}
       </div>
     </div>
   );

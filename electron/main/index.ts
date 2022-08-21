@@ -52,6 +52,7 @@ async function createWindow() {
     titlebarStyle: "hiddenInset",
     blur: true,
     blurType: "vibrancy",
+    vibrancy: "fullscreen-ui",
     webPreferences: {
       preload,
       nodeIntegration: true,

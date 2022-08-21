@@ -10,8 +10,6 @@ export const readPipedArgs = async () => {
   Logger.info("Reading piped args...");
   const startTime = process.hrtime();
 
-  console.log({ args: ArgsProvider.stdinArgs });
-
   if (!ArgsProvider.stdinArgs) {
     ArgsProvider.stdinArgs = await new Promise((resolve) => {
       let text = "";
@@ -19,13 +17,12 @@ export const readPipedArgs = async () => {
       process.stdin.setEncoding("utf8");
       process.stdin.on("readable", function () {
         var chunk = process.stdin.read();
-        console.log({ chunk });
         if (chunk !== null) {
           text += chunk;
         }
       });
       process.stdin.on("end", function () {
-        resolve(text.split(" "));
+        resolve(text.split("\n"));
       });
     });
   }

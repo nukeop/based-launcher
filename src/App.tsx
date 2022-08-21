@@ -1,4 +1,4 @@
-import { Palette } from "./components/Palette/Palette";
+import { PaletteContainer } from "./containers/PaletteContainer";
 import { useArgs } from "./hooks/useArgs";
 import { AppRoot } from "./layouts/AppRoot";
 import { createContext } from "react";
@@ -14,7 +14,7 @@ const App: React.FC = () => {
   return (
     <ArgsContext.Provider value={{ stdinArgs }}>
       <AppRoot>
-        <Palette />
+        <PaletteContainer />
       </AppRoot>
     </ArgsContext.Provider>
   );

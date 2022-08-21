@@ -10,7 +10,7 @@ export const readPipedArgs = async () => {
   Logger.info("Reading piped args...");
   const startTime = process.hrtime();
 
-  if (!ArgsProvider.stdinArgs) {
+  if (!ArgsProvider.stdinArgs && !process.stdin.isTTY) {
     ArgsProvider.stdinArgs = await new Promise((resolve) => {
       let text = "";
 
@@ -33,5 +33,6 @@ export const readPipedArgs = async () => {
       0
     )}ms`
   );
+
   return ArgsProvider.stdinArgs;
 };

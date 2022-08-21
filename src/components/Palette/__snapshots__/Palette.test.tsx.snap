@@ -9,17 +9,17 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
         class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 _app-root_plae5_1 css-ee20y-MuiPaper-root"
       >
         <div
-          class="_palette_1irhh_1"
+          class="_palette_1tjk8_1"
         >
           <div
             class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
           >
             <div
-              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+              class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
             >
               <input
                 aria-invalid="false"
-                class="MuiInputBase-input MuiOutlinedInput-input _search_1irhh_6 css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+                class="MuiInputBase-input MuiOutlinedInput-input _search_1tjk8_6 css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
                 defaultvalue=""
                 id=":r0:"
                 placeholder="Search..."
@@ -42,10 +42,10 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
             </div>
           </div>
           <div
-            class="_palette-items_1irhh_10"
+            class="_palette-items_1tjk8_10"
           >
             <li
-              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1irhh_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1tjk8_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
               role="menuitem"
               tabindex="-1"
             >
@@ -55,7 +55,7 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
               />
             </li>
             <li
-              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1irhh_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1tjk8_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
               role="menuitem"
               tabindex="-1"
             >
@@ -65,7 +65,7 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
               />
             </li>
             <li
-              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1irhh_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+              class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1tjk8_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
               role="menuitem"
               tabindex="-1"
             >
@@ -84,17 +84,17 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 _app-root_plae5_1 css-ee20y-MuiPaper-root"
     >
       <div
-        class="_palette_1irhh_1"
+        class="_palette_1tjk8_1"
       >
         <div
           class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
         >
           <div
-            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
           >
             <input
               aria-invalid="false"
-              class="MuiInputBase-input MuiOutlinedInput-input _search_1irhh_6 css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+              class="MuiInputBase-input MuiOutlinedInput-input _search_1tjk8_6 css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
               defaultvalue=""
               id=":r0:"
               placeholder="Search..."
@@ -117,10 +117,10 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
           </div>
         </div>
         <div
-          class="_palette-items_1irhh_10"
+          class="_palette-items_1tjk8_10"
         >
           <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1irhh_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1tjk8_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
             role="menuitem"
             tabindex="-1"
           >
@@ -130,7 +130,7 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
             />
           </li>
           <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1irhh_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1tjk8_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
             role="menuitem"
             tabindex="-1"
           >
@@ -140,7 +140,7 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
             />
           </li>
           <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1irhh_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1tjk8_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
             role="menuitem"
             tabindex="-1"
           >

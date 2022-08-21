@@ -1,6 +1,6 @@
-import App, { ArgsContext } from "../../App";
+import { ArgsContext } from "../../App";
+import { PaletteContainer } from "../../containers/PaletteContainer";
 import { AppRoot } from "../../layouts/AppRoot";
-import { Palette } from "./Palette";
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
@@ -15,7 +15,7 @@ describe("Palette", () => {
     return render(
       <ArgsContext.Provider value={{ stdinArgs }}>
         <AppRoot>
-          <Palette />
+          <PaletteContainer />
         </AppRoot>
       </ArgsContext.Provider>
     );

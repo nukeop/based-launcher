@@ -1,0 +1,20 @@
+.palette-item {
+    display: flex;
+    flex-flow: row;
+
+    & > *:not(:last-child) {
+        margin-right: 1em;
+    }
+
+    .palette-item-left {
+    }
+
+    .palette-item-right {
+        display: flex;
+        flex-flow: column;
+    }
+
+    .palette-item-description {
+        opacity: 0.6;
+    }
+}

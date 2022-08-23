@@ -1,9 +1,11 @@
 import { PaletteItem } from "../components/PaletteItem/PaletteItem";
+import EmojiEmotionsRoundedIcon from "@mui/icons-material/EmojiEmotionsRounded";
 import { ComponentStory } from "@storybook/react";
 
 export default {
   title: "Components/Palette/PaletteItem",
   component: PaletteItem,
+  layout: "padded",
 };
 
 const Template: ComponentStory<typeof PaletteItem> = (args) => (
@@ -31,7 +33,7 @@ ItemWithIcon.args = {
   id: "1",
   name: "Gnome",
   description: "Has no thumbnails",
-  icon: <div>🐱</div>,
+  icon: <EmojiEmotionsRoundedIcon />,
 };
 
 export const SelectedItem = Template.bind({});
@@ -39,7 +41,7 @@ SelectedItem.args = {
   id: "1",
   name: "Gnome",
   description: "Has no thumbnails",
-  icon: <div>🐱</div>,
+  icon: <EmojiEmotionsRoundedIcon />,
   isSelected: true,
 };
 

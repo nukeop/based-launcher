@@ -2,12 +2,15 @@
     display: flex;
     flex-flow: row;
 
-    & > *:not(:last-child) {
+    &>*:not(:last-child) {
         margin-right: 1em;
     }
 
-    .palette-item-left {
+    &.selected {
+        background-color: rgba(#0984e3, 0.2);
     }
+
+    .palette-item-left {}
 
     .palette-item-right {
         display: flex;

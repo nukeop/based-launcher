@@ -1,0 +1,20 @@
+.palette-grid {
+  display: grid;
+
+  &.columns-1 {
+    grid-template-columns: 100%;
+  }
+
+  &.columns-2 {
+    grid-template-columns: 50% 50%;
+
+  }
+
+  &.columns-3 {
+    grid-template-columns: 33% 33% 33%;
+  }
+
+  &.columns-4 {
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+}

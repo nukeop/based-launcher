@@ -3,7 +3,7 @@ import EmojiEmotionsRoundedIcon from "@mui/icons-material/EmojiEmotionsRounded";
 import { ComponentStory } from "@storybook/react";
 
 export default {
-  title: "Components/Palette/PaletteItem",
+  title: "Components/Palette/Palette Item",
   component: PaletteItem,
   layout: "padded",
 };

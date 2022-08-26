@@ -8,7 +8,7 @@ describe("Palette", () => {
   it("renders a palette from piped arguments", () => {
     const component = mountComponent(["first", "second", "third"]);
 
-    expect(component).toMatchSnapshot();
+    expect(component.asFragment()).toMatchSnapshot();
   });
 
   const mountComponent = (stdinArgs: string[] = []) => {

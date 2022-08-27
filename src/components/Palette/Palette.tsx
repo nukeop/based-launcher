@@ -1,3 +1,4 @@
+import { PaletteGrid } from "../PaletteGrid/PaletteGrid";
 import { PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./Palette.module.scss";
 import { MenuItem, TextField } from "@mui/material";
@@ -18,15 +19,7 @@ export const Palette: React.FC<PaletteProps> = ({ options }) => {
       />
 
       <div className={styles["palette-items"]}>
-        {options?.map((option, index) => (
-          <MenuItem
-            key={option.id}
-            className={styles["palette-item"]}
-            onClick={option.onAction}
-          >
-            {option.name}
-          </MenuItem>
-        ))}
+        <PaletteGrid items={options} />
       </div>
     </div>
   );

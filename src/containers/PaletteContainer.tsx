@@ -18,7 +18,6 @@ export const PaletteContainer: React.FC = () => {
         stdinArgs?.map((arg, index) => ({
           id: arg,
           name: arg,
-          description: arg,
           icon: null,
           onAction: () => onAction(arg),
         })) ?? []

@@ -6,7 +6,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 
 type PaletteGridProps = {
   items: PaletteItemProps[];
-  columns: number;
+  columns?: number;
 };
 
 export const PaletteGrid: React.FC<PaletteGridProps> = ({

@@ -7,7 +7,7 @@ class ArgsProvider {
 }
 
 export const readPipedArgs = async () => {
-  Logger.info("Reading piped args...");
+  Logger.debug("Reading piped args...");
   const startTime = process.hrtime();
 
   if (!ArgsProvider.stdinArgs && !process.stdin.isTTY) {

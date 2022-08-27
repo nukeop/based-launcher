@@ -7,7 +7,8 @@ import { useCallback, useContext } from "react";
 export const PaletteContainer: React.FC = () => {
   const { stdinArgs } = useContext(ArgsContext);
 
-  const onClick = useCallback((item: string) => {
+  const onAction = useCallback((item: string) => {
+    console.log("clicked", item);
     ipcRenderer.send(IpcEvent.ReturnSelectedItem, item);
   }, []);
 
@@ -19,7 +20,7 @@ export const PaletteContainer: React.FC = () => {
           name: arg,
           description: arg,
           icon: null,
-          onClick: () => onClick(arg),
+          onAction: () => onAction(arg),
         })) ?? []
       }
     />

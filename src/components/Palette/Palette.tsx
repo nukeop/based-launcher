@@ -19,7 +19,11 @@ export const Palette: React.FC<PaletteProps> = ({ options }) => {
 
       <div className={styles["palette-items"]}>
         {options?.map((option, index) => (
-          <MenuItem key={option.id} className={styles["palette-item"]}>
+          <MenuItem
+            key={option.id}
+            className={styles["palette-item"]}
+            onClick={option.onAction}
+          >
             {option.name}
           </MenuItem>
         ))}

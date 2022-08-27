@@ -35,7 +35,7 @@ const url = process.env.VITE_DEV_SERVER_URL as string;
 const indexHtml = join(ROOT_PATH.dist, "index.html");
 
 async function createWindow() {
-  Logger.info("Starting launcher");
+  Logger.debug("Starting launcher");
   const endTime = process.hrtime(startTime);
   Logger.debug(
     `Launcher started in ${(endTime[0] * 1000 + endTime[1] / 1000000).toFixed(
@@ -98,3 +98,7 @@ app.on("activate", () => {
 });
 
 ipcMain.handle(IpcEvent.GetPipedArgs, async () => readPipedArgs());
+ipcMain.on(IpcEvent.ReturnSelectedItem, (event, item) => {
+  console.log(item);
+  app.quit();
+});

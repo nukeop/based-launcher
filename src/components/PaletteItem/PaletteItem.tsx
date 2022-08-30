@@ -1,6 +1,5 @@
 import styles from "./PaletteItem.module.scss";
 import { MenuItem, Typography } from "@mui/material";
-import cx from "classnames";
 
 export type PaletteItemProps = {
   id: string;
@@ -23,10 +22,9 @@ export const PaletteItem: React.FC<PaletteItemProps> = ({
 
   return (
     <MenuItem
-      className={cx(styles["palette-item"], {
-        [styles["selected"]]: isSelected,
-      })}
+      className={styles["palette-item"]}
       onClick={onAction}
+      selected={isSelected}
     >
       {icon && <div className={styles["palette-item-left"]}>{icon}</div>}
       <div className={styles["palette-item-right"]}>

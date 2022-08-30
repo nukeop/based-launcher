@@ -22,7 +22,7 @@ export const readPipedArgs = async () => {
         }
       });
       process.stdin.on("end", function () {
-        resolve(text.split("\n"));
+        resolve(text.split("\n").filter(Boolean));
       });
     });
   }

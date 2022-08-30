@@ -1,7 +1,7 @@
 import { ArgsContext } from "../../App";
 import { PaletteContainer } from "../../containers/PaletteContainer";
 import { AppRoot } from "../../layouts/AppRoot";
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 describe("Palette", () => {
@@ -11,7 +11,15 @@ describe("Palette", () => {
     expect(component.asFragment()).toMatchSnapshot();
   });
 
-  it("filters entries based on entered text", () => {});
+  it("filters entries based on entered text", async () => {
+    const component = mountComponent(["first", "second", "third"]);
+
+    const input = await component.findByTestId("filter-input");
+    fireEvent.change(input, { target: { value: "fir" } });
+
+    expect(component.getByText("first")).toBeTruthy();
+    expect(component.getByText("second")).toBeNull();
+  });
 
   const mountComponent = (stdinArgs: string[] = []) => {
     return render(

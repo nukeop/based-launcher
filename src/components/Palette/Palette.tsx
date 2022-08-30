@@ -68,6 +68,7 @@ export const Palette: React.FC<PaletteProps> = ({ options }) => {
   return (
     <div className={styles.palette} tabIndex={-1}>
       <TextField
+        data-testid="filter-input"
         autoFocus
         fullWidth
         placeholder="Search..."

@@ -1,8 +1,9 @@
 import { PaletteGrid } from "../PaletteGrid/PaletteGrid";
 import { PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./Palette.module.scss";
-import { MenuItem, TextField } from "@mui/material";
-import React, { useCallback } from "react";
+import { TextField } from "@mui/material";
+import Fuse from "fuse.js";
+import React, { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 
 type PaletteProps = {
@@ -10,44 +11,58 @@ type PaletteProps = {
 };
 
 export const Palette: React.FC<PaletteProps> = ({ options }) => {
+  const [filterInput, setFilterInput] = useState("");
+
+  const fuse = new Fuse(options, {
+    keys: ["name", "description"],
+    threshold: 0.3,
+  });
+
+  const filteredOptions = filterInput
+    ? fuse.search(filterInput).map((result) => result.item)
+    : options;
+
   const columns = 3;
-  const rows = Math.ceil(options.length / columns);
-  const [selectedItemIndex, setSelectedItemIndex] = React.useState(0);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
   useHotkeys(
     "right",
     () => {
-      setSelectedItemIndex((selectedItemIndex + 1) % options.length);
+      setSelectedItemIndex((selectedItemIndex + 1) % filteredOptions.length);
     },
-    [options, selectedItemIndex]
+    [filteredOptions, selectedItemIndex]
   );
 
   useHotkeys(
     "left",
     () => {
       setSelectedItemIndex(
-        (selectedItemIndex + options.length - 1) % options.length
+        (selectedItemIndex + filteredOptions.length - 1) %
+          filteredOptions.length
       );
     },
-    [options, selectedItemIndex]
+    [filteredOptions, selectedItemIndex]
   );
 
   useHotkeys(
     "down",
     () => {
-      setSelectedItemIndex((selectedItemIndex + columns) % options.length);
+      setSelectedItemIndex(
+        (selectedItemIndex + columns) % filteredOptions.length
+      );
     },
-    [options, selectedItemIndex]
+    [filteredOptions, selectedItemIndex]
   );
 
   useHotkeys(
     "up",
     () => {
       setSelectedItemIndex(
-        (selectedItemIndex + options.length - columns) % options.length
+        (selectedItemIndex + filteredOptions.length - columns) %
+          filteredOptions.length
       );
     },
-    [options, selectedItemIndex]
+    [filteredOptions, selectedItemIndex]
   );
 
   return (
@@ -57,13 +72,15 @@ export const Palette: React.FC<PaletteProps> = ({ options }) => {
         fullWidth
         placeholder="Search..."
         inputProps={{ className: styles.search }}
+        value={filterInput}
+        onChange={(event) => setFilterInput(event.target.value)}
       />
 
       <div className={styles["palette-items"]}>
         <PaletteGrid
-          items={options}
+          items={filteredOptions}
           columns={columns}
-          selectedItemId={options[selectedItemIndex]?.id}
+          selectedItemId={filteredOptions[selectedItemIndex]?.id}
         />
       </div>
     </div>

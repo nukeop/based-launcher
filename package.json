@@ -59,6 +59,7 @@
     "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.1",
     "classnames": "^2.3.1",
+    "fuse.js": "^6.6.2",
     "glasstron": "^0.1.1",
     "react-hotkeys-hook": "^3.4.7",
     "winston": "^3.8.1"

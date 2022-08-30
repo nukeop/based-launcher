@@ -11,6 +11,8 @@ describe("Palette", () => {
     expect(component.asFragment()).toMatchSnapshot();
   });
 
+  it("filters entries based on entered text", () => {});
+
   const mountComponent = (stdinArgs: string[] = []) => {
     return render(
       <ArgsContext.Provider value={{ stdinArgs }}>

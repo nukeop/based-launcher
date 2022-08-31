@@ -6,4 +6,7 @@ export default defineConfig({
   test: {
     environment: "happy-dom",
   },
+  build: {
+    sourcemap: true,
+  },
 });

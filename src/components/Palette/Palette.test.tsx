@@ -1,7 +1,7 @@
 import { ArgsContext } from "../../App";
 import { PaletteContainer } from "../../containers/PaletteContainer";
 import { AppRoot } from "../../layouts/AppRoot";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 describe("Palette", () => {
@@ -17,8 +17,8 @@ describe("Palette", () => {
     const input = await component.findByTestId("filter-input");
     fireEvent.change(input, { target: { value: "fir" } });
 
-    expect(component.getByText("first")).toBeTruthy();
-    expect(component.getByText("second")).toBeNull();
+    waitFor(() => expect(component.getByText("first")).toBeTruthy());
+    waitFor(() => expect(component.getByText("second")).toBeNull());
   });
 
   const mountComponent = (stdinArgs: string[] = []) => {

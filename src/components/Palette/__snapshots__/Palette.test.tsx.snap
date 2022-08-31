@@ -7,9 +7,11 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
   >
     <div
       class="_palette_1tjk8_1"
+      tabindex="-1"
     >
       <div
         class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
+        data-testid="filter-input"
       >
         <div
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
@@ -41,36 +43,73 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
       <div
         class="_palette-items_1tjk8_10"
       >
-        <li
-          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1tjk8_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
-          role="menuitem"
-          tabindex="-1"
+        <div
+          class="_palette-grid_1vnjn_1 _columns-3_1vnjn_11"
         >
-          first
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </li>
-        <li
-          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1tjk8_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
-          role="menuitem"
-          tabindex="-1"
-        >
-          second
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </li>
-        <li
-          class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_1tjk8_10 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
-          role="menuitem"
-          tabindex="-1"
-        >
-          third
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </li>
+          <li
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected _palette-item_66ycd_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <div
+              class="_palette-item-right_66ycd_11"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+              >
+                first
+              </p>
+              <p
+                class="MuiTypography-root MuiTypography-body2 _palette-item-description_66ycd_15 css-e784if-MuiTypography-root"
+              />
+            </div>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </li>
+          <li
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_66ycd_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <div
+              class="_palette-item-right_66ycd_11"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+              >
+                second
+              </p>
+              <p
+                class="MuiTypography-root MuiTypography-body2 _palette-item-description_66ycd_15 css-e784if-MuiTypography-root"
+              />
+            </div>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </li>
+          <li
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_66ycd_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+            role="menuitem"
+            tabindex="-1"
+          >
+            <div
+              class="_palette-item-right_66ycd_11"
+            >
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+              >
+                third
+              </p>
+              <p
+                class="MuiTypography-root MuiTypography-body2 _palette-item-description_66ycd_15 css-e784if-MuiTypography-root"
+              />
+            </div>
+            <span
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+            />
+          </li>
+        </div>
       </div>
     </div>
   </div>

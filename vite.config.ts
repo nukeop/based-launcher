@@ -1,9 +1,11 @@
 import pkg from "./package.json";
 import react from "@vitejs/plugin-react";
+import { spawn } from "child_process";
+import electronPath from "electron";
 import { rmSync } from "fs";
 import path from "path";
 import { type Plugin, type UserConfig, defineConfig } from "vite";
-import electron from "vite-plugin-electron";
+import electron, { onstart } from "vite-plugin-electron";
 
 rmSync(path.join(__dirname, "dist"), { recursive: true, force: true }); // v14.14.0
 
@@ -24,6 +26,25 @@ export default defineConfig({
           build: {
             outDir: "dist/electron/main",
           },
+          plugins: [
+            onstart(() => {
+              if (process.electronApp) {
+                process.electronApp.removeAllListeners();
+                process.electronApp.kill();
+              }
+
+              // Start Electron.app
+              process.electronApp = spawn(
+                electronPath,
+                [".", "--no-sandbox", process.argv],
+                {
+                  stdio: "inherit",
+                }
+              );
+              // Exit command after Electron.app exits
+              process.electronApp.once("exit", process.exit);
+            }),
+          ],
         }),
       },
       preload: {

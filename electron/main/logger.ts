@@ -11,7 +11,7 @@ const format = winston.format.printf(
 const env = process.env.NODE_ENV || "development";
 
 const Logger = winston.createLogger({
-  level: "info",
+  level: process.env.LOG_LEVEL ?? "info",
   transports: [
     new winston.transports.Console({
       format:

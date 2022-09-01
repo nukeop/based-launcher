@@ -1,8 +1,9 @@
-.palette-item {
+li.palette-item {
     display: flex;
     flex-flow: row;
+    border-radius: 0.5em;
 
-    &>*:not(:last-child) {
+    & > *:not(:last-child) {
         margin-right: 1em;
     }
 
@@ -10,7 +11,8 @@
         background-color: rgba(#0984e3, 0.2);
     }
 
-    .palette-item-left {}
+    .palette-item-left {
+    }
 
     .palette-item-right {
         display: flex;

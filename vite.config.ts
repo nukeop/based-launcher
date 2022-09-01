@@ -36,7 +36,7 @@ export default defineConfig({
               // Start Electron.app
               process.electronApp = spawn(
                 electronPath,
-                [".", "--no-sandbox", process.argv],
+                [".", "--no-sandbox", ...process.argv],
                 {
                   stdio: "inherit",
                 }

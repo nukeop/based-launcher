@@ -1,19 +1,12 @@
 import { IpcEvent } from "../../common/ipc";
-import { readPipedArgs } from "./args";
+import { readCLIFlags, readPipedArgs } from "./args";
 import Logger from "./logger";
-import { program } from "commander";
 import { app, shell, ipcMain } from "electron";
 import { BrowserWindow } from "glasstron";
 import { release } from "os";
 import { join } from "path";
 
-program.option("-t, --theme <path>", "Path to the theme file (CSS)");
-
-program.allowUnknownOption().parse(process.argv);
-
-console.log(process.argv);
-console.log("options:", program.opts());
-console.log("args:", program.args);
+readCLIFlags();
 
 const startTime = process.hrtime();
 // Disable GPU Acceleration for Windows 7

@@ -1,11 +1,6 @@
+import { CLIFlags } from "../../common/cliFlags";
 import Logger from "./logger";
 import { program } from "commander";
-
-type CLIFlagKeys = "theme";
-
-type CLIFlags = {
-  [key in CLIFlagKeys]: string;
-};
 
 class ArgsProvider {
   static stdinArgs: string[];

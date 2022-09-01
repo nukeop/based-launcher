@@ -1,3 +1,4 @@
+import { CustomTheme } from "./containers/CustomTheme";
 import { PaletteContainer } from "./containers/PaletteContainer";
 import { useArgs } from "./hooks/useArgs";
 import { AppRoot } from "./layouts/AppRoot";
@@ -11,9 +12,11 @@ export const ArgsContext = createContext<Args>({ stdinArgs: [] });
 
 const App: React.FC = () => {
   const { stdinArgs } = useArgs();
+
   return (
     <ArgsContext.Provider value={{ stdinArgs }}>
       <AppRoot>
+        <CustomTheme />
         <PaletteContainer />
       </AppRoot>
     </ArgsContext.Provider>

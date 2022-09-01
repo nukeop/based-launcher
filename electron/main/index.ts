@@ -99,7 +99,9 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.handle(IpcEvent.GetPipedArgs, async () => readPipedArgs());
+ipcMain.handle(IpcEvent.GetPipedArgs, readPipedArgs);
+ipcMain.handle(IpcEvent.GetCliFlags, readCLIFlags);
+
 ipcMain.on(IpcEvent.ReturnSelectedItem, (event, item) => {
   console.log(item);
   app.quit();

@@ -25,6 +25,8 @@ export const PaletteItem: React.FC<PaletteItemProps> = ({
       className={styles["palette-item"]}
       onClick={onAction}
       selected={isSelected}
+      data-testid={`palette-item-${encodeURIComponent(id)}`}
+      data-selected={isSelected}
     >
       {icon && <div className={styles["palette-item-left"]}>{icon}</div>}
       <div className={styles["palette-item-right"]}>

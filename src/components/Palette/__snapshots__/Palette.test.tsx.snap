@@ -6,23 +6,23 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 _app-root_plae5_1 css-ee20y-MuiPaper-root"
   >
     <div
-      class="_palette_1tjk8_1"
+      class="_palette_66plf_1"
       tabindex="-1"
     >
       <div
         class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
-        data-testid="filter-input"
       >
         <div
           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
         >
           <input
             aria-invalid="false"
-            class="MuiInputBase-input MuiOutlinedInput-input _search_1tjk8_6 css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-            defaultvalue=""
+            class="MuiInputBase-input MuiOutlinedInput-input _search_66plf_7 css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+            data-testid="filter-input"
             id=":r0:"
             placeholder="Search..."
             type="text"
+            value=""
           />
           <fieldset
             aria-hidden="true"
@@ -41,18 +41,18 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
         </div>
       </div>
       <div
-        class="_palette-items_1tjk8_10"
+        class="_palette-items_66plf_11"
       >
         <div
           class="_palette-grid_1vnjn_1 _columns-3_1vnjn_11"
         >
           <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected _palette-item_66ycd_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected _palette-item_iadro_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
             role="menuitem"
             tabindex="-1"
           >
             <div
-              class="_palette-item-right_66ycd_11"
+              class="_palette-item-right_iadro_12"
             >
               <p
                 class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
@@ -60,7 +60,7 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
                 first
               </p>
               <p
-                class="MuiTypography-root MuiTypography-body2 _palette-item-description_66ycd_15 css-e784if-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 _palette-item-description_iadro_16 css-e784if-MuiTypography-root"
               />
             </div>
             <span
@@ -68,12 +68,12 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
             />
           </li>
           <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_66ycd_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_iadro_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
             role="menuitem"
             tabindex="-1"
           >
             <div
-              class="_palette-item-right_66ycd_11"
+              class="_palette-item-right_iadro_12"
             >
               <p
                 class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
@@ -81,7 +81,7 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
                 second
               </p>
               <p
-                class="MuiTypography-root MuiTypography-body2 _palette-item-description_66ycd_15 css-e784if-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 _palette-item-description_iadro_16 css-e784if-MuiTypography-root"
               />
             </div>
             <span
@@ -89,12 +89,12 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
             />
           </li>
           <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_66ycd_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_iadro_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
             role="menuitem"
             tabindex="-1"
           >
             <div
-              class="_palette-item-right_66ycd_11"
+              class="_palette-item-right_iadro_12"
             >
               <p
                 class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
@@ -102,7 +102,7 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
                 third
               </p>
               <p
-                class="MuiTypography-root MuiTypography-body2 _palette-item-description_66ycd_15 css-e784if-MuiTypography-root"
+                class="MuiTypography-root MuiTypography-body2 _palette-item-description_iadro_16 css-e784if-MuiTypography-root"
               />
             </div>
             <span

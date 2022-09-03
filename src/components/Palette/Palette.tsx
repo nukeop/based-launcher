@@ -3,11 +3,15 @@ import { PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./Palette.module.scss";
 import { TextField } from "@mui/material";
 import Fuse from "fuse.js";
-import React, { useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
+import React, { useCallback, useEffect, useState } from "react";
 
 type PaletteProps = {
   options: PaletteItemProps[];
+};
+
+type ItemPosition = {
+  x: number;
+  y: number;
 };
 
 export const Palette: React.FC<PaletteProps> = ({ options }) => {
@@ -23,47 +27,74 @@ export const Palette: React.FC<PaletteProps> = ({ options }) => {
     : options;
 
   const columns = 3;
-  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
+  const [selectedPosition, setSelectedPosition] = useState<ItemPosition>({
+    x: 0,
+    y: 0,
+  });
 
-  useHotkeys(
-    "right",
-    () => {
-      setSelectedItemIndex((selectedItemIndex + 1) % filteredOptions.length);
+  const lastItemY = Math.floor(filteredOptions.length / columns);
+  const lastItemX = (filteredOptions.length % columns) - 1;
+
+  const onRight = useCallback(
+    (event: KeyboardEvent) => {
+      let { x, y } = selectedPosition;
+      if (event.key === "ArrowRight") {
+        if (x === lastItemX && y === lastItemY) {
+          setSelectedPosition({ x: 0, y: 0 });
+        } else if (x === columns - 1) {
+          setSelectedPosition({ x: 0, y: y + 1 });
+        } else {
+          setSelectedPosition({ x: x + 1, y });
+        }
+      }
     },
-    [filteredOptions, selectedItemIndex]
+    [filteredOptions, selectedPosition]
   );
 
-  useHotkeys(
-    "left",
-    () => {
-      setSelectedItemIndex(
-        (selectedItemIndex + filteredOptions.length - 1) %
-          filteredOptions.length
-      );
+  const onLeft = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        let { x, y } = selectedPosition;
+        if (x === 0 && y === 0) {
+          setSelectedPosition({ x: lastItemX, y: lastItemY });
+        } else if (x === 0) {
+          setSelectedPosition({ x: columns - 1, y: y - 1 });
+        } else {
+          setSelectedPosition({ x: x - 1, y });
+        }
+      }
     },
-    [filteredOptions, selectedItemIndex]
+    [filteredOptions, selectedPosition, columns]
   );
 
-  useHotkeys(
-    "down",
-    () => {
-      setSelectedItemIndex(
-        (selectedItemIndex + columns) % filteredOptions.length
-      );
+  const onUp = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "ArrowUp") {
+      }
     },
-    [filteredOptions, selectedItemIndex]
+    [filteredOptions, selectedPosition]
   );
 
-  useHotkeys(
-    "up",
-    () => {
-      setSelectedItemIndex(
-        (selectedItemIndex + filteredOptions.length - columns) %
-          filteredOptions.length
-      );
+  const onDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === "ArrowDown") {
+      }
     },
-    [filteredOptions, selectedItemIndex]
+    [filteredOptions, selectedPosition]
   );
+
+  useEffect(() => {
+    addEventListener("keydown", onRight);
+    addEventListener("keydown", onLeft);
+    addEventListener("keydown", onUp);
+    addEventListener("keydown", onDown);
+    return () => {
+      removeEventListener("keydown", onRight);
+      removeEventListener("keydown", onLeft);
+      removeEventListener("keydown", onUp);
+      removeEventListener("keydown", onDown);
+    };
+  }, [selectedPosition, filteredOptions]);
 
   return (
     <div className={styles.palette} tabIndex={-1}>
@@ -76,14 +107,20 @@ export const Palette: React.FC<PaletteProps> = ({ options }) => {
           "data-testid": "filter-input",
         }}
         value={filterInput}
-        onChange={(event) => setFilterInput(event.target.value)}
+        onChange={(event) => {
+          setSelectedPosition({ x: 0, y: 0 });
+          return setFilterInput(event.target.value);
+        }}
       />
 
       <div className={styles["palette-items"]}>
         <PaletteGrid
           items={filteredOptions}
           columns={columns}
-          selectedItemId={filteredOptions[selectedItemIndex]?.id}
+          selectedItemId={
+            filteredOptions[selectedPosition.y * columns + selectedPosition.x]
+              ?.id
+          }
         />
       </div>
     </div>

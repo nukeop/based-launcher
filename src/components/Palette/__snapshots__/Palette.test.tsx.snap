@@ -3,119 +3,73 @@
 exports[`Palette > renders a palette from piped arguments 1`] = `
 <DocumentFragment>
   <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 _app-root_plae5_1 css-ee20y-MuiPaper-root"
+    class="_app-root_v9n3v_1"
   >
     <div
       class="_palette_66plf_1"
-      data-testid="palette"
       tabindex="-1"
     >
-      <div
-        class="MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root css-wb57ya-MuiFormControl-root-MuiTextField-root"
-      >
-        <div
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth Mui-focused MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
-        >
-          <input
-            aria-invalid="false"
-            class="MuiInputBase-input MuiOutlinedInput-input _search_66plf_7 css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-            data-testid="filter-input"
-            id=":r0:"
-            placeholder="Search..."
-            type="text"
-            value=""
-          />
-          <fieldset
-            aria-hidden="true"
-            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-          >
-            <legend
-              class="css-hdw1oc"
-            >
-              <span
-                class="notranslate"
-              >
-                ​
-              </span>
-            </legend>
-          </fieldset>
-        </div>
-      </div>
+      <input
+        class="_input_li5gy_1"
+        data-testid="filter-input"
+        id="filter-input"
+        placeholder="Search..."
+        value=""
+      />
       <div
         class="_palette-items_66plf_11"
       >
         <div
           class="_palette-grid_1vnjn_1 _columns-3_1vnjn_11"
         >
-          <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected _palette-item_iadro_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+          <button
+            class="_palette-item_40xso_1 _selected_40xso_16"
             data-selected="true"
             data-testid="palette-item-first"
-            role="menuitem"
-            tabindex="-1"
           >
             <div
-              class="_palette-item-right_iadro_12"
+              class="_palette-item-right_40xso_24"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-              >
+              <p>
                 first
               </p>
               <p
-                class="MuiTypography-root MuiTypography-body2 _palette-item-description_iadro_16 css-e784if-MuiTypography-root"
+                class="_palette-item-description_40xso_27"
               />
             </div>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
-          </li>
-          <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_iadro_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+          </button>
+          <button
+            class="_palette-item_40xso_1"
             data-selected="false"
             data-testid="palette-item-second"
-            role="menuitem"
-            tabindex="-1"
           >
             <div
-              class="_palette-item-right_iadro_12"
+              class="_palette-item-right_40xso_24"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-              >
+              <p>
                 second
               </p>
               <p
-                class="MuiTypography-root MuiTypography-body2 _palette-item-description_iadro_16 css-e784if-MuiTypography-root"
+                class="_palette-item-description_40xso_27"
               />
             </div>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
-          </li>
-          <li
-            class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters _palette-item_iadro_1 css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+          </button>
+          <button
+            class="_palette-item_40xso_1"
             data-selected="false"
             data-testid="palette-item-third"
-            role="menuitem"
-            tabindex="-1"
           >
             <div
-              class="_palette-item-right_iadro_12"
+              class="_palette-item-right_40xso_24"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-              >
+              <p>
                 third
               </p>
               <p
-                class="MuiTypography-root MuiTypography-body2 _palette-item-description_iadro_16 css-e784if-MuiTypography-root"
+                class="_palette-item-description_40xso_27"
               />
             </div>
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
-          </li>
+          </button>
         </div>
       </div>
     </div>

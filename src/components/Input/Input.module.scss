@@ -1,0 +1,26 @@
+.input {
+    @apply box-border;
+    @apply outline-0;
+
+    @apply border;
+    @apply border-solid;
+    @apply border-gray-600;
+
+    @apply bg-transparent;
+    @apply text-gray-900;
+    @apply placeholder-gray-400;
+
+    @apply text-base;
+    @apply text-white;
+    @apply rounded-lg;
+    @apply focus:ring-blue-500;
+    @apply focus:border-blue-500;
+
+    @apply block;
+    @apply w-full;
+    @apply p-4;
+
+    @apply transition-colors;
+    @apply duration-200;
+    @apply ease-in-out;
+}

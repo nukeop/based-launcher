@@ -1,7 +1,7 @@
+import { Input } from "../Input/Input";
 import { PaletteGrid } from "../PaletteGrid/PaletteGrid";
 import { PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./Palette.module.scss";
-import { TextField } from "@mui/material";
 import Fuse from "fuse.js";
 import React, { useCallback, useEffect, useState } from "react";
 
@@ -97,15 +97,11 @@ export const Palette: React.FC<PaletteProps> = ({ options }) => {
   }, [selectedPosition, filteredOptions]);
 
   return (
-    <div className={styles.palette} tabIndex={-1}>
-      <TextField
-        autoFocus
-        fullWidth
+    <div data-testid="palette" className={styles.palette} tabIndex={-1}>
+      <Input
+        data-testid="filter-input"
+        id="filter-input"
         placeholder="Search..."
-        inputProps={{
-          className: styles.search,
-          "data-testid": "filter-input",
-        }}
         value={filterInput}
         onChange={(event) => {
           setSelectedPosition({ x: 0, y: 0 });

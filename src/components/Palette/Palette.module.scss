@@ -1,23 +1,6 @@
 .palette {
-    display: flex;
-    flex-flow: column;
-
-    padding: 2em;
-    outline: none;
-
-    .search {
-        font-size: 1.5rm;
-    }
-}
-
-.palette-items {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1em;
-}
-
-.palette-item {
-    flex: 0 1 50%;
+    @apply flex flex-col;
+    @apply p-8;
+    @apply outline-none;
+    @apply h-full;
 }

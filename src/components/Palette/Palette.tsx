@@ -2,8 +2,7 @@ import { Input } from "../Input/Input";
 import { PaletteGrid } from "../PaletteGrid/PaletteGrid";
 import { PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./Palette.module.scss";
-import Fuse from "fuse.js";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 
 type PaletteProps = {
   options: PaletteItemProps[];
@@ -21,28 +20,25 @@ export const Palette: React.FC<PaletteProps> = ({
   onFilterInputValueChange,
   onSetSelectedItemIndex,
   selectedItemIndex,
-}) => {
-  return (
-    <div data-testid="palette" className={styles.palette} tabIndex={-1}>
-      <Input
-        autoFocus
-        data-testid="filter-input"
-        id="filter-input"
-        placeholder="Search..."
-        value={filterInputValue}
-        onChange={(event) => {
-          onSetSelectedItemIndex(0);
-          return onFilterInputValueChange(event.target.value);
-        }}
-      />
+}) => (
+  <div data-testid="palette" className={styles.palette} tabIndex={-1}>
+    <Input
+      autoFocus
+      autoComplete="off"
+      data-testid="filter-input"
+      id="filter-input"
+      placeholder="Search..."
+      value={filterInputValue}
+      onChange={(event) => {
+        onSetSelectedItemIndex(0);
+        return onFilterInputValueChange(event.target.value);
+      }}
+    />
 
-      <div className={styles["palette-items"]}>
-        <PaletteGrid
-          items={options}
-          columns={1}
-          selectedItemId={options[selectedItemIndex]?.id}
-        />
-      </div>
-    </div>
-  );
-};
+    <PaletteGrid
+      items={options}
+      columns={1}
+      selectedItemId={options[selectedItemIndex]?.id}
+    />
+  </div>
+);

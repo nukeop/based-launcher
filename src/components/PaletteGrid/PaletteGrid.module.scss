@@ -1,20 +1,20 @@
 .palette-grid {
-  display: grid;
-  width: 100%;
+  @apply grid w-full flex-initial overflow-auto;
+  @apply mt-4;
 
   &.columns-1 {
-    grid-template-columns: 100%;
+    @apply grid-cols-1;
   }
 
   &.columns-2 {
-    grid-template-columns: 50% 50%;
+    @apply grid-cols-2;
   }
 
   &.columns-3 {
-    grid-template-columns: 33% 33% 33%;
+    @apply grid-cols-3;
   }
 
   &.columns-4 {
-    grid-template-columns: 25% 25% 25% 25%;
+    @apply grid-cols-4;
   }
 }

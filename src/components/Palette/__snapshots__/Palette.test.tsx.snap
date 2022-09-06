@@ -3,14 +3,15 @@
 exports[`Palette > renders a palette from piped arguments 1`] = `
 <DocumentFragment>
   <div
-    class="_app-root_v9n3v_1"
+    class="_app-root_1j04z_1"
   >
     <div
-      class="_palette_66plf_1"
+      class="_palette_16tou_1"
       data-testid="palette"
       tabindex="-1"
     >
       <input
+        autocomplete="off"
         class="_input_li5gy_1"
         data-testid="filter-input"
         id="filter-input"
@@ -18,60 +19,56 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
         value=""
       />
       <div
-        class="_palette-items_66plf_11"
+        class="_palette-grid_1wf24_1 _columns-1_1wf24_5"
       >
-        <div
-          class="_palette-grid_1vnjn_1 _columns-1_1vnjn_5"
+        <button
+          class="_palette-item_40xso_1 _selected_40xso_16"
+          data-selected="true"
+          data-testid="palette-item-first"
         >
-          <button
-            class="_palette-item_40xso_1 _selected_40xso_16"
-            data-selected="true"
-            data-testid="palette-item-first"
+          <div
+            class="_palette-item-right_40xso_24"
           >
-            <div
-              class="_palette-item-right_40xso_24"
-            >
-              <p>
-                first
-              </p>
-              <p
-                class="_palette-item-description_40xso_27"
-              />
-            </div>
-          </button>
-          <button
-            class="_palette-item_40xso_1"
-            data-selected="false"
-            data-testid="palette-item-second"
+            <p>
+              first
+            </p>
+            <p
+              class="_palette-item-description_40xso_27"
+            />
+          </div>
+        </button>
+        <button
+          class="_palette-item_40xso_1"
+          data-selected="false"
+          data-testid="palette-item-second"
+        >
+          <div
+            class="_palette-item-right_40xso_24"
           >
-            <div
-              class="_palette-item-right_40xso_24"
-            >
-              <p>
-                second
-              </p>
-              <p
-                class="_palette-item-description_40xso_27"
-              />
-            </div>
-          </button>
-          <button
-            class="_palette-item_40xso_1"
-            data-selected="false"
-            data-testid="palette-item-third"
+            <p>
+              second
+            </p>
+            <p
+              class="_palette-item-description_40xso_27"
+            />
+          </div>
+        </button>
+        <button
+          class="_palette-item_40xso_1"
+          data-selected="false"
+          data-testid="palette-item-third"
+        >
+          <div
+            class="_palette-item-right_40xso_24"
           >
-            <div
-              class="_palette-item-right_40xso_24"
-            >
-              <p>
-                third
-              </p>
-              <p
-                class="_palette-item-description_40xso_27"
-              />
-            </div>
-          </button>
-        </div>
+            <p>
+              third
+            </p>
+            <p
+              class="_palette-item-description_40xso_27"
+            />
+          </div>
+        </button>
       </div>
     </div>
   </div>

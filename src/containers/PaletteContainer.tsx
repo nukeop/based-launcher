@@ -1,6 +1,6 @@
 import { IpcEvent } from "../../common/ipc";
-import { ArgsContext } from "../App";
 import { Palette } from "../components/Palette/Palette";
+import { ArgsContext } from "../contexts/argsContext";
 import { ipcRenderer } from "electron";
 import Fuse from "fuse.js";
 import { useCallback, useContext, useEffect, useState } from "react";

@@ -1,5 +1,5 @@
-import { ArgsContext } from "../../App";
 import { PaletteContainer } from "../../containers/PaletteContainer";
+import { ArgsContext } from "../../contexts/argsContext";
 import { AppRoot } from "../../layouts/AppRoot";
 import {
   cleanup,

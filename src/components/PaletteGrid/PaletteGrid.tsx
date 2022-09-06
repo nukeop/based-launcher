@@ -1,17 +1,20 @@
 import { PaletteItem, PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./PaletteGrid.module.scss";
 import cx from "classnames";
+import { RefObject } from "react";
 
 type PaletteGridProps = {
   items: PaletteItemProps[];
   selectedItemId?: string;
   columns?: number;
+  selectedItemRef?: RefObject<HTMLButtonElement>;
 };
 
 export const PaletteGrid: React.FC<PaletteGridProps> = ({
   items,
   selectedItemId,
   columns = 1,
+  selectedItemRef,
 }) => (
   <div
     className={cx(styles["palette-grid"], {
@@ -26,6 +29,7 @@ export const PaletteGrid: React.FC<PaletteGridProps> = ({
         {...item}
         key={item.id}
         isSelected={item.id === selectedItemId}
+        ref={item.id === selectedItemId ? selectedItemRef : undefined}
       />
     ))}
   </div>

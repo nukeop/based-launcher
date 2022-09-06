@@ -3,9 +3,10 @@ import { Palette } from "../components/Palette/Palette";
 import { ArgsContext } from "../contexts/argsContext";
 import { ipcRenderer } from "electron";
 import Fuse from "fuse.js";
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 
 export const PaletteContainer: React.FC = () => {
+  const selectedItemRef = useRef<HTMLButtonElement>(null);
   const { stdinArgs } = useContext(ArgsContext);
   const options =
     stdinArgs?.map((arg, index) => ({
@@ -52,6 +53,10 @@ export const PaletteContainer: React.FC = () => {
             ? 0
             : selectedItemIndex + 1
         );
+        selectedItemRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
       }
     },
     [filteredOptions, selectedItemIndex]
@@ -65,6 +70,12 @@ export const PaletteContainer: React.FC = () => {
     },
     [filteredOptions, selectedItemIndex]
   );
+
+  useEffect(() => {
+    selectedItemRef.current?.scrollIntoView({
+      block: "nearest",
+    });
+  }, [selectedItemIndex]);
 
   useEffect(() => {
     addEventListener("keydown", onUp);
@@ -84,6 +95,7 @@ export const PaletteContainer: React.FC = () => {
       onFilterInputValueChange={setFilterInput}
       selectedItemIndex={selectedItemIndex}
       onSetSelectedItemIndex={setSelectedItemIndex}
+      selectedItemRef={selectedItemRef}
     />
   );
 };

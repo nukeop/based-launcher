@@ -25,3 +25,16 @@ body {
 p {
     @apply m-0;
 }
+
+::-webkit-scrollbar {
+    @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-slate-200/20;
+    @apply rounded-md;
+}

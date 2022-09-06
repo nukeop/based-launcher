@@ -7,6 +7,7 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
   >
     <div
       class="_palette_66plf_1"
+      data-testid="palette"
       tabindex="-1"
     >
       <input
@@ -20,7 +21,7 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
         class="_palette-items_66plf_11"
       >
         <div
-          class="_palette-grid_1vnjn_1 _columns-3_1vnjn_11"
+          class="_palette-grid_1vnjn_1 _columns-1_1vnjn_5"
         >
           <button
             class="_palette-item_40xso_1 _selected_40xso_16"

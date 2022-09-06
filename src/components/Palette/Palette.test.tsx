@@ -2,14 +2,19 @@ import { ArgsContext } from "../../App";
 import { PaletteContainer } from "../../containers/PaletteContainer";
 import { AppRoot } from "../../layouts/AppRoot";
 import {
+  cleanup,
   fireEvent,
   render,
   RenderResult,
   waitFor,
 } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 
 describe("Palette", () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   it("renders a palette from piped arguments", () => {
     const component = mountComponent(["first", "second", "third"]);
 
@@ -37,61 +42,20 @@ describe("Palette", () => {
     expect(firstItem.getAttribute("data-selected")).toBe("true");
   });
 
-  it("right arrow selects the next item", async () => {
-    const component = mountComponent(["first", "second", "third"]);
-    goRight(component);
+  it("down arrow selects the next item", async () => {
+    const component = mountComponent(["first", "second", "third", "fourth"]);
+    goDown(component);
 
     const secondItem = await nthItem(component, "second");
     expect(secondItem.getAttribute("data-selected")).toBe("true");
   });
 
-  it("right arrow wraparound", async () => {
+  it("up arrow selects the previous item", async () => {
     const component = mountComponent(["first", "second", "third", "fourth"]);
-    goRight(component);
-    goRight(component);
-    goRight(component);
 
-    const fourthItem = await nthItem(component, "fourth");
-    expect(fourthItem.getAttribute("data-selected")).toBe("true");
-  });
-
-  it("right arrow wraparound in the last row", async () => {
-    const component = mountComponent(["first", "second", "third", "fourth"]);
-    goRight(component);
-    goRight(component);
-    goRight(component);
-    goRight(component);
-
-    const firstItem = await nthItem(component, "first");
-    expect(firstItem.getAttribute("data-selected")).toBe("true");
-  });
-
-  it("left arrow selects the previous item", async () => {
-    const component = mountComponent(["first", "second", "third"]);
-    goRight(component);
-
+    goDown(component);
     const secondItem = await nthItem(component, "second");
     expect(secondItem.getAttribute("data-selected")).toBe("true");
-
-    goLeft(component);
-    const firstItem = await nthItem(component, "first");
-    expect(firstItem.getAttribute("data-selected")).toBe("true");
-  });
-
-  it("down arrow selects the item in the next row", async () => {
-    const component = mountComponent(["first", "second", "third", "fourth"]);
-    goDown(component);
-
-    const fourthItem = await nthItem(component, "fourth");
-    expect(fourthItem.getAttribute("data-selected")).toBe("true");
-  });
-
-  it("up arrow selects the item in the previous row", async () => {
-    const component = mountComponent(["first", "second", "third", "fourth"]);
-
-    goDown(component);
-    const fourthItem = await nthItem(component, "fourth");
-    expect(fourthItem.getAttribute("data-selected")).toBe("true");
 
     goUp(component);
     const firstItem = await nthItem(component, "first");
@@ -107,12 +71,6 @@ describe("Palette", () => {
       </ArgsContext.Provider>
     );
   };
-
-  const goRight = (component: RenderResult) =>
-    fireEvent.keyDown(component.getByTestId("palette"), { key: "ArrowRight" });
-
-  const goLeft = (component: RenderResult) =>
-    fireEvent.keyDown(component.getByTestId("palette"), { key: "ArrowLeft" });
 
   const goUp = (component: RenderResult) =>
     fireEvent.keyDown(component.getByTestId("palette"), { key: "ArrowUp" });

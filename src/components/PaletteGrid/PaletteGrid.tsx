@@ -11,7 +11,7 @@ type PaletteGridProps = {
 export const PaletteGrid: React.FC<PaletteGridProps> = ({
   items,
   selectedItemId,
-  columns = 3,
+  columns = 1,
 }) => (
   <div
     className={cx(styles["palette-grid"], {

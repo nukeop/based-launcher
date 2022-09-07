@@ -21,3 +21,8 @@ export const WithValue = Template.bind({});
 WithValue.args = {
   value: "It's 2022 and Gnome still doesn't have thumbnails in the file picker",
 };
+
+export const WithPrefixLabel = Template.bind({});
+WithPrefixLabel.args = {
+  prefixLabel: "Run:",
+};

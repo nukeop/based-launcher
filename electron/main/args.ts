@@ -17,7 +17,8 @@ export const readCLIFlags = () => {
     program
       .name("my-launcher")
       .version("1.0.0")
-      .option("-t, --theme <path>", "Path to the theme file (CSS)");
+      .option("-t, --theme <path>", "Path to the theme file (CSS)")
+      .option("--input-prefix <prefix>", "Prefix label for the input field");
 
     program.allowUnknownOption().parse(process.argv.slice(6), { from: "user" });
     const config = readConfig();

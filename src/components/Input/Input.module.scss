@@ -26,5 +26,9 @@
 
     @apply block;
     @apply w-full;
-    @apply py-4;
+    @apply py-4 pl-4;
+
+    .prefixLabel + & {
+        @apply pl-0;
+    }
 }

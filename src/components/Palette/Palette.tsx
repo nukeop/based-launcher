@@ -7,6 +7,7 @@ import React, { RefObject } from "react";
 type PaletteProps = {
   options: PaletteItemProps[];
 
+  prefixLabel?: string;
   filterInputValue: string;
   onFilterInputValueChange: (value: string) => void;
 
@@ -23,6 +24,7 @@ export const Palette: React.FC<PaletteProps> = ({
   onSetSelectedItemIndex,
   selectedItemIndex,
   selectedItemRef,
+  prefixLabel,
 }) => (
   <div data-testid="palette" className={styles.palette} tabIndex={-1}>
     <Input
@@ -36,6 +38,7 @@ export const Palette: React.FC<PaletteProps> = ({
         onSetSelectedItemIndex(0);
         return onFilterInputValueChange(event.target.value);
       }}
+      prefixLabel={prefixLabel}
     />
 
     <PaletteGrid

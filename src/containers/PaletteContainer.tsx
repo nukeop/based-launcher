@@ -1,6 +1,7 @@
 import { IpcEvent } from "../../common/ipc";
 import { Palette } from "../components/Palette/Palette";
 import { ArgsContext } from "../contexts/argsContext";
+import { useFlags } from "../hooks/useFlags";
 import { ipcRenderer } from "electron";
 import Fuse from "fuse.js";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
@@ -8,6 +9,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 export const PaletteContainer: React.FC = () => {
   const selectedItemRef = useRef<HTMLButtonElement>(null);
   const { stdinArgs } = useContext(ArgsContext);
+  const { flags } = useFlags();
   const options =
     stdinArgs?.map((arg, index) => ({
       id: arg,
@@ -96,6 +98,7 @@ export const PaletteContainer: React.FC = () => {
       selectedItemIndex={selectedItemIndex}
       onSetSelectedItemIndex={setSelectedItemIndex}
       selectedItemRef={selectedItemRef}
+      prefixLabel={flags?.inputPrefix}
     />
   );
 };

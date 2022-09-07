@@ -1,14 +1,18 @@
 import { CLIFlags } from "../../common/cliFlags";
+import { readConfig } from "./config";
 import Logger from "./logger";
 import { program } from "commander";
 
-class ArgsProvider {
+export class ArgsProvider {
   static stdinArgs: string[];
   static flags: CLIFlags;
   private constructor() {}
 }
 
 export const readCLIFlags = () => {
+  Logger.debug("Reading CLI flags...");
+  const startTime = process.hrtime();
+
   if (!ArgsProvider.flags) {
     program
       .name("my-launcher")
@@ -16,9 +20,20 @@ export const readCLIFlags = () => {
       .option("-t, --theme <path>", "Path to the theme file (CSS)");
 
     program.allowUnknownOption().parse(process.argv.slice(6), { from: "user" });
+    const config = readConfig();
 
-    ArgsProvider.flags = program.opts();
+    ArgsProvider.flags = {
+      ...config,
+      ...program.opts(),
+    };
   }
+
+  const endTime = process.hrtime(startTime);
+  Logger.debug(
+    `Read CLI flags in ${(endTime[0] * 1000 + endTime[1] / 1000000).toFixed(
+      0
+    )}ms`
+  );
 
   return ArgsProvider.flags;
 };

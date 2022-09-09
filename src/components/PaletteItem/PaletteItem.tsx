@@ -8,11 +8,12 @@ export type PaletteItemProps = {
   description?: string;
   icon?: React.ReactNode;
   isSelected?: boolean;
+  style?: React.CSSProperties;
   onAction?: () => void;
 };
 
 export const PaletteItem = forwardRef<HTMLButtonElement, PaletteItemProps>(
-  ({ id, name, description, icon, isSelected, onAction }, ref) => {
+  ({ id, name, description, icon, isSelected, onAction, style }, ref) => {
     const displayName = name ?? id;
 
     return (
@@ -20,6 +21,7 @@ export const PaletteItem = forwardRef<HTMLButtonElement, PaletteItemProps>(
         className={cx(styles["palette-item"], {
           [styles["selected"]]: isSelected,
         })}
+        style={style}
         onClick={onAction}
         data-testid={`palette-item-${encodeURIComponent(id)}`}
         data-selected={isSelected}

@@ -5,9 +5,10 @@ import { useFlags } from "../hooks/useFlags";
 import { ipcRenderer } from "electron";
 import Fuse from "fuse.js";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
+import { FixedSizeList } from "react-window";
 
 export const PaletteContainer: React.FC = () => {
-  const selectedItemRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<FixedSizeList>(null);
   const { stdinArgs } = useContext(ArgsContext);
   const { flags } = useFlags();
   const options =
@@ -55,10 +56,6 @@ export const PaletteContainer: React.FC = () => {
             ? 0
             : selectedItemIndex + 1
         );
-        selectedItemRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-        });
       }
     },
     [filteredOptions, selectedItemIndex]
@@ -74,9 +71,7 @@ export const PaletteContainer: React.FC = () => {
   );
 
   useEffect(() => {
-    selectedItemRef.current?.scrollIntoView({
-      block: "nearest",
-    });
+    listRef.current?.scrollToItem(selectedItemIndex);
   }, [selectedItemIndex]);
 
   useEffect(() => {
@@ -97,7 +92,7 @@ export const PaletteContainer: React.FC = () => {
       onFilterInputValueChange={setFilterInput}
       selectedItemIndex={selectedItemIndex}
       onSetSelectedItemIndex={setSelectedItemIndex}
-      selectedItemRef={selectedItemRef}
+      listRef={listRef}
       prefixLabel={flags?.inputPrefix}
     />
   );

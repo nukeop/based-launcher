@@ -2,19 +2,21 @@ import { PaletteItem, PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./PaletteGrid.module.scss";
 import cx from "classnames";
 import { RefObject } from "react";
+import AutoSizer from "react-virtualized-auto-sizer";
+import { FixedSizeList } from "react-window";
 
 type PaletteGridProps = {
   items: PaletteItemProps[];
   selectedItemId?: string;
   columns?: number;
-  selectedItemRef?: RefObject<HTMLButtonElement>;
+  listRef?: RefObject<FixedSizeList>;
 };
 
 export const PaletteGrid: React.FC<PaletteGridProps> = ({
   items,
   selectedItemId,
   columns = 1,
-  selectedItemRef,
+  listRef,
 }) => (
   <div
     className={cx(styles["palette-grid"], {
@@ -24,13 +26,28 @@ export const PaletteGrid: React.FC<PaletteGridProps> = ({
       [styles["columns-4"]]: columns === 4,
     })}
   >
-    {items.map((item) => (
-      <PaletteItem
-        {...item}
-        key={item.id}
-        isSelected={item.id === selectedItemId}
-        ref={item.id === selectedItemId ? selectedItemRef : undefined}
-      />
-    ))}
+    <AutoSizer>
+      {({ height, width }) => (
+        <FixedSizeList
+          ref={listRef}
+          height={height}
+          width={width}
+          itemSize={50}
+          itemCount={items.length}
+        >
+          {({ index, style }) => {
+            const item = items[index];
+            return (
+              <PaletteItem
+                {...item}
+                key={item.id}
+                style={style}
+                isSelected={item.id === selectedItemId}
+              />
+            );
+          }}
+        </FixedSizeList>
+      )}
+    </AutoSizer>
   </div>
 );

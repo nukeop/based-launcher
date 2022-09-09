@@ -45,7 +45,7 @@ async function createWindow() {
     )}ms (debug mode)`
   );
 
-  await readPipedArgs();
+  readPipedArgs();
 
   win = new BrowserWindow({
     title: "My launcher",

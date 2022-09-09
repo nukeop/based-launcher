@@ -3,6 +3,7 @@ import { PaletteGrid } from "../PaletteGrid/PaletteGrid";
 import { PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./Palette.module.scss";
 import React, { RefObject } from "react";
+import { FixedSizeList } from "react-window";
 
 type PaletteProps = {
   options: PaletteItemProps[];
@@ -14,7 +15,7 @@ type PaletteProps = {
   selectedItemIndex: number;
   onSetSelectedItemIndex: (index: number) => void;
 
-  selectedItemRef: RefObject<HTMLButtonElement>;
+  listRef: RefObject<FixedSizeList>;
 };
 
 export const Palette: React.FC<PaletteProps> = ({
@@ -23,7 +24,7 @@ export const Palette: React.FC<PaletteProps> = ({
   onFilterInputValueChange,
   onSetSelectedItemIndex,
   selectedItemIndex,
-  selectedItemRef,
+  listRef,
   prefixLabel,
 }) => (
   <div data-testid="palette" className={styles.palette} tabIndex={-1}>
@@ -45,7 +46,7 @@ export const Palette: React.FC<PaletteProps> = ({
       items={options}
       columns={1}
       selectedItemId={options[selectedItemIndex]?.id}
-      selectedItemRef={selectedItemRef}
+      listRef={listRef}
     />
   </div>
 );

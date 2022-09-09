@@ -25,7 +25,10 @@ button.palette-item {
     }
 
     .palette-item-right {
-        @apply flex flex-col flex-1 items-start;
+        @apply flex flex-col flex-1 items-start w-full;
+        & > * {
+            @apply w-full text-left truncate;
+        }
     }
 
     .palette-item-description {

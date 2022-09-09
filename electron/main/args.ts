@@ -39,6 +39,10 @@ export const readCLIFlags = () => {
   return ArgsProvider.flags;
 };
 
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}
+
 export const readPipedArgs = async () => {
   Logger.debug("Reading piped args...");
   const startTime = process.hrtime();
@@ -55,7 +59,7 @@ export const readPipedArgs = async () => {
         }
       });
       process.stdin.on("end", function () {
-        resolve(text.split("\n").filter(Boolean));
+        resolve(text.split("\n").filter(Boolean).filter(onlyUnique));
       });
     });
   }

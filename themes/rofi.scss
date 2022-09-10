@@ -1,0 +1,57 @@
+$base03: #002b36;
+$base02: #073642;
+$base01: #586e75;
+$base00: #657b83;
+
+$base0: #839496;
+$base1: #93a1a1;
+$base2: #eee8d5;
+$base3: #fdf6e3;
+
+#root {
+  background-color: $base3;
+}
+
+.app-root {
+  background: none;
+}
+
+.palette {
+  padding: 0.5em 0.25em;
+}
+
+.filter-input {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px dashed $base03;
+
+  &:focus,
+  &:focus-within,
+  &:active {
+    border-bottom: 2px dashed $base03;
+  }
+
+  label {
+    background: transparent;
+    color: $base03;
+    padding: 0;
+    margin: 0;
+    margin-right: 0.5em;
+  }
+
+  input {
+    padding: 0;
+    color: $base03;
+  }
+}
+
+.palette-item {
+  color: $base03;
+  padding: 0;
+  height: auto !important;
+
+  &--selected {
+    color: $base3;
+    background-color: $base01  !important;
+  }
+}

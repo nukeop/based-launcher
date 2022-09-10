@@ -1,7 +1,9 @@
+import { ThemingClassNames } from "../../theming/theming-classnames";
 import { Input } from "../Input/Input";
 import { PaletteGrid } from "../PaletteGrid/PaletteGrid";
 import { PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./Palette.module.scss";
+import cx from "classnames";
 import React, { RefObject } from "react";
 import { FixedSizeList } from "react-window";
 
@@ -27,12 +29,16 @@ export const Palette: React.FC<PaletteProps> = ({
   listRef,
   prefixLabel,
 }) => (
-  <div data-testid="palette" className={styles.palette} tabIndex={-1}>
+  <div
+    data-testid="palette"
+    className={cx(styles.palette, ThemingClassNames["palette"])}
+    tabIndex={-1}
+  >
     <Input
       autoFocus
       autoComplete="off"
       data-testid="filter-input"
-      id="filter-input"
+      className={ThemingClassNames["filter-input"]}
       placeholder="Search..."
       value={filterInputValue}
       onChange={(event) => {

@@ -1,4 +1,4 @@
-button.palette-item {
+.palette-item {
     @apply flex flex-row items-center;
     @apply w-full;
     @apply px-4 py-2;
@@ -10,7 +10,7 @@ button.palette-item {
     @apply text-ellipsis;
     @apply overflow-ellipsis;
 
-    & > *:not(:last-child) {
+    &>*:not(:last-child) {
         @apply mr-1;
     }
 
@@ -26,7 +26,8 @@ button.palette-item {
 
     .palette-item-right {
         @apply flex flex-col flex-1 items-start w-full;
-        & > * {
+
+        &>* {
             @apply w-full text-left truncate;
         }
     }

@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
+    "themes": "sass themes",
+    "themes:watch": "sass themes --watch",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint \"src/**/*.{ts,tsx}\" \"electron/**/*.ts\"",

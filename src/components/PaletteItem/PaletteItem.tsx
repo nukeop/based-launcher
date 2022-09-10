@@ -1,6 +1,7 @@
+import { ThemingClassNames } from "../../theming/theming-classnames";
 import styles from "./PaletteItem.module.scss";
 import cx from "classnames";
-import { forwardRef, RefObject } from "react";
+import { forwardRef } from "react";
 
 export type PaletteItemProps = {
   id: string;
@@ -15,12 +16,16 @@ export type PaletteItemProps = {
 export const PaletteItem = forwardRef<HTMLButtonElement, PaletteItemProps>(
   ({ id, name, description, icon, isSelected, onAction, style }, ref) => {
     const displayName = name ?? id;
-
     return (
       <button
-        className={cx(styles["palette-item"], {
-          [styles["selected"]]: isSelected,
-        })}
+        className={cx(
+          styles["palette-item"],
+          {
+            [styles["selected"]]: isSelected,
+            [ThemingClassNames["palette-item--selected"]]: isSelected,
+          },
+          ThemingClassNames["palette-item"]
+        )}
         style={style}
         onClick={onAction}
         data-testid={`palette-item-${encodeURIComponent(id)}`}

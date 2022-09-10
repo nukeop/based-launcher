@@ -4,7 +4,7 @@
   "description": "Feature-rich, dmenu-compatible app launcher for Linux",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && electron-builder",
+    "build": "tsc && vite build && electron-builder --linux",
     "themes": "sass themes",
     "themes:watch": "sass themes --watch",
     "test": "vitest",

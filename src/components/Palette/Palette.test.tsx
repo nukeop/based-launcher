@@ -14,6 +14,12 @@ vi.mock("react-virtualized-auto-sizer", () => ({
   default: ({ children }: any) => children({ height: 600, width: 600 }),
 }));
 
+vi.mock("electron", () => ({
+  ipcRenderer: {
+    invoke: () => Promise.resolve(),
+  },
+}));
+
 describe("Palette", () => {
   afterEach(() => {
     cleanup();

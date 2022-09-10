@@ -28,21 +28,23 @@ export default defineConfig({
           },
           plugins: [
             onstart(() => {
-              if (process.electronApp) {
-                process.electronApp.removeAllListeners();
-                process.electronApp.kill();
-              }
-
-              // Start Electron.app
-              process.electronApp = spawn(
-                electronPath,
-                [".", "--no-sandbox", ...process.argv],
-                {
-                  stdio: "inherit",
+              if (!(process.env.NODE_ENV === "production")) {
+                if (process.electronApp) {
+                  process.electronApp.removeAllListeners();
+                  process.electronApp.kill();
                 }
-              );
-              // Exit command after Electron.app exits
-              process.electronApp.once("exit", process.exit);
+
+                // Start Electron.app
+                process.electronApp = spawn(
+                  electronPath,
+                  [".", "--no-sandbox", ...process.argv],
+                  {
+                    stdio: "inherit",
+                  }
+                );
+                // Exit command after Electron.app exits
+                process.electronApp.once("exit", process.exit);
+              }
             }),
           ],
         }),

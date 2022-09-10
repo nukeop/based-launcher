@@ -20,7 +20,12 @@ export const readCLIFlags = () => {
       .option("-t, --theme <path>", "Path to the theme file (CSS)")
       .option("--input-prefix <prefix>", "Prefix label for the input field");
 
-    program.allowUnknownOption().parse(process.argv.slice(6), { from: "user" });
+    // @ts-ignore
+    const resolvedArgv = import.meta.env.PROD
+      ? process.argv
+      : process.argv.slice(6);
+
+    program.allowUnknownOption().parse(resolvedArgv, { from: "user" });
     const config = readConfig();
 
     ArgsProvider.flags = {

@@ -1,7 +1,7 @@
 {
-  "name": "my-launcher",
+  "name": "based-launcher",
   "version": "1.0.0",
-  "description": "",
+  "description": "Feature-rich, dmenu-compatible app launcher for Linux",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",

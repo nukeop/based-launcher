@@ -15,7 +15,7 @@ export const readCLIFlags = () => {
 
   if (!ArgsProvider.flags) {
     program
-      .name("my-launcher")
+      .name("based-launcher")
       .version("1.0.0")
       .option("-t, --theme <path>", "Path to the theme file (CSS)")
       .option("--input-prefix <prefix>", "Prefix label for the input field");

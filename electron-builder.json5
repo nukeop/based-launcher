@@ -2,7 +2,7 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  appId: "BasedLauncher",
+  appId: "based-launcher",
   productName: "based-launcher",
   copyright: "Copyright © 2022 ${author}",
   asar: true,
@@ -11,12 +11,8 @@
     buildResources: "electron/resources",
   },
   files: ["dist"],
-  mac: {
-    target: ["dmg"],
-    artifactName: "${productName}-Mac-${version}-Installer.${ext}",
-  },
   linux: {
-    target: ["AppImage"],
+    target: ["AppImage", "pacman", "deb", "rpm", "tar.gz"],
     artifactName: "${productName}-Linux-${version}.${ext}",
   },
 }

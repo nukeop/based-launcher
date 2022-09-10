@@ -1,0 +1,25 @@
+name: Generate coverage
+
+on:
+  push:
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js 16
+        uses: actions/setup-node@master
+        with:
+          version: 16
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Run coverage
+        run: npm run coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/clover.xml

@@ -18,43 +18,41 @@ export const PaletteGrid: React.FC<PaletteGridProps> = ({
   selectedItemId,
   columns = 1,
   listRef,
-}) => {
-  return (
-    <div
-      className={cx(
-        styles["palette-grid"],
-        {
-          [styles["columns-1"]]: columns === 1,
-          [styles["columns-2"]]: columns === 2,
-          [styles["columns-3"]]: columns === 3,
-          [styles["columns-4"]]: columns === 4,
-        },
-        ThemingClassNames["palette-grid"]
+}) => (
+  <div
+    className={cx(
+      styles["palette-grid"],
+      {
+        [styles["columns-1"]]: columns === 1,
+        [styles["columns-2"]]: columns === 2,
+        [styles["columns-3"]]: columns === 3,
+        [styles["columns-4"]]: columns === 4,
+      },
+      ThemingClassNames["palette-grid"]
+    )}
+  >
+    <AutoSizer>
+      {({ height, width }) => (
+        <FixedSizeList
+          ref={listRef}
+          height={height}
+          width={width}
+          itemSize={50}
+          itemCount={items.length}
+        >
+          {({ index, style }) => {
+            const item = items[index];
+            return (
+              <PaletteItem
+                {...item}
+                key={item.id}
+                style={style}
+                isSelected={item.id === selectedItemId}
+              />
+            );
+          }}
+        </FixedSizeList>
       )}
-    >
-      <AutoSizer>
-        {({ height, width }) => (
-          <FixedSizeList
-            ref={listRef}
-            height={height}
-            width={width}
-            itemSize={50}
-            itemCount={items.length}
-          >
-            {({ index, style }) => {
-              const item = items[index];
-              return (
-                <PaletteItem
-                  {...item}
-                  key={item.id}
-                  style={style}
-                  isSelected={item.id === selectedItemId}
-                />
-              );
-            }}
-          </FixedSizeList>
-        )}
-      </AutoSizer>
-    </div>
-  );
-};
+    </AutoSizer>
+  </div>
+);

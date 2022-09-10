@@ -3,72 +3,86 @@
 exports[`Palette > renders a palette from piped arguments 1`] = `
 <DocumentFragment>
   <div
-    class="_app-root_1j04z_1"
+    class="_app-root_1suvm_1 app-root"
   >
     <div
-      class="_palette_16tou_1"
+      class="_palette_16tou_1 palette"
       data-testid="palette"
       tabindex="-1"
     >
-      <input
-        autocomplete="off"
-        class="_input_li5gy_1"
-        data-testid="filter-input"
-        id="filter-input"
-        placeholder="Search..."
-        value=""
-      />
       <div
-        class="_palette-grid_1wf24_1 _columns-1_1wf24_5"
+        class="_inputWrapper_10twy_1 filter-input"
       >
-        <button
-          class="_palette-item_40xso_1 _selected_40xso_16"
-          data-selected="true"
-          data-testid="palette-item-first"
+        <input
+          autocomplete="off"
+          class="_input_10twy_1"
+          data-testid="filter-input"
+          placeholder="Search..."
+          value=""
+        />
+      </div>
+      <div
+        class="_palette-grid_lf0bl_1 _columns-1_lf0bl_5 palette-grid"
+      >
+        <div
+          style="position: relative; height: 600px; width: 600px; overflow: auto; will-change: transform; direction: ltr;"
         >
           <div
-            class="_palette-item-right_40xso_24"
+            style="height: 150px; width: 100%;"
           >
-            <p>
-              first
-            </p>
-            <p
-              class="_palette-item-description_40xso_27"
-            />
+            <button
+              class="_palette-item_1jvla_1 _selected_1jvla_16 palette-item--selected palette-item"
+              data-selected="true"
+              data-testid="palette-item-first"
+              style="position: absolute; left: 0px; top: 0px; height: 50px; width: 100%;"
+            >
+              <div
+                class="_palette-item-right_1jvla_24"
+              >
+                <p>
+                  first
+                </p>
+                <p
+                  class="_palette-item-description_1jvla_30"
+                />
+              </div>
+            </button>
+            <button
+              class="_palette-item_1jvla_1 palette-item"
+              data-selected="false"
+              data-testid="palette-item-second"
+              style="position: absolute; left: 0px; top: 50px; height: 50px; width: 100%;"
+            >
+              <div
+                class="_palette-item-right_1jvla_24"
+              >
+                <p>
+                  second
+                </p>
+                <p
+                  class="_palette-item-description_1jvla_30"
+                />
+              </div>
+            </button>
+            <button
+              class="_palette-item_1jvla_1 palette-item"
+              data-selected="false"
+              data-testid="palette-item-third"
+              style="position: absolute; left: 0px; top: 100px; height: 50px; width: 100%;"
+            >
+              <div
+                class="_palette-item-right_1jvla_24"
+              >
+                <p>
+                  third
+                </p>
+                <p
+                  class="_palette-item-description_1jvla_30"
+                />
+              </div>
+            </button>
           </div>
-        </button>
-        <button
-          class="_palette-item_40xso_1"
-          data-selected="false"
-          data-testid="palette-item-second"
-        >
-          <div
-            class="_palette-item-right_40xso_24"
-          >
-            <p>
-              second
-            </p>
-            <p
-              class="_palette-item-description_40xso_27"
-            />
-          </div>
-        </button>
-        <button
-          class="_palette-item_40xso_1"
-          data-selected="false"
-          data-testid="palette-item-third"
-        >
-          <div
-            class="_palette-item-right_40xso_24"
-          >
-            <p>
-              third
-            </p>
-            <p
-              class="_palette-item-description_40xso_27"
-            />
-          </div>
-        </button>
+        </div>
       </div>
     </div>
   </div>

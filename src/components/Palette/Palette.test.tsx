@@ -8,23 +8,27 @@ import {
   RenderResult,
   waitFor,
 } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+vi.mock("react-virtualized-auto-sizer", () => ({
+  default: ({ children }: any) => children({ height: 600, width: 600 }),
+}));
 
 describe("Palette", () => {
   afterEach(() => {
     cleanup();
   });
 
-  it("renders a palette from piped arguments", () => {
+  it("renders a palette from piped arguments", async () => {
     const component = mountComponent(["first", "second", "third"]);
 
-    expect(component.asFragment()).toMatchSnapshot();
+    waitFor(() => expect(component.asFragment()).toMatchSnapshot());
   });
 
   it("filters entries based on entered text", async () => {
     const component = mountComponent(["first", "second", "third"]);
 
-    const input = await (await component.findAllByTestId("filter-input")).at(0);
+    const input = (await component.findAllByTestId("filter-input")).at(0);
     if (input) {
       fireEvent.change(input, { target: { value: "fir" } });
     }
@@ -38,7 +42,7 @@ describe("Palette", () => {
   it("selects the first item by default", async () => {
     const component = mountComponent(["first", "second", "third"]);
 
-    const firstItem = await nthItem(component, "first");
+    const firstItem = nthItem(component, "first");
     expect(firstItem.getAttribute("data-selected")).toBe("true");
   });
 
@@ -46,7 +50,7 @@ describe("Palette", () => {
     const component = mountComponent(["first", "second", "third", "fourth"]);
     goDown(component);
 
-    const secondItem = await nthItem(component, "second");
+    const secondItem = nthItem(component, "second");
     expect(secondItem.getAttribute("data-selected")).toBe("true");
   });
 
@@ -54,11 +58,11 @@ describe("Palette", () => {
     const component = mountComponent(["first", "second", "third", "fourth"]);
 
     goDown(component);
-    const secondItem = await nthItem(component, "second");
+    const secondItem = nthItem(component, "second");
     expect(secondItem.getAttribute("data-selected")).toBe("true");
 
     goUp(component);
-    const firstItem = await nthItem(component, "first");
+    const firstItem = nthItem(component, "first");
     expect(firstItem.getAttribute("data-selected")).toBe("true");
   });
 

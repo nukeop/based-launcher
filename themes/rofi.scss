@@ -45,10 +45,19 @@ $base3: #fdf6e3;
   }
 }
 
+.palette-grid {
+  margin: 0;
+  margin-top: 0.25em;
+}
+
 .palette-item {
   color: $base03;
   padding: 0;
   height: auto !important;
+
+  &:nth-child(odd) {
+    background-color: $base2;
+  }
 
   &--selected {
     color: $base3;

@@ -51,6 +51,8 @@ Name=App Name
 Comment=App Comment
 Icon=app-icon
 Exec=app-exec
+Empty=
+=invalid
 `;
     (fs.promises.readFile as Mock).mockImplementation(async () => content);
 

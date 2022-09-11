@@ -5,6 +5,9 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: "jsdom",
+    deps: {
+      inline: ["vitest-mock-process"],
+    },
   },
   build: {
     sourcemap: true,

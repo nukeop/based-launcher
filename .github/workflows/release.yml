@@ -11,6 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
+      - run: sudo apt install libarchive-tools
       - name: Use Node.js 16
         uses: actions/setup-node@master
         with:

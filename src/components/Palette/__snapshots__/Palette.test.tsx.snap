@@ -17,7 +17,7 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
           autocomplete="off"
           class="_input_10twy_1"
           data-testid="filter-input"
-          placeholder="Search..."
+          placeholder="Type to filter..."
           value=""
         />
       </div>

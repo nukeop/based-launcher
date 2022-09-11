@@ -1,3 +1,4 @@
+import Logger from "./logger";
 import fs from "fs";
 import { xdgDataDirectories } from "xdg-basedir";
 
@@ -5,18 +6,21 @@ export const getApps = async () => {
   const applicationDirs = xdgDataDirectories.map(
     (dir) => `${dir}/applications`
   );
-  return Promise.all(
+  const desktopEntriesByDir = await Promise.all(
     applicationDirs.map(async (dir) => {
-      if (!fs.existsSync(dir)) {
+      try {
+        const files = await fs.promises.readdir(dir);
+        return files
+          .filter((file) => file.endsWith(".desktop"))
+          .map((file) => `${dir}/${file}`);
+      } catch (e) {
+        Logger.error(`Could not read directory ${dir}`, e);
         return [];
       }
-
-      const files = await fs.promises.readdir(dir);
-      return files
-        .filter((file) => file.endsWith(".desktop"))
-        .map((file) => `${dir}/${file}`);
     })
   );
+
+  return desktopEntriesByDir.flat();
 };
 
 export const parseDesktopFile = async (path: string) => {
@@ -32,13 +36,4 @@ export const parseDesktopFile = async (path: string) => {
     }
     return acc;
   }, {} as Record<string, string>);
-};
-
-export const optionsFromApps = (apps: Record<string, string>[]) => {
-  return apps.map((app) => ({
-    id: app.Name,
-    name: app.Name,
-    description: app.Comment,
-    icon: app.Icon,
-  }));
 };

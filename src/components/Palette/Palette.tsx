@@ -39,7 +39,7 @@ export const Palette: React.FC<PaletteProps> = ({
       autoComplete="off"
       data-testid="filter-input"
       className={ThemingClassNames["filter-input"]}
-      placeholder="Search..."
+      placeholder="Type to filter..."
       value={filterInputValue}
       onChange={(event) => {
         onSetSelectedItemIndex(0);

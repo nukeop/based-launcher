@@ -1,11 +1,13 @@
 import { CLIFlags } from "../../common/cliFlags";
+import { LauncherMode } from "../../common/modes";
 import { readConfig } from "./config";
 import Logger from "./logger";
-import { program } from "commander";
+import { Option, program } from "commander";
 
 export class ArgsProvider {
   static stdinArgs: string[];
   static flags: CLIFlags;
+
   private constructor() {}
 }
 
@@ -17,8 +19,20 @@ export const readCLIFlags = () => {
     program
       .name("based-launcher")
       .version("1.0.0")
-      .option("-t, --theme <path>", "Path to the theme file (CSS)")
-      .option("--input-prefix <prefix>", "Prefix label for the input field");
+      .addOption(
+        new Option("-t, --theme <path>", "Path to the theme file (CSS)")
+      )
+      .addOption(
+        new Option("-m, --mode <mode>", "Mode to run the launcher in")
+          .default("dmenu")
+          .choices(Object.values(LauncherMode))
+      )
+      .addOption(
+        new Option(
+          "--input-prefix <prefix>",
+          "Prefix label for the input field"
+        )
+      );
 
     // @ts-ignore
     const resolvedArgv = import.meta.env.PROD

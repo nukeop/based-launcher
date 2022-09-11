@@ -1,6 +1,5 @@
 import { IpcEvent } from "../../common/ipc";
 import { readCLIFlags, readPipedArgs } from "./args";
-import { getApps } from "./desktop-apps";
 import Logger from "./logger";
 import { app, shell, ipcMain } from "electron";
 import { BrowserWindow } from "glasstron";
@@ -8,8 +7,6 @@ import { release } from "os";
 import { join } from "path";
 
 readCLIFlags();
-
-getApps();
 
 const startTime = process.hrtime();
 // Disable GPU Acceleration for Windows 7

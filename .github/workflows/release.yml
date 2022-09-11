@@ -19,7 +19,7 @@ jobs:
       - name: Get package version
         id: ref
         run: |
-          pkgver=$(node ./scripts/get-pkg-version.js)
+          pkgver=$(node ./scripts/version.js)
           echo ::set-output name=version::$pkgver
       - name: Install dependencies
         run: npm ci

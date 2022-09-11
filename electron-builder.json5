@@ -14,5 +14,6 @@
   linux: {
     target: ["AppImage", "pacman", "deb", "rpm", "tar.gz"],
     artifactName: "${productName}-Linux-${version}.${ext}",
+    publish: ["github"],
   },
 }

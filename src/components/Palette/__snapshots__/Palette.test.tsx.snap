@@ -11,11 +11,11 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
       tabindex="-1"
     >
       <div
-        class="_inputWrapper_10twy_1 filter-input"
+        class="_inputWrapper_1itu2_1 filter-input"
       >
         <input
           autocomplete="off"
-          class="_input_10twy_1"
+          class="_input_1itu2_1"
           data-testid="filter-input"
           placeholder="Type to filter..."
           value=""
@@ -28,56 +28,56 @@ exports[`Palette > renders a palette from piped arguments 1`] = `
           style="position: relative; height: 600px; width: 600px; overflow: auto; will-change: transform; direction: ltr;"
         >
           <div
-            style="height: 150px; width: 100%;"
+            style="height: 84px; width: 100%;"
           >
             <button
-              class="_palette-item_1jvla_1 _selected_1jvla_16 palette-item--selected palette-item"
+              class="_palette-item_bgybm_1 _selected_bgybm_18 palette-item--selected palette-item"
               data-selected="true"
               data-testid="palette-item-first"
-              style="position: absolute; left: 0px; top: 0px; height: 50px; width: 100%;"
+              style="position: absolute; left: 0px; top: 0px; height: 28px; width: 100%;"
             >
               <div
-                class="_palette-item-right_1jvla_24"
+                class="_palette-item-right_bgybm_26"
               >
                 <p>
                   first
                 </p>
                 <p
-                  class="_palette-item-description_1jvla_30"
+                  class="_palette-item-description_bgybm_32"
                 />
               </div>
             </button>
             <button
-              class="_palette-item_1jvla_1 palette-item"
+              class="_palette-item_bgybm_1 palette-item"
               data-selected="false"
               data-testid="palette-item-second"
-              style="position: absolute; left: 0px; top: 50px; height: 50px; width: 100%;"
+              style="position: absolute; left: 0px; top: 28px; height: 28px; width: 100%;"
             >
               <div
-                class="_palette-item-right_1jvla_24"
+                class="_palette-item-right_bgybm_26"
               >
                 <p>
                   second
                 </p>
                 <p
-                  class="_palette-item-description_1jvla_30"
+                  class="_palette-item-description_bgybm_32"
                 />
               </div>
             </button>
             <button
-              class="_palette-item_1jvla_1 palette-item"
+              class="_palette-item_bgybm_1 palette-item"
               data-selected="false"
               data-testid="palette-item-third"
-              style="position: absolute; left: 0px; top: 100px; height: 50px; width: 100%;"
+              style="position: absolute; left: 0px; top: 56px; height: 28px; width: 100%;"
             >
               <div
-                class="_palette-item-right_1jvla_24"
+                class="_palette-item-right_bgybm_26"
               >
                 <p>
                   third
                 </p>
                 <p
-                  class="_palette-item-description_1jvla_30"
+                  class="_palette-item-description_bgybm_32"
                 />
               </div>
             </button>

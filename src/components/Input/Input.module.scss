@@ -22,11 +22,11 @@
     @apply text-gray-900;
     @apply placeholder-gray-400;
 
-    @apply text-base text-white;
+    @apply text-xl text-white;
 
     @apply block;
     @apply w-full;
-    @apply py-4 pl-4;
+    @apply py-2 pl-4;
 
     .prefixLabel + & {
         @apply pl-0;

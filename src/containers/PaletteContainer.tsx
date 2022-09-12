@@ -5,10 +5,10 @@ import { useFlags } from "../hooks/useFlags";
 import { ipcRenderer } from "electron";
 import Fuse from "fuse.js";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import { FixedSizeList } from "react-window";
+import { VariableSizeList } from "react-window";
 
 export const PaletteContainer: React.FC = () => {
-  const listRef = useRef<FixedSizeList>(null);
+  const listRef = useRef<VariableSizeList>(null);
   const { stdinArgs } = useContext(ArgsContext);
   const { flags } = useFlags();
   const options =

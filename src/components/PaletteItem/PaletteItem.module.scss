@@ -1,22 +1,24 @@
 .palette-item {
     @apply flex flex-row items-center;
     @apply w-full;
-    @apply px-4 py-2;
-    @apply hover:bg-white/10 active:bg-white/20;
+    @apply px-3 py-1;
+    @apply hover:bg-slate-600 focus:bg-slate-600 active:bg-slate-500;
     @apply cursor-pointer;
     @apply outline-none;
     @apply text-white;
+    @apply text-sm;
     @apply whitespace-nowrap;
     @apply text-ellipsis;
     @apply overflow-ellipsis;
+    @apply rounded-lg;
 
-    &>*:not(:last-child) {
+    & > *:not(:last-child) {
         @apply mr-1;
     }
 
     &.selected {
-        @apply bg-blue-500/20;
-        @apply hover:bg-blue-500/30 focus:bg-blue-500/40 active:bg-blue-500/50;
+        @apply bg-blue-700;
+        @apply hover:bg-blue-600 focus:bg-blue-600 active:bg-blue-500;
     }
 
     .palette-item-left {
@@ -27,7 +29,7 @@
     .palette-item-right {
         @apply flex flex-col flex-1 items-start w-full;
 
-        &>* {
+        & > * {
             @apply w-full text-left truncate;
         }
     }

@@ -26,6 +26,11 @@ WithItems.args = {
       id: "2",
       name: "Item",
     },
+    {
+      id: "3",
+      name: "Item",
+      description: "Description",
+    },
   ],
 };
 

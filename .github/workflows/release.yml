@@ -26,6 +26,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+            GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Create a release
         uses: softprops/action-gh-release@v1
         with:

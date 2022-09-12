@@ -5,7 +5,7 @@ import { PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./Palette.module.scss";
 import cx from "classnames";
 import React, { RefObject } from "react";
-import { FixedSizeList } from "react-window";
+import { VariableSizeList } from "react-window";
 
 type PaletteProps = {
   options: PaletteItemProps[];
@@ -17,7 +17,7 @@ type PaletteProps = {
   selectedItemIndex: number;
   onSetSelectedItemIndex: (index: number) => void;
 
-  listRef: RefObject<FixedSizeList>;
+  listRef: RefObject<VariableSizeList>;
 };
 
 export const Palette: React.FC<PaletteProps> = ({

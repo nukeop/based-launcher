@@ -32,6 +32,14 @@ export const readCLIFlags = () => {
           "--input-prefix <prefix>",
           "Prefix label for the input field"
         )
+      )
+      .addOption(
+        new Option(
+          "--input-format <format>",
+          "Format of the input data (MIME type, several are supported)"
+        )
+          .default("text/plain")
+          .choices(["text/plain", "application/json"])
       );
 
     // @ts-ignore

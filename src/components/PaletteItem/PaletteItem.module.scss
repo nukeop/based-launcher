@@ -2,7 +2,7 @@
     @apply flex flex-row items-center;
     @apply w-full;
     @apply px-3 py-1;
-    @apply hover:bg-slate-600 focus:bg-slate-600 active:bg-slate-500;
+    @apply hover:bg-slate-600/50 focus:bg-slate-600/50 active:bg-slate-500/50;
     @apply cursor-pointer;
     @apply outline-none;
     @apply text-white;

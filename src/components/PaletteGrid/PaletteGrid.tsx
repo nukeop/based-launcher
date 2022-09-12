@@ -46,6 +46,7 @@ export const PaletteGrid: React.FC<PaletteGridProps> = ({
         {({ height, width }) => (
           <VariableSizeList
             ref={listRef}
+            className={styles["palette-grid-list"]}
             height={height}
             width={width}
             itemSize={getItemSize}

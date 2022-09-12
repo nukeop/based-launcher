@@ -17,4 +17,12 @@
   &.columns-4 {
     @apply grid-cols-4;
   }
+
+  .palette-grid-list {
+    @apply pr-2;
+
+    & > div {
+      @apply relative;
+    }
+  }
 }

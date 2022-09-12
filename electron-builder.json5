@@ -12,7 +12,7 @@
   },
   files: ["dist"],
   linux: {
-    target: ["AppImage", "pacman", "deb", "rpm", "tar.gz"],
+    target: ["AppImage", "pacman", "deb", "rpm", "snap", "tar.gz"],
     artifactName: "${productName}-Linux-${version}.${ext}",
     publish: ["github"],
   },

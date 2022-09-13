@@ -1,4 +1,8 @@
-import { getApps, parseDesktopFile } from "./desktop-apps";
+import {
+  getDesktopEntries,
+  getDesktopEntryPaths,
+  parseDesktopEntry,
+} from "./desktop-apps";
 import fs from "fs";
 import { afterEach, describe, expect, it, Mock, vi } from "vitest";
 
@@ -25,7 +29,7 @@ describe("Handling desktop apps", () => {
   });
 
   it("should find desktop apps", async () => {
-    const apps = await getApps();
+    const apps = await getDesktopEntryPaths();
     expect(apps).toEqual([
       "/xdg-data-dir/applications/file1.desktop",
       "/xdg-data-dir/applications/file2.desktop",
@@ -39,24 +43,17 @@ describe("Handling desktop apps", () => {
     (fs.promises.readdir as Mock).mockImplementation(async () => {
       throw new Error("Could not read directory");
     });
-    const apps = await getApps();
+    const apps = await getDesktopEntryPaths();
     expect(apps).toEqual([]);
     expect(fs.promises.readdir).toHaveBeenCalledTimes(2);
   });
 
   it("can parse a basic .desktop file", async () => {
-    const content = `# Comment
-[Desktop Entry]
-Name=App Name
-Comment=App Comment
-Icon=app-icon
-Exec=app-exec
-Empty=
-=invalid
-`;
-    (fs.promises.readFile as Mock).mockImplementation(async () => content);
+    (fs.promises.readFile as Mock).mockImplementation(async () =>
+      desktopEntryContents("App Name", "App Comment", "app-icon", "app-exec")
+    );
 
-    const parsed = await parseDesktopFile(
+    const parsed = await parseDesktopEntry(
       "/xdg-data-dir/applications/file1.desktop"
     );
     expect(parsed).toEqual({
@@ -70,4 +67,57 @@ Empty=
       "utf-8"
     );
   });
+
+  it("should return a parsed list of desktop entries", async () => {
+    (fs.promises.readFile as Mock).mockImplementationOnce(async () =>
+      desktopEntryContents("App Name", "App Comment", "app-icon", "app-exec")
+    );
+    (fs.promises.readFile as Mock).mockImplementationOnce(async () =>
+      desktopEntryContents("Another App", "2nd Comment", "2nd-icon", "my-app")
+    );
+
+    const entries = await getDesktopEntries();
+    expect(entries).toEqual([
+      {
+        Name: "App Name",
+        Comment: "App Comment",
+        Icon: "app-icon",
+        Exec: "app-exec",
+      },
+      {
+        Name: "Another App",
+        Comment: "2nd Comment",
+        Icon: "2nd-icon",
+        Exec: "my-app",
+      },
+    ]);
+  });
+
+  it("should handle errors when reading a file", async () => {
+    (fs.promises.readdir as Mock).mockImplementationOnce(async () => [
+      "file1.desktop",
+    ]);
+    (fs.promises.readdir as Mock).mockImplementationOnce(async () => []);
+    (fs.promises.readFile as Mock).mockImplementationOnce(async () => {
+      throw new Error();
+    });
+
+    const entries = await getDesktopEntries();
+    expect(entries).toEqual([]);
+  });
 });
+
+const desktopEntryContents = (
+  name: string,
+  description: string,
+  icon: string,
+  exec: string
+) => `# Comment
+[Desktop Entry]
+Name=${name}
+Comment=${description}
+Icon=${icon}
+Exec=${exec}
+Empty=
+=invalid
+`;

@@ -2,7 +2,7 @@ import Logger from "./logger";
 import fs from "fs";
 import { xdgDataDirectories } from "xdg-basedir";
 
-export const getApps = async () => {
+export const getDesktopEntryPaths = async () => {
   const applicationDirs = xdgDataDirectories.map(
     (dir) => `${dir}/applications`
   );
@@ -23,7 +23,7 @@ export const getApps = async () => {
   return desktopEntriesByDir.flat();
 };
 
-export const parseDesktopFile = async (path: string) => {
+export const parseDesktopEntry = async (path: string) => {
   const content = await fs.promises.readFile(path, "utf-8");
   const lines = content.split("\n");
   return lines.reduce((acc, line) => {
@@ -36,4 +36,9 @@ export const parseDesktopFile = async (path: string) => {
     }
     return acc;
   }, {} as Record<string, string>);
+};
+
+export const getDesktopEntries = async () => {
+  const paths = await getDesktopEntryPaths();
+  return Promise.all(paths.map(parseDesktopEntry));
 };

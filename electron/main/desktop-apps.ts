@@ -2,6 +2,13 @@ import Logger from "./logger";
 import fs from "fs";
 import { xdgDataDirectories } from "xdg-basedir";
 
+const DESKTOP_ENTRY_HEADER = "Desktop Entry";
+
+export type DesktopEntryContents = {
+  [DESKTOP_ENTRY_HEADER]: Record<string, string>;
+  [key: string]: Record<string, string>;
+};
+
 export const getDesktopEntryPaths = async () => {
   const applicationDirs = xdgDataDirectories.map(
     (dir) => `${dir}/applications`
@@ -23,27 +30,71 @@ export const getDesktopEntryPaths = async () => {
   return desktopEntriesByDir.flat();
 };
 
-export const parseDesktopEntry = async (path: string) => {
+export const getDesktopEntryFromPath = async (
+  path: string
+): Promise<DesktopEntryContents | undefined> => {
   try {
-    const content = await fs.promises.readFile(path, "utf-8");
-    const lines = content.split("\n");
-    return lines.reduce((acc, line) => {
-      if (line.startsWith("#") || line.startsWith("[") || !line.includes("=")) {
-        return acc;
-      }
-      const [key, value] = line.split("=");
-      if (key && value) {
-        acc[key] = value;
-      }
-      return acc;
-    }, {} as Record<string, string>);
+    const contents = await fs.promises.readFile(path, "utf-8");
+    return parseDesktopEntry(contents);
   } catch (e) {
     Logger.error(`Could not read file ${path}`, e);
-    return;
+    return undefined;
   }
 };
 
-export const getDesktopEntries = async () => {
+export const parseDesktopEntry = async (
+  contents: string
+): Promise<DesktopEntryContents> => {
+  const lines = contents.split("\n");
+  let currentHeader: string | undefined = undefined;
+
+  return lines.reduce((acc, line) => {
+    if (line.startsWith("#") || line.trim().length === 0) {
+      return acc;
+    }
+
+    if (line.startsWith("[") && line.endsWith("]")) {
+      const header = line.substring(1, line.length - 1);
+      if (!currentHeader && header !== DESKTOP_ENTRY_HEADER) {
+        throw new Error(
+          `First header in .desktop file must be [${DESKTOP_ENTRY_HEADER}]`
+        );
+      } else {
+        currentHeader = header;
+        acc[currentHeader] = {};
+      }
+    } else if (currentHeader) {
+      if (!acc[currentHeader]) {
+        throw new Error(
+          `File must not contain entries before the [${DESKTOP_ENTRY_HEADER}] header`
+        );
+      }
+
+      const tokens = line.split("=");
+      if (tokens.length !== 2) {
+        throw new Error(`Invalid line`);
+      }
+
+      const key = tokens[0].trim();
+      const value = tokens[1].trim();
+
+      if (key.length === 0) {
+        throw new Error(`Missing key`);
+      }
+      acc[currentHeader][key] = value;
+    } else {
+      throw new Error(
+        `File must not contain entries before the [${DESKTOP_ENTRY_HEADER}] header`
+      );
+    }
+
+    return acc;
+  }, {} as DesktopEntryContents);
+};
+
+export const getDesktopEntries = async (): Promise<DesktopEntryContents[]> => {
   const paths = await getDesktopEntryPaths();
-  return (await Promise.all(paths.map(parseDesktopEntry))).filter(Boolean);
+  return (await Promise.all(paths.map(getDesktopEntryFromPath))).filter(
+    Boolean
+  ) as DesktopEntryContents[];
 };

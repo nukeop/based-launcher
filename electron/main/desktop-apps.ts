@@ -24,21 +24,26 @@ export const getDesktopEntryPaths = async () => {
 };
 
 export const parseDesktopEntry = async (path: string) => {
-  const content = await fs.promises.readFile(path, "utf-8");
-  const lines = content.split("\n");
-  return lines.reduce((acc, line) => {
-    if (line.startsWith("#") || line.startsWith("[") || !line.includes("=")) {
+  try {
+    const content = await fs.promises.readFile(path, "utf-8");
+    const lines = content.split("\n");
+    return lines.reduce((acc, line) => {
+      if (line.startsWith("#") || line.startsWith("[") || !line.includes("=")) {
+        return acc;
+      }
+      const [key, value] = line.split("=");
+      if (key && value) {
+        acc[key] = value;
+      }
       return acc;
-    }
-    const [key, value] = line.split("=");
-    if (key && value) {
-      acc[key] = value;
-    }
-    return acc;
-  }, {} as Record<string, string>);
+    }, {} as Record<string, string>);
+  } catch (e) {
+    Logger.error(`Could not read file ${path}`, e);
+    return;
+  }
 };
 
 export const getDesktopEntries = async () => {
   const paths = await getDesktopEntryPaths();
-  return Promise.all(paths.map(parseDesktopEntry));
+  return (await Promise.all(paths.map(parseDesktopEntry))).filter(Boolean);
 };

@@ -69,6 +69,9 @@ describe("Handling desktop apps", () => {
   });
 
   it("should return a parsed list of desktop entries", async () => {
+    (fs.promises.readdir as Mock).mockImplementation(async () => [
+      "file1.desktop",
+    ]);
     (fs.promises.readFile as Mock).mockImplementationOnce(async () =>
       desktopEntryContents("App Name", "App Comment", "app-icon", "app-exec")
     );
@@ -96,14 +99,27 @@ describe("Handling desktop apps", () => {
   it("should handle errors when reading a file", async () => {
     (fs.promises.readdir as Mock).mockImplementationOnce(async () => [
       "file1.desktop",
+      "file2.desktop",
     ]);
     (fs.promises.readdir as Mock).mockImplementationOnce(async () => []);
     (fs.promises.readFile as Mock).mockImplementationOnce(async () => {
-      throw new Error();
+      return new Promise((_, reject) => {
+        reject(new Error("Could not read file"));
+      });
     });
+    (fs.promises.readFile as Mock).mockImplementationOnce(async () =>
+      desktopEntryContents("App Name", "App Comment", "app-icon", "app-exec")
+    );
 
     const entries = await getDesktopEntries();
-    expect(entries).toEqual([]);
+    expect(entries).toEqual([
+      {
+        Name: "App Name",
+        Comment: "App Comment",
+        Icon: "app-icon",
+        Exec: "app-exec",
+      },
+    ]);
   });
 });
 

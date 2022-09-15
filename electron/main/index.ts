@@ -1,6 +1,6 @@
 import { IpcEvent } from "../../common/ipc";
-import { readCLIFlags, readPipedArgs } from "./args";
-import { getDesktopEntries } from "./desktop-apps";
+import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
+import { readDesktopEntries } from "./desktop-apps";
 import Logger from "./logger";
 import { app, shell, ipcMain } from "electron";
 import { BrowserWindow } from "glasstron";
@@ -41,15 +41,9 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
 
     readPipedArgs();
 
-    const parsingStart = process.hrtime();
-    const entries = await getDesktopEntries();
-    const parsingEnd = process.hrtime(parsingStart);
-
-    Logger.debug(
-      `Parsed desktop entries in ${
-        parsingEnd[0] * 1000 + parsingEnd[1] / 1000000
-      }ms`
-    );
+    if (ArgsProvider.flags.mode === "apps") {
+      await readDesktopEntries();
+    }
 
     win = new BrowserWindow({
       title: "My launcher",
@@ -105,6 +99,7 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
 
   ipcMain.handle(IpcEvent.GetPipedArgs, readPipedArgs);
   ipcMain.handle(IpcEvent.GetCliFlags, readCLIFlags);
+  ipcMain.handle(IpcEvent.GetDesktopEntries, readDesktopEntries);
 
   ipcMain.on(IpcEvent.ReturnSelectedItem, (event, item) => {
     console.log(item);

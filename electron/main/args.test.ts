@@ -13,14 +13,18 @@ vi.mock("process", () => ({
   },
 }));
 
+vi.mock("./config.ts", () => ({
+  readConfig: vi.fn(),
+}));
+
 describe("Handling program arguments", () => {
   it("should read CLI args", async () => {
     import.meta.env.PROD = true;
     process.argv = [
       "node",
       "electron/main/args.test.ts",
-      "--theme test.css",
-      "--input-prefix test-prefix",
+      "--theme=test.css",
+      "--input-prefix=test-prefix",
     ];
 
     const args = await readCLIFlags();

@@ -50,9 +50,11 @@ export const readCLIFlags = () => {
     program.allowUnknownOption().parse(resolvedArgv, { from: "user" });
     const config = readConfig();
 
+    const opts = program.opts();
+
     ArgsProvider.flags = {
       ...config,
-      ...program.opts(),
+      ...opts,
     };
   }
 

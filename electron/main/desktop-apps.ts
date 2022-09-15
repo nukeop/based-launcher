@@ -1,14 +1,18 @@
+import {
+  DesktopEntry,
+  DESKTOP_ENTRY_HEADER,
+} from "../../common/desktop-entries";
 import Logger from "./logger";
 import fs from "fs";
 import path from "path";
 import { xdgDataDirectories } from "xdg-basedir";
 
-const DESKTOP_ENTRY_HEADER = "Desktop Entry";
+export class DesktopEntriesProvider {
+  static desktopEntries: DesktopEntry[] = [];
+  static isDone = false;
 
-export type DesktopEntryContents = {
-  [DESKTOP_ENTRY_HEADER]: Record<string, string>;
-  [key: string]: Record<string, string>;
-};
+  private constructor() {}
+}
 
 export const getDesktopEntryPaths = async () => {
   const applicationDirs = xdgDataDirectories.map((dir) =>
@@ -33,7 +37,7 @@ export const getDesktopEntryPaths = async () => {
 
 export const getDesktopEntryFromPath = async (
   path: string
-): Promise<DesktopEntryContents | undefined> => {
+): Promise<DesktopEntry | undefined> => {
   try {
     const contents = await fs.promises.readFile(path, "utf-8");
     return await parseDesktopEntry(contents);
@@ -45,7 +49,7 @@ export const getDesktopEntryFromPath = async (
 
 export const parseDesktopEntry = async (
   contents: string
-): Promise<DesktopEntryContents> => {
+): Promise<DesktopEntry> => {
   const lines = contents.split("\n");
   let currentHeader: string | undefined = undefined;
 
@@ -90,12 +94,32 @@ export const parseDesktopEntry = async (
     }
 
     return acc;
-  }, {} as DesktopEntryContents);
+  }, {} as DesktopEntry);
 };
 
-export const getDesktopEntries = async (): Promise<DesktopEntryContents[]> => {
+export const getDesktopEntries = async (): Promise<DesktopEntry[]> => {
   const paths = await getDesktopEntryPaths();
   return (await Promise.all(paths.map(getDesktopEntryFromPath))).filter(
     Boolean
-  ) as DesktopEntryContents[];
+  ) as DesktopEntry[];
+};
+
+export const readDesktopEntries = async () => {
+  Logger.debug("Reading desktop entries...");
+  const startTime = process.hrtime();
+
+  if (!DesktopEntriesProvider.isDone) {
+    DesktopEntriesProvider.desktopEntries = await getDesktopEntries();
+    DesktopEntriesProvider.isDone = true;
+  }
+
+  const endTime = process.hrtime(startTime);
+  Logger.debug(
+    `Read desktop entries in ${(
+      endTime[0] * 1000 +
+      endTime[1] / 1000000
+    ).toFixed(0)}ms`
+  );
+
+  return DesktopEntriesProvider.desktopEntries;
 };

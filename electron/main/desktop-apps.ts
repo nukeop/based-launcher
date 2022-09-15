@@ -2,6 +2,7 @@ import {
   DesktopEntry,
   DESKTOP_ENTRY_HEADER,
 } from "../../common/desktop-entries";
+import { ArgsProvider } from "./args";
 import Logger from "./logger";
 import fs from "fs";
 import path from "path";
@@ -109,7 +110,7 @@ export const readDesktopEntries = async () => {
   Logger.debug("Reading desktop entries...");
   const startTime = process.hrtime();
 
-  if (!DesktopEntriesProvider.isDone) {
+  if (!DesktopEntriesProvider.isDone && ArgsProvider.flags.mode === "apps") {
     DesktopEntriesProvider.desktopEntries = await getDesktopEntries();
     DesktopEntriesProvider.isDone = true;
   }

@@ -1,6 +1,6 @@
-import { PaletteContainer } from "../../containers/PaletteContainer/PaletteContainer";
 import { ArgsContext } from "../../contexts/argsContext";
 import { AppRoot } from "../../layouts/AppRoot";
+import { PaletteContainer } from "./PaletteContainer";
 import {
   cleanup,
   fireEvent,
@@ -8,6 +8,8 @@ import {
   RenderResult,
   waitFor,
 } from "@testing-library/react";
+import { CLIFlags } from "common/cliFlags";
+import { DesktopEntry } from "common/desktop-entries";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("react-virtualized-auto-sizer", () => ({
@@ -20,7 +22,7 @@ vi.mock("electron", () => ({
   },
 }));
 
-describe("Palette", () => {
+describe("Palette container", () => {
   afterEach(() => {
     cleanup();
   });
@@ -72,9 +74,15 @@ describe("Palette", () => {
     expect(firstItem).toHaveAttribute("data-selected", "true");
   });
 
-  const mountComponent = (stdinArgs: string[] = []) => {
+  const mountComponent = (
+    stdinArgs: string[] = [],
+    cliFlags: CLIFlags = {},
+    desktopEntries: DesktopEntry[] = []
+  ) => {
     return render(
-      <ArgsContext.Provider value={{ stdinArgs }}>
+      <ArgsContext.Provider
+        value={{ stdinArgs, cliFlags: {}, desktopEntries: [] }}
+      >
         <AppRoot>
           <PaletteContainer />
         </AppRoot>

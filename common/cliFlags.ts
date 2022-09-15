@@ -1,5 +1,5 @@
-export type CLIFlagKeys = "theme" | "inputPrefix" | "mode";
+export type CLIFlagKeys = "theme" | "inputPrefix" | "mode" | "inputFormat";
 
 export type CLIFlags = {
-  [key in CLIFlagKeys]: string;
+  [key in CLIFlagKeys]?: string;
 };

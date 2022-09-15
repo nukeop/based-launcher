@@ -49,7 +49,7 @@ describe("Palette", () => {
     const component = mountComponent(["first", "second", "third"]);
 
     const firstItem = nthItem(component, "first");
-    expect(firstItem.getAttribute("data-selected")).toBe("true");
+    expect(firstItem).toHaveAttribute("data-selected", "true");
   });
 
   it("down arrow selects the next item", async () => {
@@ -57,7 +57,7 @@ describe("Palette", () => {
     goDown(component);
 
     const secondItem = nthItem(component, "second");
-    expect(secondItem.getAttribute("data-selected")).toBe("true");
+    expect(secondItem).toHaveAttribute("data-selected", "true");
   });
 
   it("up arrow selects the previous item", async () => {
@@ -65,11 +65,11 @@ describe("Palette", () => {
 
     goDown(component);
     const secondItem = nthItem(component, "second");
-    expect(secondItem.getAttribute("data-selected")).toBe("true");
+    expect(secondItem).toHaveAttribute("data-selected", "true");
 
     goUp(component);
     const firstItem = nthItem(component, "first");
-    expect(firstItem.getAttribute("data-selected")).toBe("true");
+    expect(firstItem).toHaveAttribute("data-selected", "true");
   });
 
   const mountComponent = (stdinArgs: string[] = []) => {

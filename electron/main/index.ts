@@ -1,24 +1,20 @@
 import { IpcEvent } from "../../common/ipc";
 import { readCLIFlags, readPipedArgs } from "./args";
+import { getDesktopEntries } from "./desktop-apps";
 import Logger from "./logger";
 import { app, shell, ipcMain } from "electron";
 import { BrowserWindow } from "glasstron";
-import { release } from "os";
 import { join } from "path";
 
 export const ROOT_PATH = {
-  // /dist
   dist: join(__dirname, "../.."),
-  // /dist or /public
   public: join(__dirname, app.isPackaged ? "../.." : "../../../public"),
 };
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 
 let win: BrowserWindow | null = null;
-// Here, you can also use other preload
 const preload = join(__dirname, "../preload/index.js");
-// 🚧 Use ['ENV_NAME'] avoid vite:define plugin
 const url = process.env.VITE_DEV_SERVER_URL as string;
 const indexHtml = join(ROOT_PATH.dist, "index.html");
 
@@ -44,6 +40,16 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
     );
 
     readPipedArgs();
+
+    const parsingStart = process.hrtime();
+    const entries = await getDesktopEntries();
+    const parsingEnd = process.hrtime(parsingStart);
+
+    Logger.debug(
+      `Parsed desktop entries in ${
+        parsingEnd[0] * 1000 + parsingEnd[1] / 1000000
+      }ms`
+    );
 
     win = new BrowserWindow({
       title: "My launcher",
@@ -75,11 +81,6 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
 
   app.whenReady().then(createWindow);
 
-  app.on("window-all-closed", () => {
-    win = null;
-    if (process.platform !== "darwin") app.quit();
-  });
-
   app.on("second-instance", () => {
     if (win) {
       // Focus on the main window if the user tried to open another
@@ -95,6 +96,11 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
     } else {
       createWindow();
     }
+  });
+
+  app.on("window-all-closed", () => {
+    win = null;
+    if (process.platform !== "darwin") app.quit();
   });
 
   ipcMain.handle(IpcEvent.GetPipedArgs, readPipedArgs);

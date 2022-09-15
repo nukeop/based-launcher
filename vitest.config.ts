@@ -8,6 +8,7 @@ export default defineConfig({
     deps: {
       inline: ["vitest-mock-process"],
     },
+    setupFiles: ["./vitest.setup.ts"],
   },
   build: {
     sourcemap: true,

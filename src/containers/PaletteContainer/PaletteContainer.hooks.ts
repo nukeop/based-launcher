@@ -1,5 +1,6 @@
 import { IpcEvent } from "../../../common/ipc";
 import { ArgsContext } from "../../contexts/argsContext";
+import { useDesktopEntries } from "../../hooks/useDesktopEntries";
 import { useFlags } from "../../hooks/useFlags";
 import { ipcRenderer } from "electron";
 import Fuse from "fuse.js";
@@ -10,14 +11,23 @@ export const usePaletteContainerProps = () => {
   const listRef = useRef<VariableSizeList>(null);
   const { stdinArgs } = useContext(ArgsContext);
   const { flags } = useFlags();
+  const { desktopEntries } = useDesktopEntries();
 
-  const options =
-    stdinArgs?.map((arg, index) => ({
-      id: arg,
-      name: arg,
-      icon: null,
-      onAction: () => onAction(arg),
-    })) ?? [];
+  // const options =
+  //   stdinArgs?.map((arg, index) => ({
+  //     id: arg,
+  //     name: arg,
+  //     icon: null,
+  //     onAction: () => onAction(arg),
+  //   })) ?? [];
+
+  const options = desktopEntries.map((entry) => ({
+    id: entry["Desktop Entry"].Name,
+    name: entry["Desktop Entry"].Name,
+    description: entry["Desktop Entry"].Comment,
+    icon: entry["Desktop Entry"].Icon,
+    onAction: () => onAction(entry["Desktop Entry"].Exec),
+  }));
 
   const onAction = useCallback((item: string) => {
     ipcRenderer.send(IpcEvent.ReturnSelectedItem, item);

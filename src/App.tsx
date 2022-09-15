@@ -1,5 +1,5 @@
 import { CustomTheme } from "./containers/CustomTheme";
-import { PaletteContainer } from "./containers/PaletteContainer";
+import { PaletteContainer } from "./containers/PaletteContainer/PaletteContainer";
 import { ArgsContext } from "./contexts/argsContext";
 import { useArgs } from "./hooks/useArgs";
 import { useDesktopEntries } from "./hooks/useDesktopEntries";

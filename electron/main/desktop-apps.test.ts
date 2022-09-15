@@ -131,18 +131,13 @@ describe("Handling desktop apps", () => {
       });
     });
 
-    it("can parse a basic .desktop file with multiple sections", async () => {
-      const parsed = await parseDesktopEntry(
-        desktopEntryContents("App Name", "App Comment", "app-icon", "app-exec")
-      );
+    it("handles parsing a line with more than one equals sign", async () => {
+      const parsed = await parseDesktopEntry(`[Desktop Entry]
+        key=value=value
+      `);
       expect(parsed).toEqual({
         "Desktop Entry": {
-          Name: "App Name",
-          Comment: "App Comment",
-          Icon: "app-icon",
-          Exec: "app-exec",
-          Type: "Application",
-          Version: "1.0",
+          key: "value=value",
         },
       });
     });
@@ -150,8 +145,8 @@ describe("Handling desktop apps", () => {
     it("throws when parsing a .desktop file without a header", async () => {
       await expect(
         parseDesktopEntry(`
-Name=App Name
-Comment=App Comment
+          Name=App Name
+          Comment=App Comment
       `)
       ).rejects.toThrow();
     });
@@ -159,16 +154,7 @@ Comment=App Comment
     it("throws when parsing a .desktop file with the first header being something else than [Desktop Entry]", async () => {
       await expect(
         parseDesktopEntry(`
-[Not Desktop Entry]
-      `)
-      ).rejects.toThrow();
-    });
-
-    it("throws when parsing a line with more than one equals sign", async () => {
-      await expect(
-        parseDesktopEntry(`
-[Desktop Entry]
-key=value=value
+          [Not Desktop Entry]
       `)
       ).rejects.toThrow();
     });
@@ -176,8 +162,8 @@ key=value=value
     it("throws when parsing a line with no equals sign", async () => {
       await expect(
         parseDesktopEntry(`
-[Desktop Entry]
-key
+          [Desktop Entry]
+          key
       `)
       ).rejects.toThrow();
     });
@@ -185,8 +171,8 @@ key
     it("throws when parsing a line with an empty key", async () => {
       await expect(
         parseDesktopEntry(`
-[Desktop Entry]
-=App Name
+          [Desktop Entry]
+          =App Name
       `)
       ).rejects.toThrow();
     });

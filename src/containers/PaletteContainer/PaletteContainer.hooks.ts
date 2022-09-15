@@ -1,16 +1,16 @@
-import { IpcEvent } from "../../common/ipc";
-import { Palette } from "../components/Palette/Palette";
-import { ArgsContext } from "../contexts/argsContext";
-import { useFlags } from "../hooks/useFlags";
+import { IpcEvent } from "../../../common/ipc";
+import { ArgsContext } from "../../contexts/argsContext";
+import { useFlags } from "../../hooks/useFlags";
 import { ipcRenderer } from "electron";
 import Fuse from "fuse.js";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { VariableSizeList } from "react-window";
 
-export const PaletteContainer: React.FC = () => {
+export const usePaletteContainerProps = () => {
   const listRef = useRef<VariableSizeList>(null);
   const { stdinArgs } = useContext(ArgsContext);
   const { flags } = useFlags();
+
   const options =
     stdinArgs?.map((arg, index) => ({
       id: arg,
@@ -85,15 +85,13 @@ export const PaletteContainer: React.FC = () => {
     };
   }, [selectedItemIndex, filteredOptions]);
 
-  return (
-    <Palette
-      options={filteredOptions}
-      filterInputValue={filterInput}
-      onFilterInputValueChange={setFilterInput}
-      selectedItemIndex={selectedItemIndex}
-      onSetSelectedItemIndex={setSelectedItemIndex}
-      listRef={listRef}
-      prefixLabel={flags?.inputPrefix}
-    />
-  );
+  return {
+    listRef,
+    flags,
+    filteredOptions,
+    filterInput,
+    setFilterInput,
+    selectedItemIndex,
+    setSelectedItemIndex,
+  };
 };

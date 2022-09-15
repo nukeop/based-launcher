@@ -70,18 +70,19 @@ export const parseDesktopEntry = async (
       }
     } else if (currentHeader) {
       if (!acc[currentHeader]) {
+        console.log(line);
         throw new Error(
           `File must not contain entries before the [${DESKTOP_ENTRY_HEADER}] header`
         );
       }
 
       const tokens = line.split("=");
-      if (tokens.length !== 2) {
+      if (tokens.length < 2) {
         throw new Error(`Invalid line`);
       }
 
       const key = tokens[0].trim();
-      const value = tokens[1].trim();
+      const value = tokens.slice(1).join("=").trim();
 
       if (key.length === 0) {
         throw new Error(`Missing key`);

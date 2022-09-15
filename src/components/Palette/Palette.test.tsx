@@ -1,4 +1,4 @@
-import { PaletteContainer } from "../../containers/PaletteContainer";
+import { PaletteContainer } from "../../containers/PaletteContainer/PaletteContainer";
 import { ArgsContext } from "../../contexts/argsContext";
 import { AppRoot } from "../../layouts/AppRoot";
 import {

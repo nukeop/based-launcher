@@ -1,5 +1,6 @@
 import Logger from "./logger";
 import fs from "fs";
+import path from "path";
 import { xdgDataDirectories } from "xdg-basedir";
 
 const DESKTOP_ENTRY_HEADER = "Desktop Entry";
@@ -10,9 +11,10 @@ export type DesktopEntryContents = {
 };
 
 export const getDesktopEntryPaths = async () => {
-  const applicationDirs = xdgDataDirectories.map(
-    (dir) => `${dir}/applications`
+  const applicationDirs = xdgDataDirectories.map((dir) =>
+    path.join(dir, "applications")
   );
+  console.log(applicationDirs);
   const desktopEntriesByDir = await Promise.all(
     applicationDirs.map(async (dir) => {
       try {
@@ -21,7 +23,7 @@ export const getDesktopEntryPaths = async () => {
           .filter((file) => file.endsWith(".desktop"))
           .map((file) => `${dir}/${file}`);
       } catch (e) {
-        Logger.error(`Could not read directory ${dir}`, e);
+        Logger.warn(`Could not read directory ${dir}`, e);
         return [];
       }
     })
@@ -35,9 +37,9 @@ export const getDesktopEntryFromPath = async (
 ): Promise<DesktopEntryContents | undefined> => {
   try {
     const contents = await fs.promises.readFile(path, "utf-8");
-    return parseDesktopEntry(contents);
+    return await parseDesktopEntry(contents);
   } catch (e) {
-    Logger.error(`Could not read file ${path}`, e);
+    Logger.warn(`Could not read file ${path}`, e);
     return undefined;
   }
 };

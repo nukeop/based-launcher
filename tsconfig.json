@@ -23,6 +23,8 @@
   },
   "include": [
     "src",
+    "common",
+    "electron",
     "./vitest.setup.ts"
   ],
   "references": [

@@ -11,21 +11,22 @@ export const usePaletteContainerProps = () => {
   const listRef = useRef<VariableSizeList>(null);
   const { stdinArgs, cliFlags, desktopEntries } = useContext(ArgsContext);
 
-  const options =
-    stdinArgs?.map((arg, index) => ({
-      id: arg,
-      name: arg,
-      icon: null,
-      onAction: () => onAction(arg),
-    })) ?? [];
+  // const options =
+  //   stdinArgs?.map((arg, index) => ({
+  //     id: arg,
+  //     name: arg,
+  //     icon: null,
+  //     onAction: () => onAction(arg),
+  //   })) ?? [];
 
-  // const options = desktopEntries?.map((entry) => ({
-  //   id: entry["Desktop Entry"].Name,
-  //   name: entry["Desktop Entry"].Name,
-  //   description: entry["Desktop Entry"].Comment,
-  //   icon: entry["Desktop Entry"].Icon,
-  //   onAction: () => onAction(entry["Desktop Entry"].Exec),
-  // }));
+  const options =
+    desktopEntries?.map((entry) => ({
+      id: entry["Desktop Entry"].Name,
+      name: entry["Desktop Entry"].Name,
+      description: entry["Desktop Entry"].Comment,
+      icon: entry["Desktop Entry"].Icon,
+      onAction: () => onAction(entry["Desktop Entry"].Exec),
+    })) ?? [];
 
   const onAction = useCallback((item: string) => {
     ipcRenderer.send(IpcEvent.ReturnSelectedItem, item);

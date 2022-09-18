@@ -96,7 +96,6 @@ export const readPipedArgs = async () => {
       });
     });
     ArgsProvider.isReadingStdinDone = true;
-    Logger.info("Piped args:", ArgsProvider.stdinArgs);
   }
 
   const endTime = process.hrtime(startTime);

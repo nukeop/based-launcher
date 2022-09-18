@@ -1,5 +1,5 @@
 import { IpcEvent } from "../../common/ipc";
-import { LauncherOption } from "../../common/launcher";
+import { LauncherActionType, LauncherOption } from "../../common/launcher";
 import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
 import { readDesktopEntries } from "./desktop-apps";
 import Logger from "./logger";
@@ -102,8 +102,18 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
   ipcMain.handle(IpcEvent.GetCliFlags, readCLIFlags);
   ipcMain.handle(IpcEvent.GetOptions, OptionsProvider.getOptions);
 
-  ipcMain.on(IpcEvent.ExecuteAction, (event, option: LauncherOption) => {
-    console.log(option.name);
-    app.quit();
-  });
+  ipcMain.on(
+    IpcEvent.ExecuteAction,
+    (event, option: LauncherOption["onAction"]) => {
+      switch (option.type) {
+        case LauncherActionType.Execute:
+          option.payload && shell.openExternal(option.payload);
+          break;
+        case LauncherActionType.Return:
+          console.log(option.payload);
+          app.quit();
+          break;
+      }
+    }
+  );
 })();

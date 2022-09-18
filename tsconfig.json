@@ -3,11 +3,7 @@
     "baseUrl": ".",
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": [
-      "DOM",
-      "DOM.Iterable",
-      "ESNext"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -19,20 +15,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "typeRoots": ["./typings"]
   },
-  "include": [
-    "src",
-    "common",
-    "electron",
-    "./vitest.setup.ts"
-  ],
+  "include": ["src", "common", "electron", "./vitest.setup.ts"],
   "references": [
     {
       "path": "./tsconfig.node.json"
     }
   ],
-  "types": [
-    "vite-plugin-electron/electron-env"
-  ]
+  "types": ["vite-plugin-electron/electron-env", "vitest/globals", "node"]
 }

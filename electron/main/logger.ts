@@ -26,6 +26,7 @@ const Logger = winston.createLogger({
               winston.format.json(),
               winston.format.prettyPrint()
             ),
+      // @ts-ignore
       silent: env == "test",
     }),
   ],

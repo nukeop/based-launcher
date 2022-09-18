@@ -51,7 +51,6 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
       title: "My launcher",
       icon: join(ROOT_PATH.public, "favicon.svg"),
       frame: false,
-      titlebarStyle: "hiddenInset",
       blur: true,
       blurType: "vibrancy",
       vibrancy: "fullscreen-ui",

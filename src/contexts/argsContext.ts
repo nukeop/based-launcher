@@ -1,7 +1,15 @@
+import { CLIFlags } from "../../common/cliFlags";
+import { LauncherOption } from "common/launcher";
 import { createContext } from "react";
 
 type Args = {
-  stdinArgs?: string[];
+  flags?: CLIFlags;
+  options: LauncherOption[];
+  isLoading: boolean;
 };
 
-export const ArgsContext = createContext<Args>({ stdinArgs: [] });
+export const ArgsContext = createContext<Args>({
+  flags: {},
+  options: [],
+  isLoading: true,
+});

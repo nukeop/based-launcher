@@ -23,7 +23,7 @@ export const PaletteGrid: React.FC<PaletteGridProps> = ({
   listRef,
 }) => {
   const getItemSize = (index: number) => {
-    if (items[index].description) {
+    if (items[index]?.description) {
       return ITEM_SIZE_WITH_DESCRIPTION;
     } else {
       return ITEM_SIZE;

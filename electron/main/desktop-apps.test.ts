@@ -24,6 +24,10 @@ vi.mock("fs", () => ({
   },
 }));
 
+vi.mock("freedesktop-icons", () => ({
+  default: vi.fn(async (path: string) => `/freedesktop/${path}`),
+}));
+
 describe("Handling desktop apps", () => {
   afterEach(() => {
     vi.clearAllMocks();
@@ -68,7 +72,7 @@ describe("Handling desktop apps", () => {
           Version: "1.0",
           Name: "App Name",
           Comment: "App Comment",
-          Icon: "app-icon",
+          Icon: "file:///freedesktop/app-icon",
           Exec: "app-exec",
         },
       },
@@ -78,7 +82,7 @@ describe("Handling desktop apps", () => {
           Version: "1.0",
           Name: "Another App",
           Comment: "2nd Comment",
-          Icon: "2nd-icon",
+          Icon: "file:///freedesktop/2nd-icon",
           Exec: "my-app",
         },
       },
@@ -108,7 +112,7 @@ describe("Handling desktop apps", () => {
           Version: "1.0",
           Name: "App Name",
           Comment: "App Comment",
-          Icon: "app-icon",
+          Icon: "file:///freedesktop/app-icon",
           Exec: "app-exec",
         },
       },

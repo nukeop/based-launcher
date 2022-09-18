@@ -19,6 +19,10 @@ vi.mock("fs", () => ({
   },
 }));
 
+vi.mock("freedesktop-icons", () => ({
+  default: vi.fn(async (path: string) => `/freedesktop/${path}`),
+}));
+
 describe("Creating options to be displayed in the renderer", () => {
   afterEach(() => {
     vi.clearAllMocks();
@@ -84,7 +88,7 @@ describe("Creating options to be displayed in the renderer", () => {
         id: "1",
         name: "App Name",
         description: "App Comment",
-        icon: "app-icon",
+        icon: "file:///freedesktop/app-icon",
         onAction: {
           type: LauncherActionType.Execute,
           payload: "app-exec",
@@ -95,7 +99,7 @@ describe("Creating options to be displayed in the renderer", () => {
         name: "Another App",
         description: "2nd Comment",
 
-        icon: "2nd-icon",
+        icon: "file:///freedesktop/2nd-icon",
         onAction: {
           type: LauncherActionType.Execute,
           payload: "my-app",

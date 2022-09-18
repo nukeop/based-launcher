@@ -58,6 +58,7 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
         preload,
         nodeIntegration: true,
         contextIsolation: false,
+        webSecurity: false,
       },
     });
 

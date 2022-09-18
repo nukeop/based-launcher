@@ -12,7 +12,7 @@
     @apply overflow-ellipsis;
     @apply rounded-lg;
 
-    & > *:not(:last-child) {
+    &>*:not(:last-child) {
         @apply mr-1;
     }
 
@@ -22,14 +22,18 @@
     }
 
     .palette-item-left {
-        @apply p-2;
         @apply mr-2;
+        @apply h-8;
+
+        img {
+            @apply h-full;
+        }
     }
 
     .palette-item-right {
         @apply flex flex-col flex-1 items-start w-full;
 
-        & > * {
+        &>* {
             @apply w-full text-left truncate;
         }
     }

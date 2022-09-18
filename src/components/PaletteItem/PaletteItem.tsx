@@ -7,7 +7,7 @@ export type PaletteItemProps = {
   id: string;
   name?: string;
   description?: string;
-  icon?: React.ReactNode;
+  icon?: string;
   isSelected?: boolean;
   style?: React.CSSProperties;
   onAction?: () => void;
@@ -32,7 +32,11 @@ export const PaletteItem = forwardRef<HTMLButtonElement, PaletteItemProps>(
         data-selected={isSelected}
         ref={ref}
       >
-        {icon && <div className={styles["palette-item-left"]}>{icon}</div>}
+        {icon && (
+          <div className={styles["palette-item-left"]}>
+            <img src={icon} />
+          </div>
+        )}
         <div className={styles["palette-item-right"]}>
           <p className={styles["palette-item-name"]}>{displayName}</p>
           <p className={styles["palette-item-description"]}>{description}</p>

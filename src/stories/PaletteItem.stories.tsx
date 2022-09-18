@@ -32,7 +32,7 @@ ItemWithIcon.args = {
   id: "1",
   name: "Gnome",
   description: "Has no thumbnails",
-  icon: <span>🐧</span>,
+  icon: "https://cdn.svgporn.com/logos/gnome-icon.svg",
 };
 
 export const SelectedItem = Template.bind({});
@@ -40,7 +40,7 @@ SelectedItem.args = {
   id: "1",
   name: "Gnome",
   description: "Has no thumbnails",
-  icon: <span>🐧</span>,
+  icon: "https://cdn.svgporn.com/logos/gnome-icon.svg",
   isSelected: true,
 };
 

@@ -4,6 +4,7 @@ import {
 } from "../../common/desktop-entries";
 import { ArgsProvider } from "./args";
 import Logger from "./logger";
+import freedesktopIcons from "freedesktop-icons";
 import fs from "fs";
 import path from "path";
 import { xdgDataDirectories } from "xdg-basedir";
@@ -41,7 +42,15 @@ export const getDesktopEntryFromPath = async (
 ): Promise<DesktopEntry | undefined> => {
   try {
     const contents = await fs.promises.readFile(path, "utf-8");
-    return await parseDesktopEntry(contents);
+    const entry = await parseDesktopEntry(contents);
+
+    const icon = await freedesktopIcons(entry[DESKTOP_ENTRY_HEADER].Icon);
+    return {
+      [DESKTOP_ENTRY_HEADER]: {
+        ...entry[DESKTOP_ENTRY_HEADER],
+        Icon: icon && `file://${icon}`,
+      },
+    };
   } catch (e) {
     Logger.warn(`Could not read file ${path}`, e);
     return undefined;

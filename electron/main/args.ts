@@ -5,8 +5,11 @@ import Logger from "./logger";
 import { Option, program } from "commander";
 
 export class ArgsProvider {
-  static stdinArgs: string[];
-  static flags: CLIFlags;
+  static stdinArgs: string[] = [];
+  static flags: CLIFlags = {};
+
+  static isReadingStdinDone = false;
+  static isReadingFlagsDone = false;
 
   private constructor() {}
 }
@@ -15,7 +18,7 @@ export const readCLIFlags = () => {
   Logger.debug("Reading CLI flags...");
   const startTime = process.hrtime();
 
-  if (!ArgsProvider.flags) {
+  if (!ArgsProvider.isReadingFlagsDone) {
     program
       .name("based-launcher")
       .version("1.0.0")
@@ -68,7 +71,7 @@ export const readCLIFlags = () => {
   return ArgsProvider.flags;
 };
 
-function onlyUnique(value, index, self) {
+function onlyUnique(value: string, index: number, self: string[]) {
   return self.indexOf(value) === index;
 }
 
@@ -76,7 +79,7 @@ export const readPipedArgs = async () => {
   Logger.debug("Reading piped args...");
   const startTime = process.hrtime();
 
-  if (!ArgsProvider.stdinArgs && !process.stdin.isTTY) {
+  if (!ArgsProvider.isReadingStdinDone && !process.stdin.isTTY) {
     ArgsProvider.stdinArgs = await new Promise((resolve) => {
       let text = "";
 

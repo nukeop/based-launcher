@@ -2,6 +2,7 @@ import { IpcEvent } from "../../common/ipc";
 import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
 import { readDesktopEntries } from "./desktop-apps";
 import Logger from "./logger";
+import { OptionsProvider } from "./options";
 import { app, shell, ipcMain } from "electron";
 import { BrowserWindow } from "glasstron";
 import { join } from "path";
@@ -100,6 +101,7 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
   ipcMain.handle(IpcEvent.GetPipedArgs, readPipedArgs);
   ipcMain.handle(IpcEvent.GetCliFlags, readCLIFlags);
   ipcMain.handle(IpcEvent.GetDesktopEntries, readDesktopEntries);
+  ipcMain.handle(IpcEvent.GetOptions, OptionsProvider.getOptions);
 
   ipcMain.on(IpcEvent.ReturnSelectedItem, (event, item) => {
     console.log(item);

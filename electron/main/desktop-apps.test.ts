@@ -1,3 +1,4 @@
+import { desktopEntryContents } from "../tests/test-utils";
 import {
   getDesktopEntries,
   getDesktopEntryPaths,
@@ -178,18 +179,3 @@ describe("Handling desktop apps", () => {
     });
   });
 });
-
-const desktopEntryContents = (
-  name: string,
-  description: string,
-  icon: string,
-  exec: string
-) => `# Comment
-[Desktop Entry]
-Type=Application
-Version=1.0
-Name=${name}
-Comment=${description}
-Icon=${icon}
-Exec=${exec}
-`;

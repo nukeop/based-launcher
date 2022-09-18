@@ -71,7 +71,6 @@ export const parseDesktopEntry = async (
       }
     } else if (currentHeader) {
       if (!acc[currentHeader]) {
-        console.log(line);
         throw new Error(
           `File must not contain entries before the [${DESKTOP_ENTRY_HEADER}] header`
         );

@@ -21,7 +21,7 @@ export const readCLIFlags = () => {
   if (!ArgsProvider.isReadingFlagsDone) {
     program
       .name("based-launcher")
-      .version("1.0.0")
+      .version("1.0.5")
       .addOption(
         new Option("-t, --theme <path>", "Path to the theme file (CSS)")
       )

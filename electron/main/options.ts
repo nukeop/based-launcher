@@ -1,7 +1,7 @@
+import { DESKTOP_ENTRY_HEADER } from "../../common/desktop-entries";
 import { LauncherActionType, LauncherOption } from "../../common/launcher";
 import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
 import { DesktopEntriesProvider, readDesktopEntries } from "./desktop-apps";
-import { DESKTOP_ENTRY_HEADER } from "common/desktop-entries";
 
 export class OptionsProvider {
   static options: LauncherOption[] = [];

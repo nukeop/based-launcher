@@ -9,7 +9,8 @@ import {
   waitFor,
 } from "@testing-library/react";
 import { CLIFlags } from "common/cliFlags";
-import { DesktopEntry } from "common/desktop-entries";
+import { LauncherOption } from "common/launcher";
+import { anOption } from "common/tests/test-utils";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("react-virtualized-auto-sizer", () => ({
@@ -22,19 +23,25 @@ vi.mock("electron", () => ({
   },
 }));
 
+const defaultOptions = [
+  anOption({ id: "1", name: "first" }),
+  anOption({ id: "2", name: "second" }),
+  anOption({ id: "3", name: "third" }),
+];
+
 describe("Palette container", () => {
   afterEach(() => {
     cleanup();
   });
 
   it("renders a palette from piped arguments", async () => {
-    const component = mountComponent(["first", "second", "third"]);
+    const component = mountComponent(defaultOptions);
 
     waitFor(() => expect(component.asFragment()).toMatchSnapshot());
   });
 
   it("filters entries based on entered text", async () => {
-    const component = mountComponent(["first", "second", "third"]);
+    const component = mountComponent(defaultOptions);
 
     const input = (await component.findAllByTestId("filter-input")).at(0);
     if (input) {
@@ -48,41 +55,44 @@ describe("Palette container", () => {
   });
 
   it("selects the first item by default", async () => {
-    const component = mountComponent(["first", "second", "third"]);
+    const component = mountComponent(defaultOptions);
 
-    const firstItem = nthItem(component, "first");
+    const firstItem = nthItem(component, "1");
     expect(firstItem).toHaveAttribute("data-selected", "true");
   });
 
   it("down arrow selects the next item", async () => {
-    const component = mountComponent(["first", "second", "third", "fourth"]);
+    const component = mountComponent([
+      ...defaultOptions,
+      anOption({ id: "4", name: "fourth" }),
+    ]);
     goDown(component);
 
-    const secondItem = nthItem(component, "second");
+    const secondItem = nthItem(component, "2");
     expect(secondItem).toHaveAttribute("data-selected", "true");
   });
 
   it("up arrow selects the previous item", async () => {
-    const component = mountComponent(["first", "second", "third", "fourth"]);
+    const component = mountComponent([
+      ...defaultOptions,
+      anOption({ id: "4", name: "fourth" }),
+    ]);
 
     goDown(component);
-    const secondItem = nthItem(component, "second");
+    const secondItem = nthItem(component, "2");
     expect(secondItem).toHaveAttribute("data-selected", "true");
 
     goUp(component);
-    const firstItem = nthItem(component, "first");
+    const firstItem = nthItem(component, "1");
     expect(firstItem).toHaveAttribute("data-selected", "true");
   });
 
   const mountComponent = (
-    stdinArgs: string[] = [],
-    cliFlags: CLIFlags = {},
-    desktopEntries: DesktopEntry[] = []
+    options: LauncherOption[] = [],
+    flags: CLIFlags = {}
   ) => {
     return render(
-      <ArgsContext.Provider
-        value={{ stdinArgs, cliFlags: {}, desktopEntries: [] }}
-      >
+      <ArgsContext.Provider value={{ flags, options, isLoading: true }}>
         <AppRoot>
           <PaletteContainer />
         </AppRoot>

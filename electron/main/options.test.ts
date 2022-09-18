@@ -1,5 +1,5 @@
 import { LauncherActionType } from "../../common/launcher";
-import { anOption, desktopEntryContents } from "../tests/test-utils";
+import { anOption, desktopEntryContents } from "../../common/tests/test-utils";
 import { ArgsProvider } from "./args";
 import { OptionsProvider } from "./options";
 import fs from "fs";

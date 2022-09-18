@@ -5,7 +5,7 @@ export const PaletteContainer: React.FC = () => {
   const {
     listRef,
     flags,
-    filteredOptions,
+    options,
     filterInput,
     setFilterInput,
     selectedItemIndex,
@@ -14,7 +14,7 @@ export const PaletteContainer: React.FC = () => {
 
   return (
     <Palette
-      options={filteredOptions}
+      options={options}
       filterInputValue={filterInput}
       onFilterInputValueChange={setFilterInput}
       selectedItemIndex={selectedItemIndex}

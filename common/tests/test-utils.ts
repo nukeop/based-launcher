@@ -1,8 +1,11 @@
-import { LauncherOption } from "../../common/launcher";
+import { LauncherActionType, LauncherOption } from "../launcher";
 
-export const anOption = (option: Partial<LauncherOption>) => ({
+export const anOption = (option: Partial<LauncherOption>): LauncherOption => ({
   id: "1",
   name: "test",
+  onAction: {
+    type: LauncherActionType.Return,
+  },
   ...option,
 });
 

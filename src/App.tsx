@@ -1,19 +1,17 @@
 import { CustomTheme } from "./containers/CustomTheme";
 import { PaletteContainer } from "./containers/PaletteContainer/PaletteContainer";
 import { ArgsContext } from "./contexts/argsContext";
-import { useArgs } from "./hooks/useArgs";
-import { useDesktopEntries } from "./hooks/useDesktopEntries";
 import { useFlags } from "./hooks/useFlags";
+import { useOptions } from "./hooks/useOptions";
 import { AppRoot } from "./layouts/AppRoot";
 
 const App: React.FC = () => {
-  const { stdinArgs } = useArgs();
-  const { flags } = useFlags();
-  const { desktopEntries } = useDesktopEntries();
+  const { flags, isReady: isFlagsReady } = useFlags();
+  const { options, isReady: isOptionsReady } = useOptions();
 
   return (
     <ArgsContext.Provider
-      value={{ stdinArgs, cliFlags: flags, desktopEntries }}
+      value={{ flags, options, isLoading: !isFlagsReady || !isOptionsReady }}
     >
       <AppRoot>
         <CustomTheme />

@@ -59,6 +59,7 @@ export const readCLIFlags = () => {
       ...config,
       ...opts,
     };
+    ArgsProvider.isReadingFlagsDone = true;
   }
 
   const endTime = process.hrtime(startTime);
@@ -94,6 +95,8 @@ export const readPipedArgs = async () => {
         resolve(text.split("\n").filter(Boolean).filter(onlyUnique));
       });
     });
+    ArgsProvider.isReadingStdinDone = true;
+    Logger.info("Piped args:", ArgsProvider.stdinArgs);
   }
 
   const endTime = process.hrtime(startTime);

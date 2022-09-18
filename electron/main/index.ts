@@ -1,4 +1,5 @@
 import { IpcEvent } from "../../common/ipc";
+import { LauncherOption } from "../../common/launcher";
 import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
 import { readDesktopEntries } from "./desktop-apps";
 import Logger from "./logger";
@@ -98,13 +99,11 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
     if (process.platform !== "darwin") app.quit();
   });
 
-  ipcMain.handle(IpcEvent.GetPipedArgs, readPipedArgs);
   ipcMain.handle(IpcEvent.GetCliFlags, readCLIFlags);
-  ipcMain.handle(IpcEvent.GetDesktopEntries, readDesktopEntries);
   ipcMain.handle(IpcEvent.GetOptions, OptionsProvider.getOptions);
 
-  ipcMain.on(IpcEvent.ReturnSelectedItem, (event, item) => {
-    console.log(item);
+  ipcMain.on(IpcEvent.ExecuteAction, (event, option: LauncherOption) => {
+    console.log(option.name);
     app.quit();
   });
 })();

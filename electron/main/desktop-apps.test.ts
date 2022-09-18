@@ -1,4 +1,4 @@
-import { desktopEntryContents } from "../tests/test-utils";
+import { desktopEntryContents } from "../../common/tests/test-utils";
 import {
   getDesktopEntries,
   getDesktopEntryPaths,

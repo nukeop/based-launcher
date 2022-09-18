@@ -1,15 +1,15 @@
 import { CLIFlags } from "../../common/cliFlags";
-import { DesktopEntry } from "../../common/desktop-entries";
+import { LauncherOption } from "common/launcher";
 import { createContext } from "react";
 
 type Args = {
-  stdinArgs?: string[];
-  cliFlags?: CLIFlags;
-  desktopEntries?: DesktopEntry[];
+  flags?: CLIFlags;
+  options: LauncherOption[];
+  isLoading: boolean;
 };
 
 export const ArgsContext = createContext<Args>({
-  stdinArgs: [],
-  cliFlags: {},
-  desktopEntries: [],
+  flags: {},
+  options: [],
+  isLoading: true,
 });

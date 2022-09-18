@@ -1,7 +1,5 @@
 import { IpcEvent } from "../../../common/ipc";
 import { ArgsContext } from "../../contexts/argsContext";
-import { useDesktopEntries } from "../../hooks/useDesktopEntries";
-import { useFlags } from "../../hooks/useFlags";
 import { ipcRenderer } from "electron";
 import Fuse from "fuse.js";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
@@ -9,40 +7,26 @@ import { VariableSizeList } from "react-window";
 
 export const usePaletteContainerProps = () => {
   const listRef = useRef<VariableSizeList>(null);
-  const { stdinArgs, cliFlags, desktopEntries } = useContext(ArgsContext);
+  const { flags, options, isLoading } = useContext(ArgsContext);
 
-  // const options =
-  //   stdinArgs?.map((arg, index) => ({
-  //     id: arg,
-  //     name: arg,
-  //     icon: null,
-  //     onAction: () => onAction(arg),
-  //   })) ?? [];
-
-  const options =
-    desktopEntries?.map((entry) => ({
-      id: entry["Desktop Entry"].Name,
-      name: entry["Desktop Entry"].Name,
-      description: entry["Desktop Entry"].Comment,
-      icon: entry["Desktop Entry"].Icon,
-      onAction: () => onAction(entry["Desktop Entry"].Exec),
-    })) ?? [];
-
-  const onAction = useCallback((item: string) => {
-    ipcRenderer.send(IpcEvent.ReturnSelectedItem, item);
-  }, []);
+  const resolvedOptions = options.map((option) => ({
+    ...option,
+    onAction: () => {
+      ipcRenderer.send(IpcEvent.ExecuteAction, option.onAction);
+    },
+  }));
 
   const [filterInput, setFilterInput] = useState("");
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
-  const fuse = new Fuse(options, {
+  const fuse = new Fuse(resolvedOptions, {
     keys: ["name", "description"],
     threshold: 0.3,
   });
 
   const filteredOptions = filterInput
     ? fuse.search(filterInput).map((result) => result.item)
-    : options;
+    : resolvedOptions;
 
   const onUp = useCallback(
     (event: KeyboardEvent) => {
@@ -96,8 +80,9 @@ export const usePaletteContainerProps = () => {
 
   return {
     listRef,
-    flags: cliFlags,
-    filteredOptions,
+    flags,
+    options: filteredOptions,
+    isLoading,
     filterInput,
     setFilterInput,
     selectedItemIndex,

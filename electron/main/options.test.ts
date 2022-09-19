@@ -1,9 +1,13 @@
 import { LauncherActionType } from "../../common/launcher";
-import { anOption, desktopEntryContents } from "../../common/tests/test-utils";
+import {
+  anOption,
+  desktopEntryContents,
+  givenArgv,
+} from "../../common/tests/test-utils";
 import { ArgsProvider } from "./args";
 import { OptionsProvider } from "./options";
 import fs from "fs";
-import { describe, expect, it, Mock, vi, afterEach } from "vitest";
+import { describe, expect, it, Mock, vi, afterEach, beforeEach } from "vitest";
 import { spyOnImplementing } from "vitest-mock-process";
 
 vi.mock("xdg-basedir", () => ({
@@ -24,6 +28,10 @@ vi.mock("freedesktop-icons", () => ({
 }));
 
 describe("Creating options to be displayed in the renderer", () => {
+  beforeEach(() => {
+    import.meta.env.PROD = true;
+  });
+
   afterEach(() => {
     vi.clearAllMocks();
     OptionsProvider.isDone = false;
@@ -36,8 +44,7 @@ describe("Creating options to be displayed in the renderer", () => {
       read: spyOnImplementing(process.stdin, "read", () => "arg1\narg2\narg3"),
       on: spyOnImplementing(process.stdin, "on", (event: string, cb) => cb()),
     };
-    import.meta.env.PROD = true;
-    process.argv = ["node", "electron/main/args.test.ts", "--mode=dmenu"];
+    givenArgv("--mode=dmenu");
 
     const options = await OptionsProvider.getOptions();
     expect(options).toEqual([
@@ -73,8 +80,7 @@ describe("Creating options to be displayed in the renderer", () => {
   });
 
   it("should read desktop entries in apps mode", async () => {
-    import.meta.env.PROD = true;
-    process.argv = ["node", "electron/main/args.test.ts", "--mode=apps"];
+    givenArgv("--mode=apps");
     (fs.promises.readFile as Mock).mockImplementationOnce(async () =>
       desktopEntryContents("App Name", "App Comment", "app-icon", "app-exec")
     );
@@ -106,5 +112,62 @@ describe("Creating options to be displayed in the renderer", () => {
         },
       }),
     ]);
+  });
+
+  describe("input format", () => {
+    it("should read and parse json data", async () => {
+      const mockStdin = {
+        read: spyOnImplementing(
+          process.stdin,
+          "read",
+          () =>
+            `[{"id": "1", "name": "arg1", "description": "my description", "icon": "my-icon", "onAction": {"type": "execute", "payload": "my-app"}}]`
+        ),
+        on: spyOnImplementing(process.stdin, "on", (event: string, cb) => cb()),
+      };
+      givenArgv("--mode=dmenu", "--input-format=application/json");
+
+      const options = await OptionsProvider.getOptions();
+      expect(options).toEqual([
+        anOption({
+          id: "1",
+          name: "arg1",
+          description: "my description",
+          icon: "my-icon",
+          onAction: {
+            type: LauncherActionType.Execute,
+            payload: "my-app",
+          },
+        }),
+      ]);
+      mockStdin.read.mockRestore();
+      mockStdin.on.mockRestore();
+    });
+
+    it("should fill in missing attributes with default values", async () => {
+      const mockStdin = {
+        read: spyOnImplementing(
+          process.stdin,
+          "read",
+          () => `[{"name": "arg1"}]`
+        ),
+        on: spyOnImplementing(process.stdin, "on", (event: string, cb) => cb()),
+      };
+      givenArgv("--mode=dmenu", "--input-format=application/json");
+
+      const options = await OptionsProvider.getOptions();
+      expect(options).toEqual([
+        anOption({
+          id: "1",
+          name: "arg1",
+          onAction: {
+            type: LauncherActionType.Return,
+            payload: "arg1",
+          },
+        }),
+      ]);
+      mockStdin.read.mockRestore();
+      mockStdin.on.mockRestore();
+    });
   });
 });

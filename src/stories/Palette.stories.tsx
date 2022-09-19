@@ -36,3 +36,34 @@ WithOptions.args = {
   })),
   selectedItemIndex: 3,
 };
+
+export const WithIcons = Template.bind({});
+WithIcons.args = {
+  options: [
+    {
+      id: "1",
+      name: "Linux",
+      icon: "https://cdn.svgporn.com/logos/linux-tux.svg",
+      description: "The best OS",
+    },
+    {
+      id: "2",
+      name: "GNU",
+      icon: "https://cdn.svgporn.com/logos/gnu.svg",
+      description: "The freeest OS",
+    },
+    {
+      id: "3",
+      name: "Windows",
+      icon: "https://cdn.svgporn.com/logos/microsoft-windows.svg",
+      description: "The worst OS",
+    },
+    {
+      id: "4",
+      name: "MacOS",
+      icon: "https://cdn.svgporn.com/logos/apple.svg",
+      description: "The most expensive OS",
+    },
+  ],
+  selectedItemIndex: 0,
+};

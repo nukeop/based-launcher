@@ -27,14 +27,21 @@ export class OptionsProvider {
 
   static getOptionsFromStdin = async (): Promise<LauncherOption[]> => {
     await readPipedArgs();
-    return ArgsProvider.stdinArgs.map((line, index) => ({
-      id: (index + 1).toString(),
-      name: line,
-      onAction: {
-        type: LauncherActionType.Return,
-        payload: line,
-      },
-    }));
+
+    if (ArgsProvider.flags.inputFormat === "application/json") {
+      console.log(ArgsProvider.stdinArgs.join(""));
+      const options = JSON.parse(ArgsProvider.stdinArgs.join(""));
+      return options;
+    } else {
+      return ArgsProvider.stdinArgs.map((line, index) => ({
+        id: (index + 1).toString(),
+        name: line,
+        onAction: {
+          type: LauncherActionType.Return,
+          payload: line,
+        },
+      }));
+    }
   };
 
   static getOptionsFromDesktopEntries = async (): Promise<LauncherOption[]> => {

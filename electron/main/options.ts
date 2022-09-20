@@ -29,9 +29,8 @@ export class OptionsProvider {
     await readPipedArgs();
 
     if (ArgsProvider.flags.inputFormat === "application/json") {
-      console.log(ArgsProvider.stdinArgs.join(""));
       const options = JSON.parse(ArgsProvider.stdinArgs.join(""));
-      return options;
+      return OptionsProvider.processJsonOptions(options);
     } else {
       return ArgsProvider.stdinArgs.map((line, index) => ({
         id: (index + 1).toString(),
@@ -42,6 +41,25 @@ export class OptionsProvider {
         },
       }));
     }
+  };
+
+  static processJsonOptions = (
+    options: Record<string, any>[]
+  ): LauncherOption[] => {
+    return options.map((option, index) => {
+      if (!option.name) {
+        throw new Error("Name is required");
+      } else {
+        return {
+          ...option,
+          id: option.id || (index + 1).toString(),
+          onAction: option.onAction || {
+            type: LauncherActionType.Return,
+            payload: option.name,
+          },
+        } as LauncherOption;
+      }
+    });
   };
 
   static getOptionsFromDesktopEntries = async (): Promise<LauncherOption[]> => {

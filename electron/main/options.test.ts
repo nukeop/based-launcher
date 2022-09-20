@@ -28,6 +28,11 @@ vi.mock("freedesktop-icons", () => ({
 }));
 
 describe("Creating options to be displayed in the renderer", () => {
+  const mockStdin = {
+    read: spyOnImplementing(process.stdin, "read", vi.fn()),
+    on: spyOnImplementing(process.stdin, "on", (event: string, cb) => cb()),
+  };
+
   beforeEach(() => {
     import.meta.env.PROD = true;
   });
@@ -40,10 +45,7 @@ describe("Creating options to be displayed in the renderer", () => {
   });
 
   it("should read options from stdin in dmenu mode", async () => {
-    const mockStdin = {
-      read: spyOnImplementing(process.stdin, "read", () => "arg1\narg2\narg3"),
-      on: spyOnImplementing(process.stdin, "on", (event: string, cb) => cb()),
-    };
+    mockStdin.read.mockImplementation(() => "arg1\narg2\narg3");
     givenArgv("--mode=dmenu");
 
     const options = await OptionsProvider.getOptions();
@@ -75,8 +77,6 @@ describe("Creating options to be displayed in the renderer", () => {
     ]);
     expect(mockStdin.read).toHaveBeenCalledTimes(1);
     expect(mockStdin.on).toHaveBeenCalledTimes(2);
-    mockStdin.read.mockRestore();
-    mockStdin.on.mockRestore();
   });
 
   it("should read desktop entries in apps mode", async () => {
@@ -116,15 +116,11 @@ describe("Creating options to be displayed in the renderer", () => {
 
   describe("input format", () => {
     it("should read and parse json data", async () => {
-      const mockStdin = {
-        read: spyOnImplementing(
-          process.stdin,
-          "read",
-          () =>
-            `[{"id": "1", "name": "arg1", "description": "my description", "icon": "my-icon", "onAction": {"type": "execute", "payload": "my-app"}}]`
-        ),
-        on: spyOnImplementing(process.stdin, "on", (event: string, cb) => cb()),
-      };
+      mockStdin.read.mockImplementation(
+        () =>
+          `[{"id": "1", "name": "arg1", "description": "my description", "icon": "my-icon", "onAction": {"type": "execute", "payload": "my-app"}}]`
+      );
+
       givenArgv("--mode=dmenu", "--input-format=application/json");
 
       const options = await OptionsProvider.getOptions();
@@ -140,19 +136,10 @@ describe("Creating options to be displayed in the renderer", () => {
           },
         }),
       ]);
-      mockStdin.read.mockRestore();
-      mockStdin.on.mockRestore();
     });
 
     it("should fill in missing attributes with default values", async () => {
-      const mockStdin = {
-        read: spyOnImplementing(
-          process.stdin,
-          "read",
-          () => `[{"name": "arg1"}]`
-        ),
-        on: spyOnImplementing(process.stdin, "on", (event: string, cb) => cb()),
-      };
+      mockStdin.read.mockImplementation(() => `[{"name": "arg1"}]`);
       givenArgv("--mode=dmenu", "--input-format=application/json");
 
       const options = await OptionsProvider.getOptions();
@@ -166,8 +153,15 @@ describe("Creating options to be displayed in the renderer", () => {
           },
         }),
       ]);
-      mockStdin.read.mockRestore();
-      mockStdin.on.mockRestore();
+    });
+
+    it('should throw if any items are missing the "name" attribute', async () => {
+      mockStdin.read.mockImplementation(() => `[{"id": "1"}]`);
+      givenArgv("--mode=dmenu", "--input-format=application/json");
+
+      await expect(OptionsProvider.getOptions()).rejects.toThrow(
+        "Name is required"
+      );
     });
   });
 });

@@ -14,8 +14,6 @@ export const useOptions = () => {
       setIsReady(true);
     };
 
-    console.log("getting options");
-
     getOptions();
   }, []);
 

@@ -12,3 +12,5 @@ declare module "glasstron" {
     vibrancy: string;
   }
 }
+
+declare module "freedesktop-icons";

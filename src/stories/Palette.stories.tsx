@@ -29,10 +29,9 @@ WithOptions.args = {
     "Chet Desmond",
     "Dale Cooper",
     "Diane Evans",
-  ].map((name) => ({
-    id: name,
+  ].map((name, index) => ({
+    id: index.toString(),
     name,
-    icon: null,
   })),
   selectedItemIndex: 3,
 };

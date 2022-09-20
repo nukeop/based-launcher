@@ -27,14 +27,39 @@ export class OptionsProvider {
 
   static getOptionsFromStdin = async (): Promise<LauncherOption[]> => {
     await readPipedArgs();
-    return ArgsProvider.stdinArgs.map((line, index) => ({
-      id: (index + 1).toString(),
-      name: line,
-      onAction: {
-        type: LauncherActionType.Return,
-        payload: line,
-      },
-    }));
+
+    if (ArgsProvider.flags.inputFormat === "application/json") {
+      const options = JSON.parse(ArgsProvider.stdinArgs.join(""));
+      return OptionsProvider.processJsonOptions(options);
+    } else {
+      return ArgsProvider.stdinArgs.map((line, index) => ({
+        id: (index + 1).toString(),
+        name: line,
+        onAction: {
+          type: LauncherActionType.Return,
+          payload: line,
+        },
+      }));
+    }
+  };
+
+  static processJsonOptions = (
+    options: Record<string, any>[]
+  ): LauncherOption[] => {
+    return options.map((option, index) => {
+      if (!option.name) {
+        throw new Error("Name is required");
+      } else {
+        return {
+          ...option,
+          id: option.id || (index + 1).toString(),
+          onAction: option.onAction || {
+            type: LauncherActionType.Return,
+            payload: option.name,
+          },
+        } as LauncherOption;
+      }
+    });
   };
 
   static getOptionsFromDesktopEntries = async (): Promise<LauncherOption[]> => {

@@ -23,3 +23,7 @@ Comment=${description}
 Icon=${icon}
 Exec=${exec}
 `;
+
+export const givenArgv = (...argv: string[]) => {
+  process.argv = ["node", "electron/main/args.test.ts", ...argv];
+};

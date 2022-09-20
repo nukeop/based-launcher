@@ -1,7 +1,7 @@
 .palette-item {
     @apply flex flex-row items-center;
     @apply w-full;
-    @apply px-3 py-1;
+    @apply px-3 py-2;
     @apply hover:bg-slate-600/50 focus:bg-slate-600/50 active:bg-slate-500/50;
     @apply cursor-pointer;
     @apply outline-none;
@@ -12,7 +12,7 @@
     @apply overflow-ellipsis;
     @apply rounded-lg;
 
-    &>*:not(:last-child) {
+    & > *:not(:last-child) {
         @apply mr-1;
     }
 
@@ -22,8 +22,8 @@
     }
 
     .palette-item-left {
-        @apply mr-2;
-        @apply h-8;
+        @apply mr-4;
+        @apply h-8 w-8;
 
         img {
             @apply h-full;
@@ -33,7 +33,7 @@
     .palette-item-right {
         @apply flex flex-col flex-1 items-start w-full;
 
-        &>* {
+        & > * {
             @apply w-full text-left truncate;
         }
     }

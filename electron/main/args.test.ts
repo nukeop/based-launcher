@@ -1,4 +1,5 @@
 import { readCLIFlags } from "./args";
+import { givenArgv } from "common/tests/test-utils";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("process", () => ({
@@ -20,12 +21,7 @@ vi.mock("./config.ts", () => ({
 describe("Handling program arguments", () => {
   it("should read CLI args", async () => {
     import.meta.env.PROD = true;
-    process.argv = [
-      "node",
-      "electron/main/args.test.ts",
-      "--theme=test.css",
-      "--input-prefix=test-prefix",
-    ];
+    givenArgv("--theme=test.css", "--input-prefix=test-prefix");
 
     const args = await readCLIFlags();
     expect(args).toEqual(

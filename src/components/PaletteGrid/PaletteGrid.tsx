@@ -1,3 +1,4 @@
+import { useFlags } from "../../hooks/useFlags";
 import { ThemingClassNames } from "../../theming/theming-classnames";
 import { PaletteItem, PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./PaletteGrid.module.scss";
@@ -22,11 +23,14 @@ export const PaletteGrid: React.FC<PaletteGridProps> = ({
   columns = 1,
   listRef,
 }) => {
+  const { flags } = useFlags();
   const getItemSize = (index: number) => {
     if (items[index]?.description) {
-      return ITEM_SIZE_WITH_DESCRIPTION;
+      return (
+        (flags?.itemSizeWithDescription as number) ?? ITEM_SIZE_WITH_DESCRIPTION
+      );
     } else {
-      return ITEM_SIZE;
+      return (flags?.itemSize as number) ?? ITEM_SIZE;
     }
   };
   return (
@@ -46,7 +50,10 @@ export const PaletteGrid: React.FC<PaletteGridProps> = ({
         {({ height, width }) => (
           <VariableSizeList
             ref={listRef}
-            className={styles["palette-grid-list"]}
+            className={cx(
+              styles["palette-grid-list"],
+              ThemingClassNames["palette-grid-list"]
+            )}
             height={height}
             width={width}
             itemSize={getItemSize}

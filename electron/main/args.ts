@@ -43,6 +43,22 @@ export const readCLIFlags = () => {
         )
           .default("text/plain")
           .choices(["text/plain", "application/json"])
+      )
+      .addOption(
+        new Option(
+          "--item-size <size>",
+          "Height of each item in the list (in pixels), needed for theming"
+        )
+          .preset(28)
+          .argParser(parseInt)
+      )
+      .addOption(
+        new Option(
+          "--item-size-with-description <size>",
+          "Height of each item with description in the list (in pixels), needed for theming"
+        )
+          .preset(40)
+          .argParser(parseInt)
       );
 
     // @ts-ignore
@@ -54,6 +70,8 @@ export const readCLIFlags = () => {
     const config = readConfig();
 
     const opts = program.opts();
+
+    Logger.info("CLI flags:", opts);
 
     ArgsProvider.flags = {
       ...config,

@@ -42,18 +42,24 @@ $base3: #fdf6e3;
   input {
     padding: 0;
     color: $base03;
+    font-size: 1rem;
   }
 }
 
 .palette-grid {
   margin: 0;
   margin-top: 0.25em;
+
+  .palette-grid-list {
+    padding: 0;
+  }
 }
 
 .palette-item {
   color: $base03;
   padding: 0;
-  height: auto !important;
+  border-radius: 0 !important;
+  font-size: 1rem;
 
   &:nth-child(odd) {
     background-color: $base2;
@@ -61,6 +67,19 @@ $base3: #fdf6e3;
 
   &--selected {
     color: $base3;
-    background-color: $base01  !important;
+    background-color: $base01 !important;
   }
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  padding-left: 10px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $base02;
+  border-radius: 0;
 }

@@ -1,11 +1,12 @@
-export type CLIFlagKeys =
-  | "theme"
-  | "inputPrefix"
-  | "mode"
-  | "inputFormat"
-  | "itemSize"
-  | "itemSizeWithDescription";
+import { LauncherMode } from "./modes";
 
-export type CLIFlags = {
-  [key in CLIFlagKeys]?: string | number;
-};
+export type CLIFlags = Partial<{
+  theme: string;
+  inputPrefix: string;
+  mode: LauncherMode;
+  inputFormat: "text/plain" | "application/json";
+  itemSize: number;
+  itemSizeWithDescription: number;
+}>;
+
+export type CLIFlagKeys = keyof CLIFlags;

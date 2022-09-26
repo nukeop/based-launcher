@@ -1,4 +1,5 @@
 import { ThemingClassNames } from "../../theming/theming-classnames";
+import { BangsArea } from "../BangsArea/BangsArea";
 import { Input } from "../Input/Input";
 import { PaletteGrid } from "../PaletteGrid/PaletteGrid";
 import { PaletteItemProps } from "../PaletteItem/PaletteItem";
@@ -28,31 +29,35 @@ export const Palette: React.FC<PaletteProps> = ({
   selectedItemIndex,
   listRef,
   prefixLabel,
-}) => (
-  <div
-    data-testid="palette"
-    className={cx(styles.palette, ThemingClassNames["palette"])}
-    tabIndex={-1}
-  >
-    <Input
-      autoFocus
-      autoComplete="off"
-      data-testid="filter-input"
-      className={ThemingClassNames["filter-input"]}
-      placeholder="Type to filter..."
-      value={filterInputValue}
-      onChange={(event) => {
-        onSetSelectedItemIndex(0);
-        return onFilterInputValueChange(event.target.value);
-      }}
-      prefixLabel={prefixLabel}
-    />
+}) => {
+  return (
+    <div
+      data-testid="palette"
+      className={cx(styles.palette, ThemingClassNames["palette"])}
+      tabIndex={-1}
+    >
+      <Input
+        autoFocus
+        autoComplete="off"
+        data-testid="filter-input"
+        className={ThemingClassNames["filter-input"]}
+        placeholder="Type to filter..."
+        value={filterInputValue}
+        onChange={(event) => {
+          onSetSelectedItemIndex(0);
+          return onFilterInputValueChange(event.target.value);
+        }}
+        prefixLabel={prefixLabel}
+      />
 
-    <PaletteGrid
-      items={options}
-      columns={1}
-      selectedItemId={options[selectedItemIndex]?.id}
-      listRef={listRef}
-    />
-  </div>
-);
+      <BangsArea isEmpty />
+
+      <PaletteGrid
+        items={options}
+        columns={1}
+        selectedItemId={options[selectedItemIndex]?.id}
+        listRef={listRef}
+      />
+    </div>
+  );
+};

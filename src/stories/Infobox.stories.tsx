@@ -1,4 +1,5 @@
 import { Infobox } from "../components/Infobox/Infobox";
+import { ComponentStory } from "@storybook/react";
 
 export default {
   title: "Molecules/Infobox",

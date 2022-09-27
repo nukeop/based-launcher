@@ -15,7 +15,8 @@ type WikipediaResponse = {
         };
       };
     };
-}
+  };
+};
 
 export class WikipediaBang implements IBang<InfoboxBangResponse> {
   isPresent(input: string) {
@@ -26,7 +27,7 @@ export class WikipediaBang implements IBang<InfoboxBangResponse> {
   async onActivate(input: string): Promise<InfoboxBangResponse> {
     const query = input.replace("!w", "").trim();
     const url = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages|pageprops&format=json&exintro=&explaintext=&titles=${query}&pithumbsize=300`;
-    const result = await (await fetch(url)).json() as WikipediaResponse;
+    const result = (await (await fetch(url)).json()) as WikipediaResponse;
 
     const page = Object.values(result.query.pages)[0];
 

@@ -14,7 +14,7 @@ export interface InfoboxBangResponse extends BangResponse {
   type: "infobox";
 }
 
-export interface IBang<T> {
+export interface IBang<T extends BangResponse> {
   isPresent(input: string): boolean;
-  onActivate<T extends BangResponse>(input: string): Promise<T | void>;
+  onActivate(input: string): Promise<T | void>;
 }

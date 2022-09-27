@@ -1,4 +1,6 @@
+import { InfoboxBangResponse } from "../../bangs/bangs";
 import { BangsArea } from "../../components/BangsArea/BangsArea";
+import { Infobox } from "../../components/Infobox/Infobox";
 import { Palette } from "../../components/Palette/Palette";
 import { useBangs } from "../../hooks/useBangs";
 import { usePaletteContainerProps } from "./PaletteContainer.hooks";
@@ -26,7 +28,9 @@ export const PaletteContainer: React.FC = () => {
       listRef={listRef}
       prefixLabel={flags?.inputPrefix}
     >
-      <BangsArea isEmpty={!Boolean(bang)} isLoading={isLoading} />
+      <BangsArea isEmpty={!Boolean(bang)} isLoading={isLoading}>
+        {bangResponse && <Infobox {...(bangResponse as InfoboxBangResponse)} />}
+      </BangsArea>
     </Palette>
   );
 };

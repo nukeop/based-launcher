@@ -119,6 +119,26 @@ describe("Palette container", () => {
     component.unmount();
   });
 
+  it("shows that nothing was found when using the wikipedia bang", async () => {
+    fetchMock.mockOnce(
+      JSON.stringify({
+        query: {
+          pages: {},
+        },
+      })
+    );
+    const component = mountComponent(defaultOptions);
+
+    const input = (await component.findAllByTestId("filter-input")).at(0);
+    if (input) {
+      fireEvent.change(input, { target: { value: "!w wikipedia" } });
+    }
+
+    expect(await component.findByText("Nothing found")).toBeInTheDocument();
+
+    component.unmount();
+  });
+
   const mountComponent = (
     options: LauncherOption[] = [],
     flags: CLIFlags = {}

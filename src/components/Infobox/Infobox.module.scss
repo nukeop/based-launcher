@@ -16,9 +16,13 @@
         }
     }
 
+    .thumbnail + .content {
+        @apply w-2/3;
+    }
+
     .content {
         @apply flex flex-col;
-        @apply w-2/3;
+        @apply w-full;
         @apply py-2 px-4;
     }
 

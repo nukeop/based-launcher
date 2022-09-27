@@ -1,0 +1,11 @@
+.bangs-empty-state {
+    @apply text-white flex flex-col items-center justify-center w-full h-full;
+
+    .title {
+        @apply text-2xl font-bold mb-2;
+    }
+
+    .description {
+        @apply text-white/60;
+    }
+}

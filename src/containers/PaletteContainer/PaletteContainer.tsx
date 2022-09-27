@@ -27,6 +27,8 @@ export const PaletteContainer: React.FC = () => {
       onSetSelectedItemIndex={setSelectedItemIndex}
       listRef={listRef}
       prefixLabel={flags?.inputPrefix}
+      itemSize={flags?.itemSize}
+      itemSizeWithDescription={flags?.itemSizeWithDescription}
     >
       <BangsArea isEmpty={!Boolean(bang)} isLoading={isLoading}>
         {bangResponse && <Infobox {...(bangResponse as InfoboxBangResponse)} />}

@@ -12,6 +12,9 @@ type PaletteGridProps = {
   selectedItemId?: string;
   columns?: number;
   listRef?: RefObject<VariableSizeList>;
+
+  itemSize?: number;
+  itemSizeWithDescription?: number;
 };
 
 const ITEM_SIZE = 28;
@@ -22,15 +25,14 @@ export const PaletteGrid: React.FC<PaletteGridProps> = ({
   selectedItemId,
   columns = 1,
   listRef,
+  itemSize,
+  itemSizeWithDescription,
 }) => {
-  const { flags } = useFlags();
   const getItemSize = (index: number) => {
     if (items[index]?.description) {
-      return (
-        (flags?.itemSizeWithDescription as number) ?? ITEM_SIZE_WITH_DESCRIPTION
-      );
+      return (itemSizeWithDescription as number) ?? ITEM_SIZE_WITH_DESCRIPTION;
     } else {
-      return (flags?.itemSize as number) ?? ITEM_SIZE;
+      return (itemSize as number) ?? ITEM_SIZE;
     }
   };
   return (

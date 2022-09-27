@@ -19,6 +19,8 @@ type PaletteProps = {
   onSetSelectedItemIndex: (index: number) => void;
 
   listRef: RefObject<VariableSizeList>;
+
+  children?: React.ReactNode;
 };
 
 export const Palette: React.FC<PaletteProps> = ({
@@ -29,6 +31,7 @@ export const Palette: React.FC<PaletteProps> = ({
   selectedItemIndex,
   listRef,
   prefixLabel,
+  children,
 }) => {
   return (
     <div
@@ -49,9 +52,7 @@ export const Palette: React.FC<PaletteProps> = ({
         }}
         prefixLabel={prefixLabel}
       />
-
-      <BangsArea isEmpty />
-
+      {children}
       <PaletteGrid
         items={options}
         columns={1}

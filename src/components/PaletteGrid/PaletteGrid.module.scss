@@ -1,5 +1,5 @@
 .palette-grid {
-  @apply grid w-full h-full flex-initial overflow-auto;
+  @apply grid w-full h-full flex-initial overflow-y-auto overflow-x-hidden;
   @apply mt-4;
 
   &.columns-1 {

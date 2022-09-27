@@ -1,4 +1,6 @@
+import { BangsArea } from "../../components/BangsArea/BangsArea";
 import { Palette } from "../../components/Palette/Palette";
+import { useBangs } from "../../hooks/useBangs";
 import { usePaletteContainerProps } from "./PaletteContainer.hooks";
 
 export const PaletteContainer: React.FC = () => {
@@ -12,6 +14,8 @@ export const PaletteContainer: React.FC = () => {
     setSelectedItemIndex,
   } = usePaletteContainerProps();
 
+  const { bang, bangResponse, isLoading } = useBangs({ input: filterInput });
+
   return (
     <Palette
       options={options}
@@ -21,6 +25,8 @@ export const PaletteContainer: React.FC = () => {
       onSetSelectedItemIndex={setSelectedItemIndex}
       listRef={listRef}
       prefixLabel={flags?.inputPrefix}
-    />
+    >
+      <BangsArea isEmpty={!Boolean(bang)} isLoading={isLoading} />
+    </Palette>
   );
 };

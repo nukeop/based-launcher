@@ -1,9 +1,6 @@
 .inputWrapper {
-    @apply flex flex-row items-center;
-    @apply border border-solid border-slate-600/50;
-    @apply focus-within:ring-blue-500 focus-within:border-blue-500;
-    @apply rounded-lg;
-    @apply transition-colors duration-200 ease-in-out;
+    @apply flex flex-row items-center px-4 py-2;
+    @apply border-b border-slate-700;
 }
 
 .prefixLabel {

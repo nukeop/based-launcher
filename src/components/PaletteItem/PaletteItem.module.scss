@@ -1,7 +1,7 @@
 .palette-item {
     @apply flex flex-row items-center;
     @apply w-full;
-    @apply px-3 py-2;
+    @apply px-6 py-4;
     @apply hover:bg-slate-600/50 focus:bg-slate-600/50 active:bg-slate-500/50;
     @apply cursor-pointer;
     @apply outline-none;
@@ -10,7 +10,6 @@
     @apply whitespace-nowrap;
     @apply text-ellipsis;
     @apply overflow-ellipsis;
-    @apply rounded-lg;
 
     & > *:not(:last-child) {
         @apply mr-1;

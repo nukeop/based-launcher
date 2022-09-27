@@ -17,8 +17,8 @@ type PaletteGridProps = {
   itemSizeWithDescription?: number;
 };
 
-const ITEM_SIZE = 28;
-const ITEM_SIZE_WITH_DESCRIPTION = 40;
+const ITEM_SIZE = 32;
+const ITEM_SIZE_WITH_DESCRIPTION = 44;
 
 export const PaletteGrid: React.FC<PaletteGridProps> = ({
   items,

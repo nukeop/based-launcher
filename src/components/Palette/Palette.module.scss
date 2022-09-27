@@ -1,6 +1,3 @@
 .palette {
-    @apply flex flex-col;
-    @apply p-8;
-    @apply outline-none;
-    @apply h-full;
+    @apply flex flex-col outline-none h-full;
 }

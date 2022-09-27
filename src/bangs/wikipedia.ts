@@ -1,4 +1,5 @@
 import { EmptyBangResponse, IBang, InfoboxBangResponse } from "./bangs";
+import upperFirst from "lodash/upperFirst";
 
 type WikipediaResponse = {
   query: {
@@ -29,7 +30,12 @@ export class WikipediaBang
   async onActivate(
     input: string
   ): Promise<InfoboxBangResponse | EmptyBangResponse> {
-    const query = input.replace("!w", "").trim();
+    const query = input
+      .replace("!w", "")
+      .trim()
+      .split(" ")
+      .map(upperFirst)
+      .join(" ");
     const url = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages|pageprops&format=json&exintro=&explaintext=&titles=${query}&pithumbsize=300`;
     const result = (await (await fetch(url)).json()) as WikipediaResponse;
 

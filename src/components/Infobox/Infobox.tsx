@@ -11,9 +11,11 @@ export const Infobox: React.FC<InfoboxProps> = ({
 }) => {
   return (
     <div className={styles["infobox"]}>
-      <div className={styles["thumbnail"]}>
-        <img src={thumbnail} alt={header} />
-      </div>
+      {thumbnail && (
+        <div className={styles["thumbnail"]}>
+          <img src={thumbnail} alt={header} />
+        </div>
+      )}
       <div className={styles["content"]}>
         <h1 className={styles["header"]}>{header}</h1>
         <h2 className={styles["subheader"]}>{subheader}</h2>

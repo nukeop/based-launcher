@@ -31,6 +31,14 @@ export class WikipediaBang implements IBang<InfoboxBangResponse> {
 
     const page = Object.values(result.query.pages)[0];
 
+    if (!page.extract || input.length < 3) {
+      return {
+        header: "Wikipedia",
+        body: "No results found",
+        type: "infobox",
+      };
+    }
+
     return {
       header: page.title,
       body: page.extract,

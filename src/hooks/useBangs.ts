@@ -14,12 +14,16 @@ export const useBangs = ({ input }: { input: string }) => {
   useEffect(() => {
     if (bang) {
       setLoading(true);
+    } else {
+      setLoading(false);
+      setBangResponse(undefined);
     }
+
     bang?.onActivate(input).then((response) => {
       setLoading(false);
       return setBangResponse(response);
     });
-  }, [bang]);
+  }, [bang, input]);
 
   return {
     bang,

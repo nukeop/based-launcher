@@ -66,12 +66,12 @@ export class OptionsProvider {
     await readDesktopEntries();
     return DesktopEntriesProvider.desktopEntries.map((entry, index) => ({
       id: (index + 1).toString(),
-      name: entry[DESKTOP_ENTRY_HEADER].Name,
-      description: entry[DESKTOP_ENTRY_HEADER].Comment,
-      icon: entry[DESKTOP_ENTRY_HEADER].Icon,
+      name: entry.entry[DESKTOP_ENTRY_HEADER].Name,
+      description: entry.entry[DESKTOP_ENTRY_HEADER].Comment,
+      icon: entry.entry[DESKTOP_ENTRY_HEADER].Icon,
       onAction: {
-        type: LauncherActionType.Execute,
-        payload: entry[DESKTOP_ENTRY_HEADER].Exec,
+        type: LauncherActionType.RunDesktopFile,
+        payload: entry.path,
       },
     }));
   };

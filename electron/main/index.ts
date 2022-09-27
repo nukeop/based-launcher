@@ -4,6 +4,8 @@ import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
 import { readDesktopEntries } from "./desktop-apps";
 import Logger from "./logger";
 import { OptionsProvider } from "./options";
+import { spawn } from "child_process";
+import { Launcher } from "desktop-launch";
 import { app, shell, ipcMain } from "electron";
 import { BrowserWindow } from "glasstron";
 import { join } from "path";
@@ -104,10 +106,22 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
 
   ipcMain.on(
     IpcEvent.ExecuteAction,
-    (event, option: LauncherOption["onAction"]) => {
+    async (event, option: LauncherOption["onAction"]) => {
       switch (option.type) {
+        case LauncherActionType.RunDesktopFile:
+          if (option.payload) {
+            console.log("run desktop file", option.payload);
+            const launcher = new Launcher();
+            await launcher.start(option.payload).catch((e) => {
+              console.log("handling error");
+              console.error(e);
+            });
+            app.quit();
+          }
+          break;
         case LauncherActionType.Execute:
-          option.payload && shell.openExternal(option.payload);
+          option.payload && spawn(option.payload).unref();
+          app.quit();
           break;
         case LauncherActionType.Return:
           console.log(option.payload);

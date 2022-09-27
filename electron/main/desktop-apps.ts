@@ -9,8 +9,12 @@ import fs from "fs";
 import path from "path";
 import { xdgDataDirectories } from "xdg-basedir";
 
+export type DesktopEntryWithPath = {
+  path: string;
+  entry: DesktopEntry;
+};
 export class DesktopEntriesProvider {
-  static desktopEntries: DesktopEntry[] = [];
+  static desktopEntries: DesktopEntryWithPath[] = [];
   static isDone = false;
 
   private constructor() {}
@@ -39,16 +43,19 @@ export const getDesktopEntryPaths = async () => {
 
 export const getDesktopEntryFromPath = async (
   path: string
-): Promise<DesktopEntry | undefined> => {
+): Promise<DesktopEntryWithPath | undefined> => {
   try {
     const contents = await fs.promises.readFile(path, "utf-8");
     const entry = await parseDesktopEntry(contents);
 
     const icon = await freedesktopIcons(entry[DESKTOP_ENTRY_HEADER].Icon);
     return {
-      [DESKTOP_ENTRY_HEADER]: {
-        ...entry[DESKTOP_ENTRY_HEADER],
-        Icon: icon && `file://${icon}`,
+      path,
+      entry: {
+        [DESKTOP_ENTRY_HEADER]: {
+          ...entry[DESKTOP_ENTRY_HEADER],
+          Icon: icon && `file://${icon}`,
+        },
       },
     };
   } catch (e) {
@@ -107,11 +114,11 @@ export const parseDesktopEntry = async (
   }, {} as DesktopEntry);
 };
 
-export const getDesktopEntries = async (): Promise<DesktopEntry[]> => {
+export const getDesktopEntries = async (): Promise<DesktopEntryWithPath[]> => {
   const paths = await getDesktopEntryPaths();
   return (await Promise.all(paths.map(getDesktopEntryFromPath))).filter(
     Boolean
-  ) as DesktopEntry[];
+  ) as DesktopEntryWithPath[];
 };
 
 export const readDesktopEntries = async () => {

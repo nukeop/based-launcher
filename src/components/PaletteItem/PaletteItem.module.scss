@@ -23,7 +23,7 @@
 
     .palette-item-left {
         @apply mr-4;
-        @apply h-8 w-8;
+        @apply h-8 w-8 min-w-[2rem];
 
         img {
             @apply h-full;

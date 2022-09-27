@@ -48,3 +48,8 @@ You can see all the flags in [electron/main/args.ts](electron/main/args.ts).
 based-launcher can load custom css themes. Use the `--theme` or `-t` flag to select the stylesheet file.
 
 In addition to user themes, the repository comes with some custom theme files (in the `themes` folder). To build them, run `npm run themes`. If you want to work on a theme using css, you can run `npm run themes:watch`, and it will recompile all `.scss` files in the `themes` folder as they're changed. The launcher will live reload the theme as well.
+
+## Screenshots
+
+![Screenshot 1](./assets/screenshots/screenshot1.png)
+![Screenshot 2](./assets/screenshots/screenshot2.png)

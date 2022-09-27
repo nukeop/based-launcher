@@ -87,6 +87,60 @@ describe("Palette container", () => {
     expect(firstItem).toHaveAttribute("data-selected", "true");
   });
 
+  it("can use the wikipedia bang", async () => {
+    fetchMock.mockOnce(
+      JSON.stringify({
+        query: {
+          pages: {
+            "123": {
+              title: "Wikipedia",
+              extract:
+                "Wikipedia is a free online encyclopedia, created and edited by volunteers around the world and hosted by the Wikimedia Foundation.",
+              pageprops: {
+                "wikibase-shortdesc": "free online encyclopedia",
+              },
+            },
+          },
+        },
+      })
+    );
+    const component = mountComponent(defaultOptions);
+
+    const input = (await component.findAllByTestId("filter-input")).at(0);
+    if (input) {
+      fireEvent.change(input, { target: { value: "!w wikipedia" } });
+    }
+
+    expect(await component.findByText("Wikipedia")).toBeInTheDocument();
+    expect(
+      await component.findByText("free online encyclopedia")
+    ).toBeInTheDocument();
+
+    component.unmount();
+  });
+
+  it("shows that nothing was found when using the wikipedia bang", async () => {
+    fetchMock.mockOnce(
+      JSON.stringify({
+        query: {
+          pages: {
+            "123": {},
+          },
+        },
+      })
+    );
+    const component = mountComponent(defaultOptions);
+
+    const input = (await component.findAllByTestId("filter-input")).at(0);
+    if (input) {
+      fireEvent.change(input, { target: { value: "!w wikipedia" } });
+    }
+
+    expect(await component.findByText("Nothing found")).toBeInTheDocument();
+
+    component.unmount();
+  });
+
   const mountComponent = (
     options: LauncherOption[] = [],
     flags: CLIFlags = {}

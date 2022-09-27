@@ -1,4 +1,4 @@
-import { IBang, InfoboxBangResponse } from "./bangs";
+import { EmptyBangResponse, IBang, InfoboxBangResponse } from "./bangs";
 
 type WikipediaResponse = {
   query: {
@@ -15,20 +15,29 @@ type WikipediaResponse = {
         };
       };
     };
-}
+  };
+};
 
-export class WikipediaBang implements IBang<InfoboxBangResponse> {
+export class WikipediaBang
+  implements IBang<InfoboxBangResponse | EmptyBangResponse>
+{
   isPresent(input: string) {
     return input.includes("!w ") || input.includes(" !w");
   }
 
   // Gets a preview from wikipedia with a medium-size thumbnail
-  async onActivate(input: string): Promise<InfoboxBangResponse> {
+  async onActivate(
+    input: string
+  ): Promise<InfoboxBangResponse | EmptyBangResponse> {
     const query = input.replace("!w", "").trim();
     const url = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts|pageimages|pageprops&format=json&exintro=&explaintext=&titles=${query}&pithumbsize=300`;
-    const result = await (await fetch(url)).json() as WikipediaResponse;
+    const result = (await (await fetch(url)).json()) as WikipediaResponse;
 
     const page = Object.values(result.query.pages)[0];
+
+    if (!page.extract || input.length < 3) {
+      return { type: "empty" };
+    }
 
     return {
       header: page.title,

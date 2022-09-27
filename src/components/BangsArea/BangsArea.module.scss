@@ -1,9 +1,9 @@
 .bangs-area {
-    @apply flex justify-center items-center w-full h-full rounded-xl bg-black/20 transition-all duration-500;
-    @apply mt-4;
+    @apply flex justify-center items-center w-full rounded-xl bg-black/20 transition-all duration-500;
+    @apply mt-4 p-8;
 
     &.empty {
-        @apply h-0;
+        @apply h-0 p-0 m-0;
     }
 
     &.loading {

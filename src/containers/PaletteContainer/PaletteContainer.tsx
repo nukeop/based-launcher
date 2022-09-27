@@ -1,4 +1,11 @@
+import {
+  InfoboxBangResponse,
+  isEmptyBangResponse,
+  isInfoboxBangResponse,
+} from "../../bangs/bangs";
 import { BangsArea } from "../../components/BangsArea/BangsArea";
+import { BangsEmptyState } from "../../components/BangsEmptyState/BangsEmptyState";
+import { Infobox } from "../../components/Infobox/Infobox";
 import { Palette } from "../../components/Palette/Palette";
 import { useBangs } from "../../hooks/useBangs";
 import { usePaletteContainerProps } from "./PaletteContainer.hooks";
@@ -25,8 +32,13 @@ export const PaletteContainer: React.FC = () => {
       onSetSelectedItemIndex={setSelectedItemIndex}
       listRef={listRef}
       prefixLabel={flags?.inputPrefix}
+      itemSize={flags?.itemSize}
+      itemSizeWithDescription={flags?.itemSizeWithDescription}
     >
-      <BangsArea isEmpty={!Boolean(bang)} isLoading={isLoading} />
+      <BangsArea isEmpty={!Boolean(bang)} isLoading={isLoading}>
+        {isInfoboxBangResponse(bangResponse) && <Infobox {...bangResponse} />}
+        {isEmptyBangResponse(bangResponse) && <BangsEmptyState />}
+      </BangsArea>
     </Palette>
   );
 };

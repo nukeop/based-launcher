@@ -23,3 +23,8 @@ export const Loading = Template.bind({});
 Loading.args = {
   isLoading: true,
 };
+
+export const WithChildren = Template.bind({});
+WithChildren.args = {
+  children: <div className="text-white">Children</div>,
+};

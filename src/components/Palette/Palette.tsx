@@ -20,6 +20,9 @@ type PaletteProps = {
 
   listRef: RefObject<VariableSizeList>;
 
+  itemSize?: number;
+  itemSizeWithDescription?: number;
+
   children?: React.ReactNode;
 };
 
@@ -31,6 +34,8 @@ export const Palette: React.FC<PaletteProps> = ({
   selectedItemIndex,
   listRef,
   prefixLabel,
+  itemSize,
+  itemSizeWithDescription,
   children,
 }) => {
   return (
@@ -58,6 +63,8 @@ export const Palette: React.FC<PaletteProps> = ({
         columns={1}
         selectedItemId={options[selectedItemIndex]?.id}
         listRef={listRef}
+        itemSize={itemSize}
+        itemSizeWithDescription={itemSizeWithDescription}
       />
     </div>
   );

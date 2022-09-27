@@ -123,7 +123,9 @@ describe("Palette container", () => {
     fetchMock.mockOnce(
       JSON.stringify({
         query: {
-          pages: {},
+          pages: {
+            "123": {},
+          },
         },
       })
     );

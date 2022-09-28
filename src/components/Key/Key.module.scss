@@ -1,0 +1,12 @@
+.key {
+    @apply rounded;
+    @apply bg-slate-500/50 text-slate-300;
+    @apply text-sm;
+    @apply px-2 py-1;
+    @apply m-1;
+    @apply border border-slate-500;
+
+    &.active {
+        @apply border-blue-500;
+    }
+}

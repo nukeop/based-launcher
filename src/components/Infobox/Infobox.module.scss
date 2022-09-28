@@ -30,15 +30,16 @@
         @apply text-xl;
         @apply font-bold;
         @apply mb-2;
+        @apply text-slate-800;
     }
 
     .subheader {
-        @apply text-gray-600;
+        @apply text-slate-400;
         @apply mb-2;
     }
 
     .body {
-        @apply text-gray-600;
+        @apply text-slate-600;
         @apply text-sm;
         @apply line-clamp-3;
     }

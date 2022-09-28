@@ -1,6 +1,7 @@
 import { ThemingClassNames } from "../../theming/theming-classnames";
 import { BangsArea } from "../BangsArea/BangsArea";
 import { Input } from "../Input/Input";
+import { PaletteFooter } from "../PaletteFooter/PaletteFooter";
 import { PaletteGrid } from "../PaletteGrid/PaletteGrid";
 import { PaletteItemProps } from "../PaletteItem/PaletteItem";
 import styles from "./Palette.module.scss";
@@ -66,6 +67,7 @@ export const Palette: React.FC<PaletteProps> = ({
         itemSize={itemSize}
         itemSizeWithDescription={itemSizeWithDescription}
       />
+      <PaletteFooter />
     </div>
   );
 };

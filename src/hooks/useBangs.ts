@@ -1,8 +1,9 @@
 import { BangResponse } from "../bangs/bangs";
+import { CalendarBang } from "../bangs/calendar";
 import { WikipediaBang } from "../bangs/wikipedia";
 import { useEffect, useState } from "react";
 
-const allBangs = [new WikipediaBang()];
+const allBangs = [new WikipediaBang(), new CalendarBang()];
 
 export const useBangs = ({ input }: { input: string }) => {
   const [bangResponse, setBangResponse] = useState<BangResponse | undefined>(

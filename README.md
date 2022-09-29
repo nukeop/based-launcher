@@ -53,3 +53,4 @@ In addition to user themes, the repository comes with some custom theme files (i
 
 ![Screenshot 1](./assets/screenshots/screenshot1.png)
 ![Screenshot 2](./assets/screenshots/screenshot2.png)
+![Screenshot 3](./assets/screenshots/screenshot3.png)

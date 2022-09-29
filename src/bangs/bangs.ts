@@ -1,6 +1,6 @@
 // DuckDuckGo style bangs
 
-export type BangResponseType = "infobox" | "value" | "empty";
+export type BangResponseType = "infobox" | "widget" | "value" | "empty";
 
 export type BangResponse = {
   type: BangResponseType;
@@ -14,6 +14,11 @@ export interface InfoboxBangResponse extends BangResponse {
   type: "infobox";
 }
 
+export interface WidgetBangResponse<T> extends BangResponse {
+  widget: T;
+  type: "widget";
+}
+
 export interface EmptyBangResponse extends BangResponse {
   type: "empty";
 }
@@ -22,6 +27,12 @@ export const isInfoboxBangResponse = (
   response: BangResponse | void
 ): response is InfoboxBangResponse => {
   return response?.type === "infobox";
+};
+
+export const isWidgetBangResponse = (
+  response: BangResponse | void
+): response is WidgetBangResponse<any> => {
+  return response?.type === "widget";
 };
 
 export const isEmptyBangResponse = (

@@ -2,6 +2,7 @@ import {
   InfoboxBangResponse,
   isEmptyBangResponse,
   isInfoboxBangResponse,
+  isWidgetBangResponse,
 } from "../../bangs/bangs";
 import { BangsArea } from "../../components/BangsArea/BangsArea";
 import { BangsEmptyState } from "../../components/BangsEmptyState/BangsEmptyState";
@@ -38,6 +39,7 @@ export const PaletteContainer: React.FC = () => {
       <BangsArea isEmpty={!Boolean(bang)} isLoading={isLoading}>
         {isInfoboxBangResponse(bangResponse) && <Infobox {...bangResponse} />}
         {isEmptyBangResponse(bangResponse) && <BangsEmptyState />}
+        {isWidgetBangResponse(bangResponse) && <bangResponse.widget />}
       </BangsArea>
     </Palette>
   );

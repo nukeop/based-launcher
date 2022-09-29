@@ -107,9 +107,7 @@ describe("Palette container", () => {
     const component = mountComponent(defaultOptions);
 
     const input = (await component.findAllByTestId("filter-input")).at(0);
-    if (input) {
-      fireEvent.change(input, { target: { value: "!w wikipedia" } });
-    }
+    input && fireEvent.change(input, { target: { value: "!w wikipedia" } });
 
     expect(await component.findByText("Wikipedia")).toBeInTheDocument();
     expect(
@@ -139,6 +137,15 @@ describe("Palette container", () => {
     expect(await component.findByText("Nothing found")).toBeInTheDocument();
 
     component.unmount();
+  });
+
+  it("can use the calendar bang", async () => {
+    const component = mountComponent(defaultOptions);
+
+    const input = (await component.findAllByTestId("filter-input")).at(0);
+    input && fireEvent.change(input, { target: { value: "!cal" } });
+
+    waitFor(() => expect(component.getByText("Mon")).toBeInTheDocument());
   });
 
   const mountComponent = (

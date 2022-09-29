@@ -52,10 +52,16 @@
                     @apply rounded-lg overflow-hidden;
                     &__day {
                         &--weekend {
-                            @apply text-pink-600;
+                            @apply text-blue-600;
+                            &:nth-of-type(7n) {
+                                @apply text-pink-600;
+                            }
                         }
 
                         &--neighboringMonth {
+                            &:last-child {
+                                @apply text-gray-400;
+                            }
                             @apply text-gray-400 bg-gray-100;
                         }
                     }

@@ -1,0 +1,66 @@
+.calendar {
+    @apply bg-transparent text-gray-800 overflow-hidden shadow-lg;
+
+    :global {
+        .react-calendar {
+            &__navigation {
+                @apply text-white flex justify-between items-center mb-4;
+
+                &__label {
+                    @apply flex justify-center font-bold text-xl;
+                }
+
+                &__prev-button,
+                &__next-button {
+                    @apply px-2;
+                }
+
+                &__prev2-button,
+                &__next2-button {
+                    @apply hidden;
+                }
+            }
+
+            &__tile {
+                @apply bg-white border-gray-200 border-b border-r py-3 text-sm;
+
+                &--active abbr {
+                    @apply bg-gray-900 rounded-full p-2 text-white;
+                }
+            }
+
+            &__year-view {
+                &__months {
+                    @apply rounded-lg overflow-hidden;
+                }
+            }
+
+            &__month-view {
+                &__weekdays {
+                    @apply bg-transparent text-white mb-2;
+
+                    &__weekday {
+                        @apply flex justify-center;
+
+                        abbr {
+                            @apply no-underline;
+                        }
+                    }
+                }
+
+                &__days {
+                    @apply rounded-lg overflow-hidden;
+                    &__day {
+                        &--weekend {
+                            @apply text-pink-600;
+                        }
+
+                        &--neighboringMonth {
+                            @apply text-gray-400 bg-gray-100;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

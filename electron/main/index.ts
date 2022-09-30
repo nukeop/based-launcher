@@ -1,11 +1,10 @@
 import { IpcEvent } from "../../common/ipc";
 import { LauncherActionType, LauncherOption } from "../../common/launcher";
 import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
-import { readDesktopEntries } from "./desktop-apps";
+import { readDesktopEntries } from "./freedesktop/desktop-apps";
 import Logger from "./logger";
 import { OptionsProvider } from "./options";
 import { spawn } from "child_process";
-import { Launcher } from "desktop-launch";
 import { app, shell, ipcMain } from "electron";
 import { BrowserWindow } from "glasstron";
 import { join } from "path";
@@ -110,12 +109,7 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
       switch (option.type) {
         case LauncherActionType.RunDesktopFile:
           if (option.payload) {
-            console.log("run desktop file", option.payload);
-            const launcher = new Launcher();
-            await launcher.start(option.payload).catch((e) => {
-              console.log("handling error");
-              console.error(e);
-            });
+            spawn("gtk-launch", [option.payload]).unref();
             app.quit();
           }
           break;

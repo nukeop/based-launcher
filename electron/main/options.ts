@@ -1,7 +1,11 @@
 import { DESKTOP_ENTRY_HEADER } from "../../common/desktop-entries";
 import { LauncherActionType, LauncherOption } from "../../common/launcher";
 import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
-import { DesktopEntriesProvider, readDesktopEntries } from "./desktop-apps";
+import {
+  DesktopEntriesProvider,
+  readDesktopEntries,
+} from "./freedesktop/desktop-apps";
+import path from "path";
 
 export class OptionsProvider {
   static options: LauncherOption[] = [];
@@ -71,7 +75,7 @@ export class OptionsProvider {
       icon: entry.entry[DESKTOP_ENTRY_HEADER].Icon,
       onAction: {
         type: LauncherActionType.RunDesktopFile,
-        payload: entry.path,
+        payload: path.basename(entry.path),
       },
     }));
   };

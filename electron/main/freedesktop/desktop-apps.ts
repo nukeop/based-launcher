@@ -1,9 +1,9 @@
 import {
   DesktopEntry,
   DESKTOP_ENTRY_HEADER,
-} from "../../common/desktop-entries";
-import { ArgsProvider } from "./args";
-import Logger from "./logger";
+} from "../../../common/desktop-entries";
+import { ArgsProvider } from "../args";
+import Logger from "../logger";
 import freedesktopIcons from "freedesktop-icons";
 import fs from "fs";
 import path from "path";
@@ -48,13 +48,14 @@ export const getDesktopEntryFromPath = async (
     const contents = await fs.promises.readFile(path, "utf-8");
     const entry = await parseDesktopEntry(contents);
 
-    const icon = await freedesktopIcons(entry[DESKTOP_ENTRY_HEADER].Icon);
+    // const icon = await freedesktopIcons(entry[DESKTOP_ENTRY_HEADER].Icon);
     return {
       path,
       entry: {
         [DESKTOP_ENTRY_HEADER]: {
           ...entry[DESKTOP_ENTRY_HEADER],
-          Icon: icon && `file://${icon}`,
+          // Icon: icon && `file://${icon}`,
+          Icon: null,
         },
       },
     };

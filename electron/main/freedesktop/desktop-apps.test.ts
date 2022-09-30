@@ -1,4 +1,4 @@
-import { desktopEntryContents } from "../../common/tests/test-utils";
+import { desktopEntryContents } from "../../../common/tests/test-utils";
 import {
   getDesktopEntries,
   getDesktopEntryPaths,
@@ -67,24 +67,30 @@ describe("Handling desktop apps", () => {
     const entries = await getDesktopEntries();
     expect(entries).toEqual([
       {
-        "Desktop Entry": {
-          Type: "Application",
-          Version: "1.0",
-          Name: "App Name",
-          Comment: "App Comment",
-          Icon: "file:///freedesktop/app-icon",
-          Exec: "app-exec",
+        entry: {
+          "Desktop Entry": {
+            Type: "Application",
+            Version: "1.0",
+            Name: "App Name",
+            Comment: "App Comment",
+            Icon: "file:///freedesktop/app-icon",
+            Exec: "app-exec",
+          },
         },
+        path: "/xdg-data-dir/applications/file1.desktop",
       },
       {
-        "Desktop Entry": {
-          Type: "Application",
-          Version: "1.0",
-          Name: "Another App",
-          Comment: "2nd Comment",
-          Icon: "file:///freedesktop/2nd-icon",
-          Exec: "my-app",
+        entry: {
+          "Desktop Entry": {
+            Type: "Application",
+            Version: "1.0",
+            Name: "Another App",
+            Comment: "2nd Comment",
+            Icon: "file:///freedesktop/2nd-icon",
+            Exec: "my-app",
+          },
         },
+        path: "/xdg-data-dir-2/applications/file1.desktop",
       },
     ]);
   });
@@ -107,14 +113,17 @@ describe("Handling desktop apps", () => {
     const entries = await getDesktopEntries();
     expect(entries).toEqual([
       {
-        "Desktop Entry": {
-          Type: "Application",
-          Version: "1.0",
-          Name: "App Name",
-          Comment: "App Comment",
-          Icon: "file:///freedesktop/app-icon",
-          Exec: "app-exec",
+        entry: {
+          "Desktop Entry": {
+            Type: "Application",
+            Version: "1.0",
+            Name: "App Name",
+            Comment: "App Comment",
+            Icon: "file:///freedesktop/app-icon",
+            Exec: "app-exec",
+          },
         },
+        path: "/xdg-data-dir/applications/file2.desktop",
       },
     ]);
   });

@@ -96,8 +96,8 @@ describe("Creating options to be displayed in the renderer", () => {
         description: "App Comment",
         icon: "file:///freedesktop/app-icon",
         onAction: {
-          type: LauncherActionType.Execute,
-          payload: "app-exec",
+          type: LauncherActionType.RunDesktopFile,
+          payload: "file1.desktop",
         },
       }),
       anOption({
@@ -107,8 +107,8 @@ describe("Creating options to be displayed in the renderer", () => {
 
         icon: "file:///freedesktop/2nd-icon",
         onAction: {
-          type: LauncherActionType.Execute,
-          payload: "my-app",
+          type: LauncherActionType.RunDesktopFile,
+          payload: "file2.desktop",
         },
       }),
     ]);

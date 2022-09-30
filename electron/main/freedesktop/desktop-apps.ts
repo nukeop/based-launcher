@@ -55,7 +55,7 @@ export const getDesktopEntryFromPath = async (
         [DESKTOP_ENTRY_HEADER]: {
           ...entry[DESKTOP_ENTRY_HEADER],
           // Icon: icon && `file://${icon}`,
-          Icon: null,
+          Icon: undefined,
         },
       },
     };

@@ -14,6 +14,6 @@ export type LauncherOption = {
   id: string;
   name: string;
   description?: string;
-  icon?: string | null;
+  icon?: string;
   onAction: LauncherAction;
 };

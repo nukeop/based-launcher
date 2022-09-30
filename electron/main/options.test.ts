@@ -95,7 +95,7 @@ describe("Creating options to be displayed in the renderer", () => {
         name: "App Name",
         description: "App Comment",
         // icon: "file:///freedesktop/app-icon",
-        icon: null,
+        icon: undefined,
         onAction: {
           type: LauncherActionType.RunDesktopFile,
           payload: "file1.desktop",
@@ -107,7 +107,7 @@ describe("Creating options to be displayed in the renderer", () => {
         description: "2nd Comment",
 
         // icon: "file:///freedesktop/2nd-icon",
-        icon: null,
+        icon: undefined,
         onAction: {
           type: LauncherActionType.RunDesktopFile,
           payload: "file2.desktop",

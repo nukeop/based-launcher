@@ -8,7 +8,7 @@
     "build": "electron-build-env neon build && tsc && vite build && electron-builder",
     "themes": "sass themes",
     "themes:watch": "sass themes --watch",
-    "test": "cargo test && vitest",
+    "test": "vitest --run && cd native && cargo test --release",
     "coverage": "vitest run --coverage",
     "lint": "eslint \"src/**/*.{ts,tsx}\" \"electron/**/*.ts\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" \"electron/**/*.ts\" --fix",

@@ -104,3 +104,6 @@ release
 
 themes/*.css
 themes/*.css.map
+
+native/target
+native/index.node

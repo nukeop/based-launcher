@@ -1,0 +1,17 @@
+[package]
+name = "based_launcher"
+version = "1.0.8"
+license = "AGPL-3.0"
+edition = "2018"
+exclude = ["index.node"]
+
+[lib]
+name = "based_launcher"
+crate-type = ["cdylib"]
+
+[dependencies]
+
+[dependencies.neon]
+version = "0.10"
+default-features = false
+features = ["napi-6"]

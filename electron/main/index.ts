@@ -1,5 +1,6 @@
 import { IpcEvent } from "../../common/ipc";
 import { LauncherActionType, LauncherOption } from "../../common/launcher";
+import rustModules from "../../native/index.node";
 import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
 import { readDesktopEntries } from "./desktop-apps";
 import Logger from "./logger";
@@ -23,6 +24,8 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
 (async () => {
   const startTime = process.hrtime();
   await readCLIFlags();
+
+  console.log(rustModules.hello());
 
   // Set application name for Windows 10+ notifications
   if (process.platform === "win32") app.setAppUserModelId(app.getName());

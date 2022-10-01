@@ -1,7 +1,11 @@
 import { DESKTOP_ENTRY_HEADER } from "../../common/desktop-entries";
 import { LauncherActionType, LauncherOption } from "../../common/launcher";
 import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
-import { DesktopEntriesProvider, readDesktopEntries } from "./desktop-apps";
+import {
+  DesktopEntriesProvider,
+  readDesktopEntries,
+} from "./freedesktop/desktop-apps";
+import path from "path";
 
 export class OptionsProvider {
   static options: LauncherOption[] = [];
@@ -64,15 +68,18 @@ export class OptionsProvider {
 
   static getOptionsFromDesktopEntries = async (): Promise<LauncherOption[]> => {
     await readDesktopEntries();
-    return DesktopEntriesProvider.desktopEntries.map((entry, index) => ({
-      id: (index + 1).toString(),
-      name: entry[DESKTOP_ENTRY_HEADER].Name,
-      description: entry[DESKTOP_ENTRY_HEADER].Comment,
-      icon: entry[DESKTOP_ENTRY_HEADER].Icon,
-      onAction: {
-        type: LauncherActionType.Execute,
-        payload: entry[DESKTOP_ENTRY_HEADER].Exec,
-      },
-    }));
+    return DesktopEntriesProvider.desktopEntries.map(
+      (entry, index) =>
+        ({
+          id: (index + 1).toString(),
+          name: entry.entry[DESKTOP_ENTRY_HEADER].Name,
+          description: entry.entry[DESKTOP_ENTRY_HEADER].Comment,
+          icon: entry.entry[DESKTOP_ENTRY_HEADER].Icon,
+          onAction: {
+            type: LauncherActionType.RunDesktopFile,
+            payload: path.basename(entry.path),
+          },
+        } as LauncherOption)
+    );
   };
 }

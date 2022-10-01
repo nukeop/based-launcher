@@ -13,6 +13,7 @@ Linux application launcher and multitool
 ## Installation
 
 Get the latest release for your distro from the [releases page](https://github.com/nukeop/based-launcher/releases). You can also build it from source.
+You will need `gtk-launch` installed on your system to launch programs.
 
 ### Building
 

@@ -1,5 +1,6 @@
 export enum LauncherActionType {
   Execute = "execute",
+  RunDesktopFile = "run-desktop-file",
   Return = "return",
 }
 

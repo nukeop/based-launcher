@@ -1,3 +1,3 @@
 declare module "*index.node" {
-  export const hello: () => string;
+  export const getDesktopEntries: () => object;
 }

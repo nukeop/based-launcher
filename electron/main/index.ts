@@ -26,7 +26,9 @@ const indexHtml = join(ROOT_PATH.dist, "index.html");
   const startTime = process.hrtime();
   await readCLIFlags();
 
-  console.log(rustModules.hello());
+  // console.log(rustModules.hello());
+
+  console.log(rustModules.getDesktopEntries());
 
   // Set application name for Windows 10+ notifications
   if (process.platform === "win32") app.setAppUserModelId(app.getName());

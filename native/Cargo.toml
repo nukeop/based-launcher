@@ -10,6 +10,7 @@ name = "based_launcher"
 crate-type = ["cdylib"]
 
 [dependencies]
+"freedesktop-desktop-entry" = "0.5.0"
 
 [dependencies.neon]
 version = "0.10"

@@ -1,6 +1,9 @@
 use std::fs;
 
+mod mac;
+
 use freedesktop_desktop_entry::{default_paths, DesktopEntry, Iter};
+use mac::get_apps_json;
 use neon::prelude::*;
 
 fn get_desktop_entries(mut cx: FunctionContext) -> JsResult<JsArray> {
@@ -27,8 +30,21 @@ fn get_desktop_entries(mut cx: FunctionContext) -> JsResult<JsArray> {
     Ok(entries)
 }
 
+fn get_apps_mac(mut cx: FunctionContext) -> JsResult<JsString> {
+    let entries = cx.empty_array();
+    let process = get_apps_json();
+    let json = String::from_utf8_lossy(&process.stdout);
+
+    // entries.p
+
+    // Ok(entries)
+
+    Ok(cx.string(json))
+}
+
 #[neon::main]
 fn main(mut cx: ModuleContext) -> NeonResult<()> {
     cx.export_function("getDesktopEntries", get_desktop_entries)?;
+    cx.export_function("getAppsMac", get_apps_mac)?;
     Ok(())
 }

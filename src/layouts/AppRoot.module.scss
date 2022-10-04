@@ -1,4 +1,4 @@
 .app-root {
-    @apply relative w-full h-full rounded-md;
+    @apply relative w-full h-full rounded-2xl overflow-hidden;
     @apply bg-slate-800/50 text-white;
 }

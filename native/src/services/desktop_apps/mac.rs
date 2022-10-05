@@ -18,11 +18,31 @@ impl DesktopAppsProvider for MacDesktopApps {
         let json = String::from_utf8_lossy(&output.stdout);
         let v: Value = serde_json::from_str(&json).unwrap();
 
-        for app in v.as_array().unwrap() {
-            let path = app["path"].as_str().unwrap().to_string();
-            let name = app["_name"].as_str().unwrap().to_string();
+        match v.as_object().unwrap().get("SPApplicationsDataType") {
+            Some(apps) => {
+                for app in apps.as_array().unwrap() {
+                    let path = app
+                        .as_object()
+                        .unwrap()
+                        .get("path")
+                        .unwrap()
+                        .as_str()
+                        .unwrap()
+                        .to_string();
 
-            entries.push(DesktopApp::new(path, name, None, None));
+                    let name = app
+                        .as_object()
+                        .unwrap()
+                        .get("_name")
+                        .unwrap()
+                        .as_str()
+                        .unwrap()
+                        .to_string();
+
+                    entries.push(DesktopApp::new(path, name, None, None));
+                }
+            }
+            None => {}
         }
 
         entries

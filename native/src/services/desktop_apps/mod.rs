@@ -26,7 +26,7 @@ impl DesktopApp {
         }
     }
 
-    pub fn to_js_object<'a>(&'a self, cx: &'a mut FunctionContext) -> JsResult<JsObject> {
+    pub fn to_js_object<'a>(&self, cx: &mut FunctionContext<'a>) -> JsResult<'a, JsObject> {
         let obj = cx.empty_object();
 
         let path = cx.string(&self.path);
@@ -51,15 +51,15 @@ impl DesktopApp {
 
 pub trait DesktopAppsProvider {
     fn get_desktop_entries() -> Vec<DesktopApp>;
-    fn to_js_array<'a>(mut cx: &mut CallContext<'a, JsObject>) -> JsResult<'a, JsArray> {
+    fn to_js_array<'a>(cx: &mut FunctionContext<'a>) -> Handle<'a, JsArray> {
         let entries = cx.empty_array();
 
         for (i, entry) in Self::get_desktop_entries().iter().enumerate() {
-            let obj = entry.to_js_object(&mut cx)?;
+            let obj = entry.to_js_object(cx).unwrap();
 
-            entries.set(cx, i as u32, obj)?;
+            entries.set(cx, i as u32, obj).unwrap();
         }
 
-        Ok(entries)
+        entries
     }
 }

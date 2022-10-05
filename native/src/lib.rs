@@ -11,11 +11,11 @@ fn get_desktop_apps<'a>(mut cx: CallContext<'a, JsObject>) -> JsResult<'a, JsArr
     let strategy_str: Handle<JsString> = strategy.downcast(&mut cx).unwrap();
     match strategy_str.value(&mut cx).as_str() {
         "linux" => {
-            let entries = LinuxDesktopApps::to_js_array(&mut cx)?.clone();
+            let entries = LinuxDesktopApps::to_js_array(&mut cx);
             Ok(entries)
         }
-        "mac" => {
-            let entries = MacDesktopApps::to_js_array(&mut cx)?;
+        "darwin" => {
+            let entries = MacDesktopApps::to_js_array(&mut cx);
             Ok(entries)
         }
         _ => cx.throw_error("Unsupported platform"),

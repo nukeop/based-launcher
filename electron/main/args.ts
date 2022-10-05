@@ -71,7 +71,7 @@ export const readCLIFlags = () => {
 
     const opts = program.opts();
 
-    Logger.info("CLI flags:", opts);
+    Logger.debug("CLI flags:", opts);
 
     ArgsProvider.flags = {
       ...config,

@@ -6,6 +6,8 @@ type RustDesktopEntry = {
 };
 
 declare module "*index.node" {
-  export const getDesktopApps: () => RustDesktopEntry[];
+  export const getDesktopApps: (
+    platform: NodeJS.Platform
+  ) => RustDesktopEntry[];
   export const getAppsMac: () => string;
 }

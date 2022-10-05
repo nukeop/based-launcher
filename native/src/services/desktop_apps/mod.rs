@@ -1,3 +1,8 @@
+pub mod linux;
+pub mod mac;
+
+use std::ops::Deref;
+
 use neon::prelude::*;
 pub struct DesktopApp {
     path: String,
@@ -45,6 +50,16 @@ impl DesktopApp {
 }
 
 pub trait DesktopAppsProvider {
-    fn get_desktop_entries(&self) -> Vec<DesktopApp>;
-    fn to_js_array(&self, cx: &mut FunctionContext) -> JsResult<JsArray>;
+    fn get_desktop_entries() -> Vec<DesktopApp>;
+    fn to_js_array<'a>(mut cx: &mut CallContext<'a, JsObject>) -> JsResult<'a, JsArray> {
+        let entries = cx.empty_array();
+
+        for (i, entry) in Self::get_desktop_entries().iter().enumerate() {
+            let obj = entry.to_js_object(&mut cx)?;
+
+            entries.set(cx, i as u32, obj)?;
+        }
+
+        Ok(entries)
+    }
 }

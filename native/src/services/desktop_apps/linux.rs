@@ -2,14 +2,13 @@ use std::fs;
 
 use freedesktop_desktop_entry::{default_paths, DesktopEntry, Iter};
 use freedesktop_icons::lookup;
-use neon::prelude::*;
 
-use super::desktop_apps::{DesktopApp, DesktopAppsProvider};
+use super::{DesktopApp, DesktopAppsProvider};
 
 pub struct LinuxDesktopApps {}
 
 impl DesktopAppsProvider for LinuxDesktopApps {
-    fn get_desktop_entries(&self) -> Vec<DesktopApp> {
+    fn get_desktop_entries() -> Vec<DesktopApp> {
         let mut entries = Vec::new();
 
         for path in Iter::new(default_paths()) {
@@ -40,16 +39,5 @@ impl DesktopAppsProvider for LinuxDesktopApps {
         }
 
         entries
-    }
-
-    fn to_js_array(&self, cx: &mut FunctionContext) -> JsResult<JsArray> {
-        let entries = cx.empty_array();
-
-        for (i, entry) in self.get_desktop_entries().iter().enumerate() {
-            let obj = entry.to_js_object(cx)?;
-            entries.set(cx, i as u32, obj)?;
-        }
-
-        Ok(entries)
     }
 }

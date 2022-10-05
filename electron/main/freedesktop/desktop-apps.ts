@@ -127,7 +127,7 @@ export const readDesktopEntries = async () => {
   const startTime = process.hrtime();
 
   if (!DesktopEntriesProvider.isDone && ArgsProvider.flags.mode === "apps") {
-    DesktopEntriesProvider.desktopEntries = rustModules.getDesktopEntries();
+    DesktopEntriesProvider.desktopEntries = rustModules.getDesktopApps();
     DesktopEntriesProvider.isDone = true;
   }
 

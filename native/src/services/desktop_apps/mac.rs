@@ -1,4 +1,3 @@
-use serde_json::Value;
 use std::process::Command;
 
 use super::{DesktopApp, DesktopAppsProvider};
@@ -16,7 +15,7 @@ impl DesktopAppsProvider for MacDesktopApps {
             .expect("failed to execute process");
 
         let json = String::from_utf8_lossy(&output.stdout);
-        let v: Value = serde_json::from_str(&json).unwrap();
+        let v: serde_json::Value = serde_json::from_str(&json).unwrap();
 
         match v.as_object().unwrap().get("SPApplicationsDataType") {
             Some(apps) => {
@@ -39,7 +38,16 @@ impl DesktopAppsProvider for MacDesktopApps {
                         .unwrap()
                         .to_string();
 
-                    entries.push(DesktopApp::new(path, name, None, None));
+
+                    let plist_path = format!("{}/Contents/Info.plist", path);
+                    let plist = plist::Value::from_file(plist_path).unwrap();
+
+                    let icon = plist
+                        .as_dictionary()
+                        .and_then(|dict| dict.get("CFBundleIconFile"))
+                        .and_then(|icon| icon.as_string()).unwrap();
+
+                    entries.push(DesktopApp::new(path, name, None, Some(icon.to_string())));
                 }
             }
             None => {}

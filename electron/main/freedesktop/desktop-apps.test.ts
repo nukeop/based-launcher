@@ -28,6 +28,12 @@ vi.mock("freedesktop-icons", () => ({
   default: vi.fn(async (path: string) => `/freedesktop/${path}`),
 }));
 
+vi.mock("../../../native/index.node", () => ({
+  default: {
+    getDesktopApps: () => [],
+  },
+}));
+
 describe("Handling desktop apps", () => {
   afterEach(() => {
     vi.clearAllMocks();

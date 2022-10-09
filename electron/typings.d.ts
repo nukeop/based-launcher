@@ -9,5 +9,4 @@ declare module "*index.node" {
   export const getDesktopApps: (
     platform: NodeJS.Platform
   ) => RustDesktopEntry[];
-  export const getAppsMac: () => string;
 }

@@ -3,7 +3,9 @@
     @apply m-4 p-8;
 
     &.empty {
-        @apply h-0 p-0 m-0;
+        @apply h-0 p-0;
+        margin-top: -3rem;
+        opacity: 0;
     }
 
     &.loading {

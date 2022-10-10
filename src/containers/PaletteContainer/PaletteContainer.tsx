@@ -1,9 +1,10 @@
 import {
-  InfoboxBangResponse,
   isEmptyBangResponse,
   isInfoboxBangResponse,
+  isValueBangResponse,
   isWidgetBangResponse,
 } from "../../bangs/bangs";
+import { BangValue } from "../../components/BangValue/BangValue";
 import { BangsArea } from "../../components/BangsArea/BangsArea";
 import { BangsEmptyState } from "../../components/BangsEmptyState/BangsEmptyState";
 import { Infobox } from "../../components/Infobox/Infobox";
@@ -40,6 +41,7 @@ export const PaletteContainer: React.FC = () => {
         {isInfoboxBangResponse(bangResponse) && <Infobox {...bangResponse} />}
         {isEmptyBangResponse(bangResponse) && <BangsEmptyState />}
         {isWidgetBangResponse(bangResponse) && <bangResponse.widget />}
+        {isValueBangResponse(bangResponse) && <BangValue {...bangResponse} />}
       </BangsArea>
     </Palette>
   );

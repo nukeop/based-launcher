@@ -1,10 +1,18 @@
 // DuckDuckGo style bangs
+import React from "react";
 
 export type BangResponseType = "infobox" | "widget" | "value" | "empty";
 
 export type BangResponse = {
   type: BangResponseType;
 };
+
+export interface ValueBangResponse extends BangResponse {
+  type: "value";
+  value: string;
+  hasEqualsSign?: boolean;
+  icon?: React.ReactNode;
+}
 
 export interface InfoboxBangResponse extends BangResponse {
   header: string;
@@ -39,6 +47,12 @@ export const isEmptyBangResponse = (
   response: BangResponse | void
 ): response is EmptyBangResponse => {
   return response?.type === "empty";
+};
+
+export const isValueBangResponse = (
+  response: BangResponse | void
+): response is ValueBangResponse => {
+  return response?.type === "value";
 };
 
 export interface IBang<T extends BangResponse> {

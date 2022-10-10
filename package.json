@@ -81,6 +81,7 @@
     "classnames": "^2.3.1",
     "commander": "^9.4.0",
     "electron-store": "^8.1.0",
+    "fparser": "^2.0.2",
     "freedesktop-icons": "^1.0.0",
     "fuse.js": "^6.6.2",
     "glasstron": "^0.1.1",

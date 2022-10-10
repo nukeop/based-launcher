@@ -1,3 +1,4 @@
+import native from "./native-plugin";
 import pkg from "./package.json";
 import react from "@vitejs/plugin-react";
 import { spawn } from "child_process";
@@ -27,6 +28,7 @@ export default defineConfig({
             outDir: "dist/electron/main",
           },
           plugins: [
+            native(),
             onstart(() => {
               if (!(process.env.NODE_ENV === "production")) {
                 if (process.electronApp) {

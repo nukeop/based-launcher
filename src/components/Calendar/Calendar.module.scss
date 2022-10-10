@@ -1,5 +1,6 @@
 .calendar {
     @apply bg-transparent text-gray-800 overflow-hidden shadow-lg;
+    flex: 0 1 66%;
 
     :global {
         .react-calendar {
@@ -50,9 +51,11 @@
 
                 &__days {
                     @apply rounded-lg overflow-hidden;
+
                     &__day {
                         &--weekend {
                             @apply text-blue-600;
+
                             &:nth-of-type(7n) {
                                 @apply text-pink-600;
                             }
@@ -62,6 +65,7 @@
                             &:last-child {
                                 @apply text-gray-400;
                             }
+
                             @apply text-gray-400 bg-gray-100;
                         }
                     }

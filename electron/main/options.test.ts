@@ -27,6 +27,27 @@ vi.mock("freedesktop-icons", () => ({
   default: vi.fn(async (path: string) => `/freedesktop/${path}`),
 }));
 
+vi.mock("../../native/index.node", () => ({
+  default: {
+    getDesktopApps: () => [
+      {
+        name: "App Name",
+        description: "App Comment",
+        icon: "/freedesktop/app-icon",
+        onAction: undefined,
+        path: "/path/file1.desktop",
+      },
+      {
+        name: "Another App",
+        description: "2nd Comment",
+        icon: "/freedesktop/2nd-icon",
+        onAction: undefined,
+        path: "/path/file2.desktop",
+      },
+    ],
+  },
+}));
+
 describe("Creating options to be displayed in the renderer", () => {
   const mockStdin = {
     read: spyOnImplementing(process.stdin, "read", vi.fn()),
@@ -94,8 +115,7 @@ describe("Creating options to be displayed in the renderer", () => {
         id: "1",
         name: "App Name",
         description: "App Comment",
-        // icon: "file:///freedesktop/app-icon",
-        icon: undefined,
+        icon: "file:///freedesktop/app-icon",
         onAction: {
           type: LauncherActionType.RunDesktopFile,
           payload: "file1.desktop",
@@ -105,9 +125,7 @@ describe("Creating options to be displayed in the renderer", () => {
         id: "2",
         name: "Another App",
         description: "2nd Comment",
-
-        // icon: "file:///freedesktop/2nd-icon",
-        icon: undefined,
+        icon: "file:///freedesktop/2nd-icon",
         onAction: {
           type: LauncherActionType.RunDesktopFile,
           payload: "file2.desktop",

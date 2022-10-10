@@ -1,5 +1,6 @@
 import { IpcEvent } from "../../common/ipc";
 import { LauncherActionType, LauncherOption } from "../../common/launcher";
+import rustModules from "../../native/index.node";
 import { ArgsProvider, readCLIFlags, readPipedArgs } from "./args";
 import { readDesktopEntries } from "./freedesktop/desktop-apps";
 import Logger from "./logger";

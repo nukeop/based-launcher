@@ -2,9 +2,9 @@ import {
   DesktopEntry,
   DESKTOP_ENTRY_HEADER,
 } from "../../../common/desktop-entries";
+import rustModules from "../../../native/index.node";
 import { ArgsProvider } from "../args";
 import Logger from "../logger";
-import freedesktopIcons from "freedesktop-icons";
 import fs from "fs";
 import path from "path";
 import { xdgDataDirectories } from "xdg-basedir";
@@ -14,7 +14,7 @@ export type DesktopEntryWithPath = {
   entry: DesktopEntry;
 };
 export class DesktopEntriesProvider {
-  static desktopEntries: DesktopEntryWithPath[] = [];
+  static desktopEntries: RustDesktopEntry[] = [];
   static isDone = false;
 
   private constructor() {}
@@ -127,7 +127,9 @@ export const readDesktopEntries = async () => {
   const startTime = process.hrtime();
 
   if (!DesktopEntriesProvider.isDone && ArgsProvider.flags.mode === "apps") {
-    DesktopEntriesProvider.desktopEntries = await getDesktopEntries();
+    DesktopEntriesProvider.desktopEntries = rustModules.getDesktopApps(
+      process.platform
+    );
     DesktopEntriesProvider.isDone = true;
   }
 

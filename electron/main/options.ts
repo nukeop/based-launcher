@@ -68,13 +68,14 @@ export class OptionsProvider {
 
   static getOptionsFromDesktopEntries = async (): Promise<LauncherOption[]> => {
     await readDesktopEntries();
+
     return DesktopEntriesProvider.desktopEntries.map(
       (entry, index) =>
         ({
           id: (index + 1).toString(),
-          name: entry.entry[DESKTOP_ENTRY_HEADER].Name,
-          description: entry.entry[DESKTOP_ENTRY_HEADER].Comment,
-          icon: entry.entry[DESKTOP_ENTRY_HEADER].Icon,
+          name: entry.name,
+          description: entry.description,
+          icon: entry.icon && `file://${entry.icon}`,
           onAction: {
             type: LauncherActionType.RunDesktopFile,
             payload: path.basename(entry.path),

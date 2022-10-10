@@ -1,6 +1,6 @@
 {
   "name": "based-launcher",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Feature-rich, dmenu-compatible app launcher for Linux",
   "scripts": {
     "dev": "vite",

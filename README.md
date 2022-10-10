@@ -5,7 +5,7 @@ Linux application launcher and multitool
 ## Features
 
 - **Dmenu mode** - pipe a list of options to the launcher, when you select one it will output it to stdout. It also accepts json input.
-- **App launcher** - search for applications and launch them. This works by searching for .desktop files according to freedesktop.org specifications. Currently it's slow, because it needs to search for icons in several locations. I'm planning to improve this by caching the results.
+- **App launcher** - search for applications and launch them. This works by searching for .desktop files according to freedesktop.org specifications. Currently it's slow, because it needs to search for icons in several locations. I'm planning to improve this by caching the results. In the future, it will also work on Mac OS.
 - **Performant** - launches in 150ms, despite being Electron. Browse and filter thousands of options without lag. Brutally mogs other JS launchers.
   - Development is fast and easy thanks to Vite and Vitest. Tests run in under 1s. The program starts in dev mode with live reload in 200ms.
 - **Themable** - the UI can be styled with CSS or SCSS using all their modern features. Immediate feedback due to your styles being reloaded on the fly.
@@ -13,7 +13,10 @@ Linux application launcher and multitool
 ## Installation
 
 Get the latest release for your distro from the [releases page](https://github.com/nukeop/based-launcher/releases). You can also build it from source.
+
 You will need `gtk-launch` installed on your system to launch programs.
+
+For development, get the latest Node, NPM, and Rust.
 
 ### Building
 

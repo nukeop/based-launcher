@@ -7,7 +7,7 @@ export class CalculatorBang
   isPresent(input: string) {
     try {
       const formula = new Formula(input);
-      return formula.evaluate();
+      return formula.evaluate({});
     } catch (e) {
       return false;
     }
@@ -20,7 +20,7 @@ export class CalculatorBang
 
     return {
       type: "value",
-      value: formula.evaluate().toString(),
+      value: formula.evaluate({}).toString(),
     };
   }
 }

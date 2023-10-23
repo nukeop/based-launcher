@@ -3,88 +3,102 @@
 exports[`Palette container > renders a palette from piped arguments 1`] = `
 <DocumentFragment>
   <div
-    class="_app-root_1suvm_1 app-root"
+    class="_app-root_z8vvx_1 app-root"
   >
     <div
-      class="_palette_16tou_1 palette"
+      class="_palette_11q5b_1 palette"
       data-testid="palette"
       tabindex="-1"
     >
       <div
-        class="_inputWrapper_123jb_1 filter-input"
+        class="_inputWrapper_rbxir_1 filter-input"
       >
         <input
           autocomplete="off"
-          class="_input_123jb_1"
+          class="_input_rbxir_1"
           data-testid="filter-input"
           placeholder="Type to filter..."
           value=""
         />
       </div>
       <div
-        class="_palette-grid_1fw27_1 _columns-1_1fw27_5 palette-grid"
+        class="_bangs-area_1rcuj_1 _empty_1rcuj_5"
+      />
+      <div
+        class="_palette-grid_ch72j_1 _columns-1_ch72j_5 palette-grid"
       >
         <div
-          class="_palette-grid-list_1fw27_17"
+          class="_palette-grid-list_ch72j_17 palette-grid-list"
           style="position: relative; height: 600px; width: 600px; overflow: auto; will-change: transform; direction: ltr;"
         >
           <div
-            style="height: 84px; width: 100%;"
+            style="height: 96px; width: 100%;"
           >
             <button
-              class="_palette-item_1sq8q_1 _selected_1sq8q_18 palette-item--selected palette-item"
+              class="_palette-item_102lw_1 _selected_102lw_17 palette-item--selected palette-item"
               data-selected="true"
               data-testid="palette-item-1"
-              style="position: absolute; left: 0px; top: 0px; height: 28px; width: 100%;"
+              style="position: absolute; left: 0px; top: 0px; height: 32px; width: 100%;"
             >
               <div
-                class="_palette-item-right_1sq8q_26"
+                class="_palette-item-right_102lw_28"
               >
                 <p>
                   first
                 </p>
                 <p
-                  class="_palette-item-description_1sq8q_32"
+                  class="_palette-item-description_102lw_34"
                 />
               </div>
             </button>
             <button
-              class="_palette-item_1sq8q_1 palette-item"
+              class="_palette-item_102lw_1 palette-item"
               data-selected="false"
               data-testid="palette-item-2"
-              style="position: absolute; left: 0px; top: 28px; height: 28px; width: 100%;"
+              style="position: absolute; left: 0px; top: 32px; height: 32px; width: 100%;"
             >
               <div
-                class="_palette-item-right_1sq8q_26"
+                class="_palette-item-right_102lw_28"
               >
                 <p>
                   second
                 </p>
                 <p
-                  class="_palette-item-description_1sq8q_32"
+                  class="_palette-item-description_102lw_34"
                 />
               </div>
             </button>
             <button
-              class="_palette-item_1sq8q_1 palette-item"
+              class="_palette-item_102lw_1 palette-item"
               data-selected="false"
               data-testid="palette-item-3"
-              style="position: absolute; left: 0px; top: 56px; height: 28px; width: 100%;"
+              style="position: absolute; left: 0px; top: 64px; height: 32px; width: 100%;"
             >
               <div
-                class="_palette-item-right_1sq8q_26"
+                class="_palette-item-right_102lw_28"
               >
                 <p>
                   third
                 </p>
                 <p
-                  class="_palette-item-description_1sq8q_32"
+                  class="_palette-item-description_102lw_34"
                 />
               </div>
             </button>
           </div>
         </div>
       </div>
+      <footer
+        class="_footer_uvi8w_1"
+      >
+        Type to filter, use bangs to search (e.g. 
+        <kbd
+          class="_key_1c8fc_1"
+        >
+          !w
+        </kbd>
+         to search Wikipedia).
+      </footer>
     </div>
   </div>
 </DocumentFragment>

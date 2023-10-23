@@ -1,5 +1,6 @@
 use std::fs;
 
+use diesel::prelude::*;
 use freedesktop_desktop_entry::{default_paths, DesktopEntry, Iter};
 use freedesktop_icons::lookup;
 
@@ -15,7 +16,7 @@ impl DesktopAppsProvider for LinuxDesktopApps {
         let mut entries = Vec::new();
 
         for path in Iter::new(default_paths()) {
-            let connection = establish_connection();
+            let mut connection = establish_connection();
 
             if let Ok(bytes) = fs::read_to_string(&path) {
                 if let Ok(entry) = DesktopEntry::decode(&path, &bytes) {
@@ -34,14 +35,14 @@ impl DesktopAppsProvider for LinuxDesktopApps {
                         .unwrap();
 
                     let new_icon = Icon {
-                        path: path_str.as_str(),
-                        name: name.as_str(),
+                        path: path_str.as_str().to_string(),
+                        name: name.as_str().to_string(),
                     };
 
                     diesel::insert_into(icon_cache::table)
                         .values(new_icon)
                         .returning(Icon::as_returning())
-                        .get_result(connection)
+                        .get_result(&mut connection)
                         .expect("Error saving new icon");
 
                     entries.push(DesktopApp::new(

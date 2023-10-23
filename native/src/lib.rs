@@ -1,3 +1,5 @@
+pub mod models;
+pub mod schema;
 pub mod services;
 
 use neon::prelude::*;
@@ -5,6 +7,8 @@ use neon::prelude::*;
 use services::desktop_apps::linux::LinuxDesktopApps;
 use services::desktop_apps::mac::MacDesktopApps;
 use services::desktop_apps::DesktopAppsProvider;
+
+const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 fn get_desktop_apps<'a>(mut cx: CallContext<'a, JsObject>) -> JsResult<'a, JsArray> {
     let strategy: Handle<JsValue> = cx.argument(0)?;

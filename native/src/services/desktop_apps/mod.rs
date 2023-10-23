@@ -1,8 +1,6 @@
 pub mod linux;
 pub mod mac;
 
-use std::ops::Deref;
-
 use neon::prelude::*;
 pub struct DesktopApp {
     path: String,

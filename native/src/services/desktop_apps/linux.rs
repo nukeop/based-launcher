@@ -3,6 +3,9 @@ use std::fs;
 use freedesktop_desktop_entry::{default_paths, DesktopEntry, Iter};
 use freedesktop_icons::lookup;
 
+use crate::schema::icon_cache;
+use crate::{models::Icon, services::database::connection::establish_connection};
+
 use super::{DesktopApp, DesktopAppsProvider};
 
 pub struct LinuxDesktopApps {}
@@ -12,6 +15,8 @@ impl DesktopAppsProvider for LinuxDesktopApps {
         let mut entries = Vec::new();
 
         for path in Iter::new(default_paths()) {
+            let connection = establish_connection();
+
             if let Ok(bytes) = fs::read_to_string(&path) {
                 if let Ok(entry) = DesktopEntry::decode(&path, &bytes) {
                     let locale = Some("en-US");
@@ -27,6 +32,17 @@ impl DesktopAppsProvider for LinuxDesktopApps {
                         .into_os_string()
                         .into_string()
                         .unwrap();
+
+                    let new_icon = Icon {
+                        path: path_str.as_str(),
+                        name: name.as_str(),
+                    };
+
+                    diesel::insert_into(icon_cache::table)
+                        .values(new_icon)
+                        .returning(Icon::as_returning())
+                        .get_result(connection)
+                        .expect("Error saving new icon");
 
                     entries.push(DesktopApp::new(
                         path_str,
